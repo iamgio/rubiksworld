@@ -1,6 +1,5 @@
 package rubiksworld.view
 
-import javafx.scene.control.Label
 import javafx.scene.layout.Pane
 import rubiksworld.controller.Controller
 
@@ -15,6 +14,6 @@ class MainSceneView : View<Pane> {
     override fun create(controller: Controller) = Pane().apply {
         prefWidth = INITIAL_WIDTH
         prefHeight = INITIAL_HEIGHT
-        children += Label("test")
+        stylesheets += "/style/style.css"
     }
 }
