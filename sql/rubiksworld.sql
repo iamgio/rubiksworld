@@ -190,9 +190,10 @@ VALUES ('3x3'), ('4x4');
 INSERT INTO Models
     (name, maker, category_name, price, discount_percentage, image_url, is_speed_cube, is_stickerless, is_magnetic)
 VALUES
-    ('WeiLong WR M V9', 'MoYu', '3x3', 17.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-WeiLong-WR-M-V9-3x3-Magnetic-Standard-Frosted-Stickerless-Bright_540x.jpg?v=1682478273', TRUE, TRUE, TRUE),
-    ('RS3 M', 'MoYu', '3x3', 9.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-Super-RS3-M-Standard-Labeled_540x.jpg?v=1683787078', TRUE, TRUE, TRUE),
-    ('WeiLong GTS3M', 'MoYu', '3x3', 19.99, NULL, 'img', 1, 1, 0),
+    ('WeiLong WR M V9', 'MoYu', '3x3', 17.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-WeiLong-WR-M-V9-3x3-Magnetic-Standard-Frosted-Stickerless-Bright_540x.jpg?v=1682478273', 1, 1, 1),
+    ('RS3 M', 'MoYu', '3x3', 9.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-Super-RS3-M-Standard-Labeled_540x.jpg?v=1683787078', 1, 1, 1),
+    ('GTS3 M', 'MoYu', '3x3', 24, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoYu-WeiLong-GTS2-M-3x3-Magnetic-Black_540x.jpg?v=1681847670', 1, 1, 1),
+    ('WeiLong GTS3 M', 'MoYu', '3x3', 19.99, NULL, 'img', 1, 1, 0),
     ('Rubik''s Cube', 'Rubik''s', '3x3', 9.99, NULL, 'img', 0, 0, 0),
     ('356', 'GAN', '3x3', 26, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-356-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681849509', 1, 1, 1),
     ('11 Pro', 'GAN', '3x3', 41.89, 0.1, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-11-Pro-3x3-Magnetic_540x.jpg?v=1681850528', 1, 1, 1),
@@ -209,11 +210,11 @@ VALUES
     ('WeiLong WR M V9', 'MoYu', 'Version'),
     ('RS3 M', 'MoYu', 'Version'),
     ('RS3 M', 'MoYu', 'Lubrication'),
-    ('WeiLong GTS3 M', 'MoYu', 'Lubrication'),
+    ('GTS3 M', 'MoYu', 'Lubrication'),
     ('356', 'GAN', 'Lubrication'),
     ('11 Pro', 'GAN', 'Internal Color'),
     ('Sail W', 'QiYi', 'Plastic Color'),
-    ('JiaoShi Meilong', 'MoFang', 'Plastic Color');
+    ('Meilong', 'MoFang JiaoShi', 'Plastic Color');
 
 INSERT INTO Customizations
     (model_name, model_maker, part, `change`, price, is_default)
@@ -234,5 +235,5 @@ VALUES
     ('11 Pro', 'GAN', 'Internal Color', 'None', 0, FALSE),
     ('Sail W', 'QiYi', 'Plastic Color', 'Black', 0, FALSE),
     ('Sail W', 'QiYi', 'Plastic Color', 'White', 0, TRUE),
-    ('JiaoShi Meilong', 'MoFang', 'Plastic Color', 'Stickerless', TRUE),
-    ('JiaoShi Meilong', 'MoFang', 'Plastic Color', 'Black', FALSE);
+    ('Meilong', 'MoFang JiaoShi', 'Plastic Color', 'Stickerless', 0, TRUE),
+    ('Meilong', 'MoFang JiaoShi', 'Plastic Color', 'Black', 0,  FALSE);
