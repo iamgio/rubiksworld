@@ -9,6 +9,11 @@ import rubiksworld.model.Model
 interface DatabaseController {
 
     /**
+     * Initializes the database.
+     */
+    fun initDatabase()
+
+    /**
      * Searches models by some given filters.
      * @param filters search filters
      * @return models matching the given filters

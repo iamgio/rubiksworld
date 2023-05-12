@@ -1,26 +1,56 @@
 package rubiksworld.model
 
+import org.ktorm.entity.Entity
+
 /**
  * A model that is available in the shop.
- *
- * @param name model name
- * @param maker model maker
- * @param category category this model belongs to
- * @param price model price
- * @param discountPercentage if not `null`, discount percentage on this model's final price
- * @param imageUrl image URL of this model
- * @param isSpeedCube whether this is a model for speed cubing
- * @param isStickerless whether this is a stickerless model
- * @param isMagnetic whether this is a magnetic model
  */
-data class Model(
-    val name: String,
-    val maker: String,
-    val category: Category,
-    val price: Double,
-    val discountPercentage: Double?,
-    val imageUrl: String,
-    val isSpeedCube: Boolean,
-    val isStickerless: Boolean,
+interface Model : Entity<Model> {
+
+    companion object : Entity.Factory<Model>()
+
+    /**
+     * Model name.
+     */
+    val name: String
+
+    /**
+     * Model maker.
+     */
+    val maker: String
+
+    /**
+     * Cctegory this model belongs to.
+     */
+    val category: Category
+
+    /**
+     * Model price.
+     */
+    val price: Double
+
+    /**
+     * If not `null`, discount percentage on this model's final price.
+     */
+    val discountPercentage: Double?
+
+    /**
+     * Image URL of this model.
+     */
+    val imageUrl: String
+
+    /**
+     * Whether this is a model for speed cubing.
+     */
+    val isSpeedCube: Boolean
+
+    /**
+     * Whether this is a stickerless model.
+     */
+    val isStickerless: Boolean
+
+    /**
+     * Whether this is a stickerless model.
+     */
     val isMagnetic: Boolean
-)
+}
