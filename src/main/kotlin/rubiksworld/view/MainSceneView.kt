@@ -1,10 +1,9 @@
 package rubiksworld.view
 
+import javafx.scene.control.Tab
+import javafx.scene.control.TabPane
 import javafx.scene.layout.Pane
 import rubiksworld.controller.Controller
-
-private const val INITIAL_WIDTH = 900.0
-private const val INITIAL_HEIGHT = 600.0
 
 /**
  * The main scene component.
@@ -12,8 +11,13 @@ private const val INITIAL_HEIGHT = 600.0
 class MainSceneView : View<Pane> {
 
     override fun create(controller: Controller) = Pane().apply {
-        prefWidth = INITIAL_WIDTH
-        prefHeight = INITIAL_HEIGHT
-        stylesheets += "/style/style.css"
+        sceneProperty().addListener { _, _, new ->
+            prefWidthProperty().bind(new.widthProperty())
+            prefHeightProperty().bind(new.heightProperty())
+        }
+
+        children += TabPane(Tab("Shop"), Tab("Solves")).also {
+            it.prefWidthProperty().bind(prefWidthProperty())
+        }
     }
 }

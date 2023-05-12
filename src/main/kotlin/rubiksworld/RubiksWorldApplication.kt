@@ -1,10 +1,9 @@
 package rubiksworld
 
 import javafx.application.Application
-import javafx.scene.Scene
 import javafx.stage.Stage
 import rubiksworld.controller.ControllerInitializer
-import rubiksworld.view.MainSceneView
+import rubiksworld.view.MainScene
 
 /**
  * The JavaFX application.
@@ -15,7 +14,7 @@ class RubiksWorldApplication : Application() {
         val controller = ControllerInitializer().initialize()
         primaryStage?.run {
             title = "Rubik's World"
-            scene = Scene(MainSceneView().create(controller))
+            scene = MainScene().create(controller)
             show()
         }
     }
