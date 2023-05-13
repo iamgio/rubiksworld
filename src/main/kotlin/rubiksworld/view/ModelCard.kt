@@ -49,14 +49,14 @@ class ModelCard(private val model: Model) : View<Pane> {
 
         // Base price
         val priceHbox = HBox(
-            Label(model.price.toString() + CURRENCY).apply {
+            Label(formatPrice(model.price)).apply {
                 styleClass += if (model.discountPercentage == null) "price" else "initial-price"
             }
         ).apply { styleClass += "price-box" }
 
         // Discounts
         model.discountPercentage?.let {
-            val price = String.format("%.2f", model.price - model.price * it) + CURRENCY
+            val price = formatPrice(model.price - model.price * it)
             val discount = "-${(it * 100).toInt()}%"
             priceHbox.children += Label(price).apply { styleClass += "price" }
             priceHbox.children += Label(discount).apply { styleClass += "discount" }
@@ -64,4 +64,9 @@ class ModelCard(private val model: Model) : View<Pane> {
 
         children += priceHbox
     }
+
+    /**
+     * @return [price] with 2 decimal places + currency symbol
+     */
+    private fun formatPrice(price: Double) = String.format("%.02f", price) + CURRENCY
 }
