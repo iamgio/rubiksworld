@@ -1,15 +1,19 @@
 package rubiksworld.view
 
 import javafx.scene.control.Label
+import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
+import javafx.scene.shape.Rectangle
 import rubiksworld.controller.Controller
 import rubiksworld.model.Model
 import rubiksworld.view.shop.CURRENCY
+import kotlin.concurrent.thread
 
 private const val WIDTH = 150.0
+private const val LOADING_IMAGE_HEIGHT = 92.0
 
 /**
  * The graphic representation of a model.
@@ -22,11 +26,23 @@ class ModelCard(private val model: Model) : View<Pane> {
         styleClass += "model-card"
         prefWidth = WIDTH
 
+        // Image placeholder
+        children += Rectangle(WIDTH, LOADING_IMAGE_HEIGHT).apply { styleClass += "placeholder" }
+
         // Image
-        children += ImageView(model.imageUrl).also {
+        thread {
+            val image = Image(model.imageUrl)
+            controller.sync {
+                children[0] = ImageView(image).also {
+                    it.isPreserveRatio = true
+                    it.fitWidth = WIDTH
+                }
+            }
+        }
+        /*children += ImageView(model.imageUrl).also {
             it.isPreserveRatio = true
             it.fitWidth = WIDTH
-        }
+        }*/
 
         // Info
         children += Label(model.maker).apply { styleClass += "maker" }

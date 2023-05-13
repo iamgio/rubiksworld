@@ -20,6 +20,10 @@
     -fx-font-weight: bold;
 }
 
+.model-card .placeholder {
+    -fx-fill: -fx-card-background;
+}
+
 .model-card .price-box {
     -fx-spacing: 10;
     -fx-padding: 6 0 0 0;
