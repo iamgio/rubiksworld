@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import rubiksworld.controller.Controller
+import rubiksworld.model.Model
 import rubiksworld.view.ModelCard
 import rubiksworld.view.View
 
@@ -18,7 +19,7 @@ private const val BARS_HEIGHT = 57.0
  *
  * @param onUpdate action to run when the UI should be updated
  */
-class ShopView(val onUpdate: () -> Unit) : View<Pane> {
+class ShopView(val onUpdate: () -> Unit, val onModelSelect: (Model) -> Unit) : View<Pane> {
 
     override fun create(controller: Controller) = VBox().apply {
         val modelsPane = FlowPane(Orientation.HORIZONTAL).apply { styleClass += "models-pane" }
@@ -27,7 +28,12 @@ class ShopView(val onUpdate: () -> Unit) : View<Pane> {
             controller.async {
                 val results = searchModels(filters)
                 controller.sync {
-                    modelsPane.children.setAll(results.map { ModelCard(it).create(controller) })
+                    val cards = results.map { model ->
+                        ModelCard(model).create(controller).apply {
+                            setOnMouseClicked { onModelSelect(model) }
+                        }
+                    }
+                    modelsPane.children.setAll(cards)
                     onUpdate()
                 }
             }
