@@ -13,7 +13,7 @@ import rubiksworld.model.Model
 /**
  *
  */
-class DatabaseControllerImpl : DatabaseController {
+open class DatabaseControllerImpl : DatabaseController {
 
     private lateinit var database: Database
 
