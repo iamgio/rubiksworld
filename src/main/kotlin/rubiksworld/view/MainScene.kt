@@ -3,7 +3,7 @@ package rubiksworld.view
 import javafx.scene.Scene
 import rubiksworld.controller.Controller
 
-private const val INITIAL_WIDTH = 900.0
+private const val INITIAL_WIDTH = 915.0
 private const val INITIAL_HEIGHT = 600.0
 
 /**

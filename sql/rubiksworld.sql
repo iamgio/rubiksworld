@@ -191,14 +191,14 @@ INSERT INTO Models
     (name, maker, category_name, price, discount_percentage, image_url, is_speed_cube, is_stickerless, is_magnetic)
 VALUES
     ('WeiLong WR M V9', 'MoYu', '3x3', 17.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-WeiLong-WR-M-V9-3x3-Magnetic-Standard-Frosted-Stickerless-Bright_540x.jpg?v=1682478273', 1, 1, 1),
-    ('RS3 M', 'MoYu', '3x3', 9.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-Super-RS3-M-Standard-Labeled_540x.jpg?v=1683787078', 1, 1, 1),
+    ('RS3 M', 'MoYu', '3x3', 9.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-Super-RS3-M-3x3-Magnetic-Standard-Stickerless-Bright_540x.jpg?v=1683861081', 1, 1, 1),
     ('GTS3 M', 'MoYu', '3x3', 24, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoYu-WeiLong-GTS2-M-3x3-Magnetic-Black_540x.jpg?v=1681847670', 1, 1, 1),
-    ('WeiLong GTS3 M', 'MoYu', '3x3', 19.99, NULL, 'img', 1, 1, 0),
-    ('Rubik''s Cube', 'Rubik''s', '3x3', 9.99, NULL, 'img', 0, 0, 0),
+    ('WeiLong GTS3 M', 'MoYu', '3x3', 19.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoYu-WeiLong-GTS3-M-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681848204', 1, 1, 0),
+    ('Rubik''s Cube', 'Rubik''s', '3x3', 9.99, NULL, 'https://assets.target.com.au/transform/0848543a-b9b2-4fee-995e-3496a43834d4/37090289_A1904277?io=transform:extend,width:700,height:800&output=jpeg&quality=80', 0, 0, 0),
     ('356', 'GAN', '3x3', 26, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-356-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681849509', 1, 1, 1),
     ('11 Pro', 'GAN', '3x3', 41.89, 0.1, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-11-Pro-3x3-Magnetic_540x.jpg?v=1681850528', 1, 1, 1),
     ('ZhiLong Mini', 'YJ', '3x3', 7.41, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/YJ-ZhiLong-Mini-50mm-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681850645', 1, 1, 1),
-    ('Valk 3', 'QiYi', '3x3', 23.99, 0.15, 'img', 1, 1, 1),
+    ('Valk 3', 'QiYi', '3x3', 23.99, 0.15, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-Valk-3-3x3-Magnetic-Stickerless-Bright-4_540x.jpg?v=1681848780', 1, 1, 1),
     ('Sail W', 'QiYi', '3x3', 3.68, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-Sail-W-3x3-White-2_540x.jpg?v=1681848838', 0, 0, 0),
     ('Big Sail', 'QiYi', '3x3', 4.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-Big-Sail-60mm-3x3-Black_540x.jpg?v=1681847606', 1, 0, 0),
     ('Meilong', 'MoFang JiaoShi', '3x3', 6.99, 0.2, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoFang-JiaoShi-MeiLong-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681849893', 1, 0, 1),

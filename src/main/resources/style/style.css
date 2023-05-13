@@ -1,3 +1,39 @@
 .root {
+    -fx-card-background: white;
+    -fx-dark-text: #2A384B;
+}
 
+.models-pane {
+    -fx-hgap: 24;
+    -fx-vgap: 24;
+    -fx-padding: 24 0 0 24;
+}
+
+.model-card {
+    -fx-background-color: -fx-card-background;
+    -fx-padding: 24;
+    -fx-background-radius: 16;
+}
+
+.model-card .label {
+    -fx-text-fill: -fx-dark-text;
+    -fx-font-weight: bold;
+}
+
+.model-card .price-box {
+    -fx-spacing: 10;
+    -fx-padding: 6 0 0 0;
+}
+
+.model-card .maker {
+    -fx-opacity: .6;
+    -fx-padding: 10 0 0 0;
+}
+
+.model-card .initial-price {
+    -fx-opacity: .25;
+}
+
+.model-card .discount {
+    -fx-text-fill: orange;
 }
