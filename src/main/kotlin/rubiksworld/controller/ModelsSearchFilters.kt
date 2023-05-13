@@ -9,18 +9,8 @@ package rubiksworld.controller
  * @param onlyMagnetic whether only magnetic models should be searched
  */
 data class ModelsSearchFilters(
-    val text: String,
-    val onlySpeedCubes: Boolean,
-    val onlyStickerless: Boolean,
-    val onlyMagnetic: Boolean
-) {
-    companion object {
-        /**
-         * Options for a non-filtered search.
-         */
-        val EMPTY = ModelsSearchFilters(
-            text = "",
-            onlySpeedCubes = false, onlyStickerless = false, onlyMagnetic = false
-        )
-    }
-}
+    val text: String = "",
+    val onlySpeedCubes: Boolean = false,
+    val onlyStickerless: Boolean = false,
+    val onlyMagnetic: Boolean = false
+)

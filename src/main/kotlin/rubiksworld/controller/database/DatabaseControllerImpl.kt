@@ -1,6 +1,9 @@
 package rubiksworld.controller.database
 
 import org.ktorm.database.Database
+import org.ktorm.dsl.like
+import org.ktorm.dsl.or
+import org.ktorm.entity.filter
 import org.ktorm.entity.toList
 import rubiksworld.controller.ModelsSearchFilters
 import rubiksworld.model.Model
@@ -17,6 +20,19 @@ class DatabaseControllerImpl : DatabaseController {
     }
 
     override fun searchModels(filters: ModelsSearchFilters): List<Model> {
-        return database.models.toList()
+        return with(filters) {
+            val textLike = "%$text%"
+            database.models
+                .filter {
+                    text.isBlank() or
+                            it.name.like(textLike) or
+                            it.maker.like(textLike) or
+                            it.category.like(textLike)
+                }
+                .filter { !onlySpeedCubes or it.isSpeedCube }
+                .filter { !onlyStickerless or it.isStickerless }
+                .filter { !onlyMagnetic or it.isMagnetic }
+                .toList()
+        }
     }
 }
