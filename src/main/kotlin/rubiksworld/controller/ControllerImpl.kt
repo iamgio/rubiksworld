@@ -2,6 +2,7 @@ package rubiksworld.controller
 
 import javafx.application.Platform
 import rubiksworld.controller.database.DatabaseController
+import rubiksworld.model.Model
 import kotlin.concurrent.thread
 
 /**
@@ -24,4 +25,6 @@ class ControllerImpl(
     }
 
     override fun searchModels(filters: ModelsSearchFilters) = databaseController.searchModels(filters)
+
+    override fun getCustomizableParts(model: Model) = databaseController.getCustomizableParts(model)
 }

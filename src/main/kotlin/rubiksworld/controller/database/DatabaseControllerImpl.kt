@@ -1,11 +1,13 @@
 package rubiksworld.controller.database
 
 import org.ktorm.database.Database
+import org.ktorm.dsl.eq
 import org.ktorm.dsl.like
 import org.ktorm.dsl.or
 import org.ktorm.entity.filter
 import org.ktorm.entity.toList
 import rubiksworld.controller.ModelsSearchFilters
+import rubiksworld.model.CustomizablePart
 import rubiksworld.model.Model
 
 /**
@@ -34,5 +36,12 @@ class DatabaseControllerImpl : DatabaseController {
                 .filter { !onlyMagnetic or it.isMagnetic }
                 .toList()
         }
+    }
+
+    override fun getCustomizableParts(model: Model): List<CustomizablePart> {
+        return database.customizableParts
+            .filter { it.modelName eq model.name }
+            .filter { it.modelMaker eq model.maker }
+            .toList()
     }
 }

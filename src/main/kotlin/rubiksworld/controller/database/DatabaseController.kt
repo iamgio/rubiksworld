@@ -1,6 +1,7 @@
 package rubiksworld.controller.database
 
 import rubiksworld.controller.ModelsSearchFilters
+import rubiksworld.model.CustomizablePart
 import rubiksworld.model.Model
 
 /**
@@ -19,4 +20,9 @@ interface DatabaseController {
      * @return models matching the given filters
      */
     fun searchModels(filters: ModelsSearchFilters): List<Model>
+
+    /**
+     * @return available customizable parts for the given [model]
+     */
+    fun getCustomizableParts(model: Model): List<CustomizablePart>
 }

@@ -3,6 +3,8 @@ package rubiksworld
 import org.junit.jupiter.api.Test
 import rubiksworld.controller.ControllerInitializer
 import rubiksworld.controller.ModelsSearchFilters
+import kotlin.test.assertContains
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -33,5 +35,16 @@ class QueriesTests {
         val results3 = controller.searchModels(filters3)
         assertTrue { results3.size > results1.size }
         assertTrue { results3.all { it.isMagnetic } }
+    }
+
+    @Test
+    fun customizableParts() {
+        val model = controller.searchModels(ModelsSearchFilters("RS3 M")).first()
+        val parts = controller.getCustomizableParts(model)
+        assertEquals(2, parts.size)
+
+        val partNames = parts.map { it.part }
+        assertContains(partNames, "Version")
+        assertContains(partNames, "Lubrication")
     }
 }
