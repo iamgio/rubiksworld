@@ -6,7 +6,7 @@
 .models-pane {
     -fx-hgap: 24;
     -fx-vgap: 24;
-    -fx-padding: 24 0 0 24;
+    -fx-padding: 24 0 24 24;
 }
 
 .model-card {
