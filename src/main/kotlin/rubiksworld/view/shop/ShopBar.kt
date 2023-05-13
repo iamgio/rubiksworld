@@ -40,6 +40,8 @@ class ShopBar(private val onSearchFiltersChange: (ModelsSearchFilters) -> Unit) 
         stickerless.setOnAction { search() }
         magnetic.setOnAction { search() }
 
+        search()
+
         return listOf(field, speedCube, magnetic, stickerless)
     }
 }
