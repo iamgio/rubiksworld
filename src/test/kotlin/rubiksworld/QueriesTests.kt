@@ -47,4 +47,18 @@ class QueriesTests {
         assertContains(partNames, "Version")
         assertContains(partNames, "Lubrication")
     }
+
+    @Test
+    fun availableCustomizations() {
+        val model = controller.searchModels(ModelsSearchFilters("356")).first()
+        assertEquals("GAN", model.maker)
+
+        val parts = controller.getCustomizableParts(model)
+        assertEquals(1, parts.size)
+
+        val customizations = controller.getAvailableCustomizations(parts.first())
+        assertEquals(2, customizations.size)
+        assertEquals("Lubrication", customizations.first().part)
+        assertEquals(customizations[0].part, customizations[1].part)
+    }
 }

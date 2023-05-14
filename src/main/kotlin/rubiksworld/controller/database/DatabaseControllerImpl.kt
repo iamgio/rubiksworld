@@ -8,6 +8,7 @@ import org.ktorm.entity.filter
 import org.ktorm.entity.toList
 import rubiksworld.controller.ModelsSearchFilters
 import rubiksworld.model.CustomizablePart
+import rubiksworld.model.Customization
 import rubiksworld.model.Model
 
 /**
@@ -42,6 +43,14 @@ open class DatabaseControllerImpl : DatabaseController {
         return database.customizableParts
             .filter { it.modelName eq model.name }
             .filter { it.modelMaker eq model.maker }
+            .toList()
+    }
+
+    override fun getAvailableCustomizations(part: CustomizablePart): List<Customization> {
+        return database.customizations
+            .filter { it.modelName eq part.model.name }
+            .filter { it.modelMaker eq part.model.maker }
+            .filter { it.part eq part.part }
             .toList()
     }
 }

@@ -2,6 +2,7 @@ package rubiksworld.controller.database
 
 import rubiksworld.controller.ModelsSearchFilters
 import rubiksworld.model.CustomizablePart
+import rubiksworld.model.Customization
 import rubiksworld.model.Model
 
 /**
@@ -25,4 +26,9 @@ interface DatabaseController {
      * @return available customizable parts for the given [model]
      */
     fun getCustomizableParts(model: Model): List<CustomizablePart>
+
+    /**
+     * @return the available customizations for the given [part]
+     */
+    fun getAvailableCustomizations(part: CustomizablePart): List<Customization>
 }
