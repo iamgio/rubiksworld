@@ -41,3 +41,12 @@
 .model-card .discount {
     -fx-text-fill: orange;
 }
+
+.model-overview {
+    -fx-background-color: -fx-card-background;
+}
+
+.model-overview .section-title {
+    -fx-font-weight: bold;
+    -fx-padding: 16 0 0 0;
+}
