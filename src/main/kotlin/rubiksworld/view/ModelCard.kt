@@ -6,9 +6,11 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import javafx.scene.shape.Rectangle
+import rubiksworld.common.calcDiscountedPrice
+import rubiksworld.common.doublePercentageToInt
+import rubiksworld.common.formatPrice
 import rubiksworld.controller.Controller
 import rubiksworld.model.Model
-import rubiksworld.view.shop.CURRENCY
 
 private const val WIDTH = 150.0
 private const val LOADING_IMAGE_HEIGHT = 92.0
@@ -56,17 +58,12 @@ class ModelCard(private val model: Model) : View<Pane> {
 
         // Discounts
         model.discountPercentage?.let {
-            val price = formatPrice(model.price - model.price * it)
-            val discount = "-${(it * 100).toInt()}%"
+            val price = formatPrice(calcDiscountedPrice(model.price, it))
+            val discount = "-${doublePercentageToInt(it)}%"
             priceHbox.children += Label(price).apply { styleClass += "price" }
             priceHbox.children += Label(discount).apply { styleClass += "discount" }
         }
 
         children += priceHbox
     }
-
-    /**
-     * @return [price] with 2 decimal places + currency symbol
-     */
-    private fun formatPrice(price: Double) = String.format("%.02f", price) + CURRENCY
 }
