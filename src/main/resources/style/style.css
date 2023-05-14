@@ -7,6 +7,10 @@
     -fx-font-family: "Manrope";
 }
 
+.tab {
+    -fx-font-weight: bold;
+}
+
 .models-pane {
     -fx-hgap: 24;
     -fx-vgap: 24;
