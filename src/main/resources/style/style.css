@@ -3,6 +3,10 @@
     -fx-dark-text: #2A384B;
 }
 
+.label, .text {
+    -fx-font-family: "Manrope";
+}
+
 .models-pane {
     -fx-hgap: 24;
     -fx-vgap: 24;
@@ -46,6 +50,10 @@
     -fx-background-color: -fx-card-background;
     -fx-spacing: 64;
     -fx-padding: 32;
+}
+
+.model-overview .label {
+    -fx-text-fill: -fx-dark-text;
 }
 
 .model-overview .section-title {
