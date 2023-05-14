@@ -56,6 +56,10 @@
     -fx-padding: 32;
 }
 
+.model-overview > * {
+    -fx-spacing: 2;
+}
+
 .model-overview .label {
     -fx-text-fill: -fx-dark-text;
 }
@@ -68,4 +72,12 @@
 .model-overview .customizations-box {
     -fx-spacing: 16;
     -fx-padding: 6 0 0 0;
+}
+
+.model-overview .check-box {
+    -fx-padding: 40 0 16 0;
+}
+
+.model-overview .button {
+    -fx-padding: 8 16 8 16;
 }

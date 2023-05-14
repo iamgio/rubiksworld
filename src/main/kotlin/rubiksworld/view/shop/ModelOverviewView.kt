@@ -1,8 +1,6 @@
 package rubiksworld.view.shop
 
-import javafx.scene.control.Label
-import javafx.scene.control.RadioButton
-import javafx.scene.control.ToggleGroup
+import javafx.scene.control.*
 import javafx.scene.image.ImageView
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
@@ -47,6 +45,14 @@ class ModelOverviewView(private val model: Model) : View<Pane> {
 
             val customizations = controller.getAvailableCustomizations(part)
             children += createCustomizationsBox(customizations)
+        }
+
+        children += CheckBox("Wishlist").apply {
+            // isSelected = check...
+        }
+
+        children += Button("Add to cart").apply {
+            // ...
         }
     }
 
