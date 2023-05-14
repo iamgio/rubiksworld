@@ -44,9 +44,16 @@
 
 .model-overview {
     -fx-background-color: -fx-card-background;
+    -fx-spacing: 64;
+    -fx-padding: 32;
 }
 
 .model-overview .section-title {
     -fx-font-weight: bold;
     -fx-padding: 16 0 0 0;
+}
+
+.model-overview .customizations-box {
+    -fx-spacing: 16;
+    -fx-padding: 6 0 0 0;
 }
