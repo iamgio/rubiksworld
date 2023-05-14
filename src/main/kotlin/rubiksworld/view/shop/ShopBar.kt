@@ -30,7 +30,7 @@ class ShopBar(private val onSearchFiltersChange: (ModelsSearchFilters) -> Unit) 
         val magnetic = ToggleButton("Magnetic")
 
         val getFilters = {
-            ModelsSearchFilters(field.text, speedCube.isSelected, magnetic.isSelected, stickerless.isSelected)
+            ModelsSearchFilters(field.text, speedCube.isSelected, stickerless.isSelected, magnetic.isSelected)
         }
 
         val search = { onSearchFiltersChange(getFilters()) }
@@ -42,6 +42,6 @@ class ShopBar(private val onSearchFiltersChange: (ModelsSearchFilters) -> Unit) 
 
         search()
 
-        return listOf(field, speedCube, magnetic, stickerless)
+        return listOf(field, speedCube, stickerless, magnetic)
     }
 }
