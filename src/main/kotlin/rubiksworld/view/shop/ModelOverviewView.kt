@@ -1,10 +1,13 @@
 package rubiksworld.view.shop
 
+import javafx.beans.property.DoubleProperty
+import javafx.beans.property.SimpleDoubleProperty
 import javafx.scene.control.*
 import javafx.scene.image.ImageView
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
+import rubiksworld.common.formatPrice
 import rubiksworld.controller.Controller
 import rubiksworld.model.Customization
 import rubiksworld.model.Model
@@ -14,9 +17,14 @@ import rubiksworld.view.View
 private const val IMAGE_WIDTH = 250.0
 
 /**
+ * The view that contains information about a model and lets the user add it to their wishlist and cart.
  *
+ * @param model target model
  */
 class ModelOverviewView(private val model: Model) : View<Pane> {
+
+    private val price: DoubleProperty = SimpleDoubleProperty(model.price)
+    private val appliedCustomizations = mutableListOf<Customization>()
 
     override fun create(controller: Controller) = HBox().apply {
         styleClass += "model-overview"
@@ -44,8 +52,13 @@ class ModelOverviewView(private val model: Model) : View<Pane> {
             children += title(part.part)
 
             val customizations = controller.getAvailableCustomizations(part)
-            children += createCustomizationsBox(customizations)
+            children += createCustomizationsBox(customizations, controller)
         }
+
+        children += title("Total")
+        children += Label().apply {
+            textProperty().bind(price.map { formatPrice(it.toDouble()) })
+        } // TODO update + discount (from db?)
 
         children += CheckBox("Wishlist").apply {
             // isSelected = check...
@@ -56,13 +69,23 @@ class ModelOverviewView(private val model: Model) : View<Pane> {
         }
     }
 
-    private fun createCustomizationsBox(customizations: List<Customization>) = HBox().apply {
+    private fun createCustomizationsBox(customizations: List<Customization>, controller: Controller) = HBox().apply {
         styleClass += "customizations-box"
         val group = ToggleGroup()
 
         val buttons = customizations.map { customization ->
             RadioButton(customization.change).apply {
                 toggleGroup = group
+
+                selectedProperty().addListener { _ ->
+                    if (isSelected) {
+                        appliedCustomizations += customization
+                    } else {
+                        appliedCustomizations -= customization
+                    }
+                    price.set(controller.calcPrice(model, appliedCustomizations))
+                }
+
                 isSelected = customization.isDefault
             }
         }
