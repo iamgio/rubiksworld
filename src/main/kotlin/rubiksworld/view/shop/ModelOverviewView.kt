@@ -25,6 +25,7 @@ private const val IMAGE_WIDTH = 250.0
 class ModelOverviewView(private val model: Model) : View<Pane> {
 
     private val price: DoubleProperty = SimpleDoubleProperty(model.price)
+    private val discountedPrice: DoubleProperty = SimpleDoubleProperty()
     private val appliedCustomizations = mutableListOf<Customization>()
 
     override fun create(controller: Controller) = HBox().apply {
@@ -57,13 +58,26 @@ class ModelOverviewView(private val model: Model) : View<Pane> {
         }
 
         children += title("Total")
-        children += Label().apply {
-            textProperty().bind(price.map { formatPrice(it.toDouble()) })
-        }
+
+        val priceBox = HBox().apply { styleClass += "price-box" }
+
         model.discountPercentage?.let {
-            val discount = "${doublePercentageToInt(it)}% discount already applied"
-            children += Label(discount).apply { styleClass += "discount" }
+            priceBox.children += Label().apply {
+                styleClass += "initial-price"
+                textProperty().bind(price.map { formatPrice(it.toDouble()) })
+            }
         }
+
+        priceBox.children += Label().apply {
+            textProperty().bind(discountedPrice.map { formatPrice(it.toDouble()) })
+        }
+
+        model.discountPercentage?.let {
+            val discount = "-${doublePercentageToInt(it)}%"
+            priceBox.children += Label(discount).apply { styleClass += "discount" }
+        }
+
+        children += priceBox
 
         children += CheckBox("Wishlist").apply {
             // isSelected = check...
@@ -88,7 +102,11 @@ class ModelOverviewView(private val model: Model) : View<Pane> {
                     } else {
                         appliedCustomizations -= customization
                     }
-                    price.set(controller.calcPrice(model, appliedCustomizations))
+
+                    if (model.discountPercentage != null) {
+                        price.set(controller.calcPrice(model, appliedCustomizations, applyDiscount = false))
+                    }
+                    discountedPrice.set(controller.calcPrice(model, appliedCustomizations))
                 }
 
                 isSelected = customization.isDefault

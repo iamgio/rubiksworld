@@ -42,7 +42,7 @@
     -fx-padding: 10 0 0 0;
 }
 
-.model-card .initial-price {
+.model-card .initial-price, .model-overview .initial-price {
     -fx-opacity: .25;
 }
 
@@ -76,6 +76,10 @@
 
 .model-overview .button {
     -fx-padding: 8 16 8 16;
+}
+
+.model-overview .price-box {
+    -fx-spacing: 12;
 }
 
 .model-card .discount, .model-overview .discount {

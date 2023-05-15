@@ -1,6 +1,5 @@
 package rubiksworld.controller
 
-import rubiksworld.common.calcDiscountedPrice
 import rubiksworld.controller.database.DatabaseController
 import rubiksworld.model.Customization
 import rubiksworld.model.Model
@@ -25,8 +24,5 @@ interface Controller : DatabaseController {
     /**
      * @return the final price of a [model] with applied [customizations]
      */
-    fun calcPrice(model: Model, customizations: List<Customization>): Double {
-        val price = model.price + customizations.sumOf { it.price }
-        return model.discountPercentage?.let { calcDiscountedPrice(price, it) } ?: price
-    }
+    fun calcPrice(model: Model, customizations: List<Customization>, applyDiscount: Boolean = true): Double
 }
