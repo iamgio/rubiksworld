@@ -5,10 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import rubiksworld.controller.ControllerInitializer
 import rubiksworld.controller.ModelsSearchFilters
-import kotlin.test.assertContains
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /**
  * Tests for database queries.
@@ -67,7 +64,7 @@ class QueriesTests {
     }
 
     @Test
-    fun addModelVersion() {
+    fun addToCart() {
         val model = controller.searchModels(ModelsSearchFilters("RS3 M")).first()
         assertEquals("MoYu", model.maker)
 
@@ -86,6 +83,12 @@ class QueriesTests {
 
         val modelVersion = controller.insertModelVersion(model, customizations)
         assertEquals(model.name, modelVersion.model.name)
+
+        val user = controller.getUser("luca_rossi")
+        assertNotNull(user)
+        controller.addToCart(user, modelVersion)
+
+        assertContains(controller.getCart(user).map { it.id }, modelVersion.id)
     }
 
     @Test

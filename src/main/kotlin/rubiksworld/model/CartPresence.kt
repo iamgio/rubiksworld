@@ -12,10 +12,10 @@ interface CartPresence : Entity<CartPresence> {
     /**
      * Cart's owner.
      */
-    val user: User
+    var user: User
 
     /**
      * Target model.
      */
-    val modelVersion: ModelVersion
+    var modelVersion: ModelVersion
 }

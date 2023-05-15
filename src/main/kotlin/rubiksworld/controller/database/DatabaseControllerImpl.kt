@@ -4,9 +4,7 @@ import org.ktorm.database.Database
 import org.ktorm.dsl.eq
 import org.ktorm.dsl.like
 import org.ktorm.dsl.or
-import org.ktorm.entity.add
-import org.ktorm.entity.filter
-import org.ktorm.entity.toList
+import org.ktorm.entity.*
 import rubiksworld.controller.ModelsSearchFilters
 import rubiksworld.model.*
 
@@ -57,6 +55,12 @@ open class DatabaseControllerImpl : DatabaseController {
         return database.users.toList()
     }
 
+    override fun getUser(nickname: String): User? {
+        return database.users
+            .filter { it.nickname eq nickname }
+            .firstOrNull()
+    }
+
     override fun insertModelVersion(model: Model, customizations: List<Customization>): ModelVersion {
         val modelVersion = ModelVersion {
             this.model = model
@@ -72,5 +76,19 @@ open class DatabaseControllerImpl : DatabaseController {
         }
 
         return modelVersion
+    }
+
+    override fun addToCart(user: User, modelVersion: ModelVersion) {
+        val cartPresence = CartPresence {
+            this.user = user
+            this.modelVersion = modelVersion
+        }
+        database.cartPresences.add(cartPresence)
+    }
+
+    override fun getCart(user: User): List<ModelVersion> {
+        return database.cartPresences
+            .filter { it.userNickname eq user.nickname }
+            .map { it.modelVersion }
     }
 }
