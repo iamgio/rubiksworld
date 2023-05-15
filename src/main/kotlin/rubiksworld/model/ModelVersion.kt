@@ -17,5 +17,5 @@ interface ModelVersion : Entity<ModelVersion> {
     /**
      * Target model.
      */
-    val model: Model
+    var model: Model
 }

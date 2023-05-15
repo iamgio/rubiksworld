@@ -1,10 +1,7 @@
 package rubiksworld.controller.database
 
 import rubiksworld.controller.ModelsSearchFilters
-import rubiksworld.model.CustomizablePart
-import rubiksworld.model.Customization
-import rubiksworld.model.Model
-import rubiksworld.model.User
+import rubiksworld.model.*
 
 /**
  * The controller responsible for communicating with the database.
@@ -37,4 +34,10 @@ interface DatabaseController {
      * @return all the registered users
      */
     fun getAllUsers(): List<User>
+
+    /**
+     * Creates a row for a new customized version of a [Model].
+     * @return a new model version
+     */
+    fun insertModelVersion(model: Model, customizations: List<Customization>): ModelVersion
 }

@@ -4,13 +4,11 @@ import org.ktorm.database.Database
 import org.ktorm.dsl.eq
 import org.ktorm.dsl.like
 import org.ktorm.dsl.or
+import org.ktorm.entity.add
 import org.ktorm.entity.filter
 import org.ktorm.entity.toList
 import rubiksworld.controller.ModelsSearchFilters
-import rubiksworld.model.CustomizablePart
-import rubiksworld.model.Customization
-import rubiksworld.model.Model
-import rubiksworld.model.User
+import rubiksworld.model.*
 
 /**
  *
@@ -57,5 +55,22 @@ open class DatabaseControllerImpl : DatabaseController {
 
     override fun getAllUsers(): List<User> {
         return database.users.toList()
+    }
+
+    override fun insertModelVersion(model: Model, customizations: List<Customization>): ModelVersion {
+        val modelVersion = ModelVersion {
+            this.model = model
+        }
+        database.modelVersions.add(modelVersion)
+
+        customizations.forEach { customization ->
+            val application = Application {
+                this.customization = customization
+                this.modelVersion = modelVersion
+            }
+            database.applications.add(application)
+        }
+
+        return modelVersion
     }
 }

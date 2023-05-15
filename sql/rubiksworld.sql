@@ -147,7 +147,7 @@ ALTER TABLE `Applications`
     ADD FOREIGN KEY (`model_version_id`) REFERENCES `ModelVersions` (`id`);
 
 ALTER TABLE `ModelVersions`
-    ADD FOREIGN KEY (`model_name`, `model_maker`) REFERENCES `Applications` (`model_name`, `model_maker`);
+    ADD FOREIGN KEY (`model_name`, `model_maker`) REFERENCES `Models` (`name`, `maker`);
 
 ALTER TABLE `CartPresences`
     ADD FOREIGN KEY (`user_nickname`) REFERENCES `Users` (`nickname`);

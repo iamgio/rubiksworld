@@ -67,6 +67,28 @@ class QueriesTests {
     }
 
     @Test
+    fun addModelVersion() {
+        val model = controller.searchModels(ModelsSearchFilters("RS3 M")).first()
+        assertEquals("MoYu", model.maker)
+
+        val parts = controller.getCustomizableParts(model)
+        assertEquals(2, parts.size)
+
+        val custom1 = controller.getAvailableCustomizations(
+            parts.first { it.part == "Lubrication" }
+        ).first { it.change == "Yes" }
+
+        val custom2 = controller.getAvailableCustomizations(
+            parts.first { it.part == "Version" }
+        ).first { it.change == "Ball Core" }
+
+        val customizations = listOf(custom1, custom2)
+
+        val modelVersion = controller.insertModelVersion(model, customizations)
+        assertEquals(model.name, modelVersion.model.name)
+    }
+
+    @Test
     fun allUsers() {
         val users = controller.getAllUsers().map { it.name + " " + it.surname }
         assertContains(users, "Alice Lombardi")
