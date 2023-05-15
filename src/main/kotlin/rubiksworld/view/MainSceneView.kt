@@ -38,9 +38,13 @@ class MainSceneView : View<Pane> {
     private fun addLoginPage(tabPane: TabPane, controller: Controller) {
         val login = LoginView().also {
             it.onLogin = { nickname, name, surname ->
-                controller.user = controller.insertUser(nickname, name, surname)
-                tabPane.tabs.clear()
-                populateTabs(tabPane, controller)
+                controller.async {
+                    controller.user = controller.insertUser(nickname, name, surname)
+                    controller.sync {
+                        tabPane.tabs.clear()
+                        populateTabs(tabPane, controller)
+                    }
+                }
             }
         }.create(controller)
 

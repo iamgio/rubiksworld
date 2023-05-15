@@ -20,11 +20,30 @@ class LoginView : View<Pane> {
         styleClass += "login-view"
 
         val nickname = TextField()
+        nickname.textProperty().addListener { _, _, new ->
+            // Remove special characters
+            nickname.text = new.replace("[^\\w_]".toRegex(), "")
+        }
+
         val name = TextField()
+        name.textProperty().addListener { _, _, new ->
+            // Remove non-literal characters
+            name.text = new.replace("[^a-zA-Z ]".toRegex(), "")
+        }
+
         val surname = TextField()
+        surname.textProperty().addListener { _, _, new ->
+            // Remove non-literal characters
+            surname.text = new.replace("[^a-zA-Z ]".toRegex(), "")
+        }
 
         val button = Button("Log in").apply {
             setOnAction {
+                if (nickname.text.isBlank() || name.text.isBlank() || surname.text.isBlank()) {
+                    return@setOnAction
+                }
+                text = "Loading..."
+                isDisable = true
                 onLogin?.invoke(nickname.text, name.text, surname.text)
             }
         }
