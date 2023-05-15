@@ -65,7 +65,7 @@ CREATE TABLE `Users`
     `name`             VARCHAR(255) NOT NULL,
     `surname`          VARCHAR(255) NOT NULL,
     `city`             VARCHAR(255),
-    `zip`              VARCHAR(255),
+    `zip`              VARCHAR(10),
     `email`            VARCHAR(512),
     `address`          VARCHAR(255),
     `phone_number`     VARCHAR(20),
