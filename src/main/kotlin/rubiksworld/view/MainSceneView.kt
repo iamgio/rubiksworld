@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane
 import rubiksworld.controller.Controller
 import rubiksworld.model.Model
 import rubiksworld.view.login.LoginView
+import rubiksworld.view.shop.CartView
 import rubiksworld.view.shop.ModelOverviewView
 import rubiksworld.view.shop.ShopView
 
@@ -55,7 +56,9 @@ class MainSceneView : View<Pane> {
         tabPane.tabs.addAll(
             Tab("Shop", ShopView(
                 onUpdate = { tabPane.requestLayout() },
-                onModelSelect = { model -> openTemporaryModelOverviewTab(model, controller, tabPane) }
+                onModelSelect = { model -> openTemporaryModelOverviewTab(model, controller, tabPane) },
+                onCartOpen = { openTemporaryCartTab(controller, tabPane) },
+                onWishlistOpen = {}
             ).create(controller)),
             Tab("Solves")
         )
@@ -63,6 +66,11 @@ class MainSceneView : View<Pane> {
 
     private fun openTemporaryModelOverviewTab(model: Model, controller: Controller, tabPane: TabPane) {
         val tab = Tab(model.name, ModelOverviewView(model).create(controller))
+        openTemporaryTab(tabPane, tab)
+    }
+
+    private fun openTemporaryCartTab(controller: Controller, tabPane: TabPane) {
+        val tab = Tab("Cart", CartView().create(controller))
         openTemporaryTab(tabPane, tab)
     }
 
