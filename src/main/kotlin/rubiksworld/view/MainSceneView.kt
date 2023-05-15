@@ -25,6 +25,17 @@ class MainSceneView : View<Pane> {
             it.prefWidthProperty().bind(prefWidthProperty())
         }
 
+        // addLoginPage(tabPane, controller)
+        // TODO development: remove before production
+        // ---
+        controller.user = controller.getUser("luca_rossi")!!
+        populateTabs(tabPane, controller)
+        // ---
+
+        children += tabPane
+    }
+
+    private fun addLoginPage(tabPane: TabPane, controller: Controller) {
         val login = LoginView().also {
             it.onLogin = { nickname, name, surname ->
                 controller.user = controller.insertUser(nickname, name, surname)
@@ -34,7 +45,6 @@ class MainSceneView : View<Pane> {
         }.create(controller)
 
         tabPane.tabs += Tab("Log in", login)
-        children += tabPane
     }
 
     private fun populateTabs(tabPane: TabPane, controller: Controller) {
