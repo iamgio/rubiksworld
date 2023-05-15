@@ -69,8 +69,8 @@ CREATE TABLE `Users`
     `email`            VARCHAR(512),
     `address`          VARCHAR(255),
     `phone_number`     VARCHAR(20),
-    `shipping_price`   DECIMAL(4, 2) NOT NULL,
-    `minimum_subtotal` DECIMAL(4, 2) NOT NULL
+    `shipping_price`   DECIMAL(4, 2) NOT NULL DEFAULT 2.80,
+    `minimum_subtotal` DECIMAL(4, 2) NOT NULL DEFAULT 15
 );
 
 CREATE TABLE `CartPresences`
@@ -236,3 +236,17 @@ VALUES
     ('Sail W', 'QiYi', 'Plastic Color', 'White', 0, TRUE),
     ('Meilong', 'MoFang JiaoShi', 'Plastic Color', 'Stickerless', 0, TRUE),
     ('Meilong', 'MoFang JiaoShi', 'Plastic Color', 'Black', 0,  FALSE);
+
+INSERT INTO Users
+    (nickname, name, surname)
+VALUES
+    ('luca_rossi', 'Luca', 'Rossi'),
+    ('giulia_russo', 'Giulia', 'Russo'),
+    ('ferrari50', 'Lorenzo', 'Ferrari'),
+    ('chiarina02', 'Chiara', 'Bianchi'),
+    ('fraroma', 'Francesco', 'Romano'),
+    ('galletta_', 'Alessia', 'Gallo'),
+    ('marchino05', 'Marco', 'Conti'),
+    ('marisofi', 'Sofia', 'Marino'),
+    ('darkmatt', 'Matteo', 'Greco'),
+    ('alilombi', 'Alice', 'Lombardi');

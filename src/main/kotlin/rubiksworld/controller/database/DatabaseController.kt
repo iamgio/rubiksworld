@@ -4,6 +4,7 @@ import rubiksworld.controller.ModelsSearchFilters
 import rubiksworld.model.CustomizablePart
 import rubiksworld.model.Customization
 import rubiksworld.model.Model
+import rubiksworld.model.User
 
 /**
  * The controller responsible for communicating with the database.
@@ -31,4 +32,9 @@ interface DatabaseController {
      * @return the available customizations for the given [part]
      */
     fun getAvailableCustomizations(part: CustomizablePart): List<Customization>
+
+    /**
+     * @return all the registered users
+     */
+    fun getAllUsers(): List<User>
 }

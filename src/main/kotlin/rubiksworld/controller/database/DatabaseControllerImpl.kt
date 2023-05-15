@@ -10,6 +10,7 @@ import rubiksworld.controller.ModelsSearchFilters
 import rubiksworld.model.CustomizablePart
 import rubiksworld.model.Customization
 import rubiksworld.model.Model
+import rubiksworld.model.User
 
 /**
  *
@@ -52,5 +53,9 @@ open class DatabaseControllerImpl : DatabaseController {
             .filter { it.modelMaker eq part.model.maker }
             .filter { it.part eq part.part }
             .toList()
+    }
+
+    override fun getAllUsers(): List<User> {
+        return database.users.toList()
     }
 }

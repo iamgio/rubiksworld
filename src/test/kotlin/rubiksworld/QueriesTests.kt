@@ -1,6 +1,8 @@
 package rubiksworld
 
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import rubiksworld.controller.ControllerInitializer
 import rubiksworld.controller.ModelsSearchFilters
 import kotlin.test.assertContains
@@ -11,11 +13,13 @@ import kotlin.test.assertTrue
 /**
  * Tests for database queries.
  */
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class QueriesTests {
 
     private val controller = ControllerInitializer().initialize()
 
-    init {
+    @BeforeAll
+    fun init() {
         controller.initDatabase()
     }
 
@@ -60,5 +64,13 @@ class QueriesTests {
         assertEquals(2, customizations.size)
         assertEquals("Lubrication", customizations.first().part)
         assertEquals(customizations[0].part, customizations[1].part)
+    }
+
+    @Test
+    fun allUsers() {
+        val users = controller.getAllUsers().map { it.name + " " + it.surname }
+        assertContains(users, "Alice Lombardi")
+        assertContains(users, "Luca Rossi")
+        assertContains(users, "Francesco Romano")
     }
 }
