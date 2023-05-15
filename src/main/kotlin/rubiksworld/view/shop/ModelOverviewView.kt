@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
+import rubiksworld.common.doublePercentageToInt
 import rubiksworld.common.formatPrice
 import rubiksworld.controller.Controller
 import rubiksworld.model.Customization
@@ -58,7 +59,11 @@ class ModelOverviewView(private val model: Model) : View<Pane> {
         children += title("Total")
         children += Label().apply {
             textProperty().bind(price.map { formatPrice(it.toDouble()) })
-        } // TODO update + discount (from db?)
+        }
+        model.discountPercentage?.let {
+            val discount = "${doublePercentageToInt(it)}% discount already applied"
+            children += Label(discount).apply { styleClass += "discount" }
+        }
 
         children += CheckBox("Wishlist").apply {
             // isSelected = check...

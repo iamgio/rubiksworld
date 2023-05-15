@@ -46,10 +46,6 @@
     -fx-opacity: .25;
 }
 
-.model-card .discount {
-    -fx-text-fill: orange;
-}
-
 .model-overview {
     -fx-background-color: -fx-card-background;
     -fx-spacing: 64;
@@ -80,4 +76,8 @@
 
 .model-overview .button {
     -fx-padding: 8 16 8 16;
+}
+
+.model-card .discount, .model-overview .discount {
+    -fx-text-fill: orange;
 }
