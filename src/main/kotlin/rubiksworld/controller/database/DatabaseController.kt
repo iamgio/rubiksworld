@@ -42,6 +42,14 @@ interface DatabaseController {
     fun getUser(nickname: String): User?
 
     /**
+     * Inserts a new user if it does not exist, or updates it if it exists.
+     * @param nickname user's nickname
+     * @param name user's name
+     * @param surname user's surname
+     */
+    fun insertUser(nickname: String, name: String, surname: String): User
+
+    /**
      * Creates a row for a new customized version of a [Model].
      * @return a new model version
      */

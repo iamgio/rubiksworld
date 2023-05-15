@@ -3,11 +3,14 @@ package rubiksworld.controller
 import rubiksworld.controller.database.DatabaseController
 import rubiksworld.model.Customization
 import rubiksworld.model.Model
+import rubiksworld.model.User
 
 /**
  * The model-view bridge.
  */
 interface Controller : DatabaseController {
+
+    var user: User
 
     /**
      * Runs an action asynchronously.

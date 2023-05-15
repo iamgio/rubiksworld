@@ -5,12 +5,15 @@ import rubiksworld.common.calcDiscountedPrice
 import rubiksworld.controller.database.DatabaseControllerImpl
 import rubiksworld.model.Customization
 import rubiksworld.model.Model
+import rubiksworld.model.User
 import kotlin.concurrent.thread
 
 /**
  * [Controller] implementation.
  */
 class ControllerImpl : DatabaseControllerImpl(), Controller {
+
+    override lateinit var user: User
 
     override fun async(action: Controller.() -> Unit) {
         thread { action(this) }

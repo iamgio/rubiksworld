@@ -12,17 +12,17 @@ interface User : Entity<User> {
     /**
      * User's unique nickname.
      */
-    val nickname: String
+    var nickname: String
 
     /**
      * User's name.
      */
-    val name: String
+    var name: String
 
     /**
      * User's surname.
      */
-    val surname: String
+    var surname: String
 
     /**
      * Client's city.

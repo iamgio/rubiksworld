@@ -57,8 +57,25 @@ open class DatabaseControllerImpl : DatabaseController {
 
     override fun getUser(nickname: String): User? {
         return database.users
-            .filter { it.nickname eq nickname }
-            .firstOrNull()
+            .find { it.nickname eq nickname }
+    }
+
+    override fun insertUser(nickname: String, name: String, surname: String): User {
+        val match = getUser(nickname)
+        if (match != null) {
+            match.name = name
+            match.surname = surname
+            match.flushChanges()
+            return match
+        }
+
+        val newUser = User {
+            this.nickname = nickname
+            this.name = name
+            this.surname = surname
+        }
+        database.users.add(newUser)
+        return newUser
     }
 
     override fun insertModelVersion(model: Model, customizations: List<Customization>): ModelVersion {

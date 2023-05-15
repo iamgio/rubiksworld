@@ -5,6 +5,7 @@ import javafx.scene.control.TabPane
 import javafx.scene.layout.Pane
 import rubiksworld.controller.Controller
 import rubiksworld.model.Model
+import rubiksworld.view.login.LoginView
 import rubiksworld.view.shop.ModelOverviewView
 import rubiksworld.view.shop.ShopView
 
@@ -23,6 +24,20 @@ class MainSceneView : View<Pane> {
             it.tabClosingPolicy = TabPane.TabClosingPolicy.UNAVAILABLE
             it.prefWidthProperty().bind(prefWidthProperty())
         }
+
+        val login = LoginView().also {
+            it.onLogin = { nickname, name, surname ->
+                controller.user = controller.insertUser(nickname, name, surname)
+                tabPane.tabs.clear()
+                populateTabs(tabPane, controller)
+            }
+        }.create(controller)
+
+        tabPane.tabs += Tab("Log in", login)
+        children += tabPane
+    }
+
+    private fun populateTabs(tabPane: TabPane, controller: Controller) {
         tabPane.tabs.addAll(
             Tab("Shop", ShopView(
                 onUpdate = { tabPane.requestLayout() },
@@ -30,7 +45,6 @@ class MainSceneView : View<Pane> {
             ).create(controller)),
             Tab("Solves")
         )
-        children += tabPane
     }
 
     private fun openTemporaryModelOverviewTab(model: Model, controller: Controller, tabPane: TabPane) {

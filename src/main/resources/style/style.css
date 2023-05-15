@@ -11,6 +11,22 @@
     -fx-font-weight: bold;
 }
 
+.login-view {
+    -fx-max-width: 250;
+    -fx-padding: 16 24 24 24;
+    -fx-spacing: 24;
+}
+
+.login-view .fields-box {
+    -fx-spacing: 6;
+}
+
+.login-view .label {
+    -fx-text-fill: -fx-dark-text;
+    -fx-font-weight: bold;
+    -fx-padding: 8 0 0 0;
+}
+
 .models-pane {
     -fx-hgap: 24;
     -fx-vgap: 24;
