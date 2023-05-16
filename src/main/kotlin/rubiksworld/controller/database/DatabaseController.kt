@@ -74,14 +74,14 @@ interface DatabaseController {
     fun getFullModelInfo(partialModel: Model): Model
 
     /**
-     * Adds a model version to the [user]'s cart
+     * Adds a model version to the [user]'s cart.
      * @param user cart owner
      * @param modelVersion customized model version
      */
     fun addToCart(user: User, modelVersion: ModelVersion)
 
     /**
-     * Adds a model version to the [user]'s cart
+     * Adds a model version to the [user]'s cart.
      * @param user cart owner
      * @param model model
      * @param customizations customizations to be applied
@@ -90,6 +90,11 @@ interface DatabaseController {
         addToCart(user, insertModelVersion(model, customizations))
     }
 
+    /**
+     * Removes a model version from the [user]'s cart.
+     * @param user cart owner
+     * @param modelVersion customized model version
+     */
     fun removeFromCart(user: User, modelVersion: ModelVersion)
 
     /**
