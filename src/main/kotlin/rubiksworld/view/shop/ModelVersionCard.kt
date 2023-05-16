@@ -1,5 +1,6 @@
 package rubiksworld.view.shop
 
+import javafx.scene.Node
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.layout.Pane
@@ -12,8 +13,12 @@ import rubiksworld.view.View
 
 /**
  * The card for a customized [ModelVersion].
+ *
+ * @param modelVersion customized model version
+ * @param onRemove action to run when this is model version is removed from a list,
+ *                 with this card's layout as an argument
  */
-class ModelVersionCard(private val modelVersion: ModelVersion, private val onRemove: () -> Unit) : View<Pane> {
+class ModelVersionCard(private val modelVersion: ModelVersion, private val onRemove: (Node) -> Unit) : View<Pane> {
 
     override fun create(controller: Controller): Pane {
         val model = controller.getFullModelInfo(modelVersion.model).copy()
@@ -31,8 +36,8 @@ class ModelVersionCard(private val modelVersion: ModelVersion, private val onRem
 
             val spacer = Pane().apply { VBox.setVgrow(this, Priority.ALWAYS) }
 
-            val remove = Button("Remove").apply {
-                setOnAction { onRemove() }
+            val remove = Button("Remove").also {
+                it.setOnAction { onRemove(this) }
             }
 
             children.addAll(customizationsBox, spacer, remove)

@@ -16,8 +16,9 @@ class CartView : View<Pane> {
         val modelsPane = ModelsPane()
 
         controller.getCart(controller.user).forEach {
-            modelsPane.children += ModelVersionCard(it) {
-
+            modelsPane.children += ModelVersionCard(it) { card ->
+                controller.removeFromCart(controller.user, it)
+                modelsPane.children -= card
             }.create(controller)
         }
 

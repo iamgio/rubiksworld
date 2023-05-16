@@ -90,6 +90,8 @@ interface DatabaseController {
         addToCart(user, insertModelVersion(model, customizations))
     }
 
+    fun removeFromCart(user: User, modelVersion: ModelVersion)
+
     /**
      * @param user cart owner
      * @return the model versions from the [user]'s cart

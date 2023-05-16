@@ -133,6 +133,12 @@ open class DatabaseControllerImpl : DatabaseController {
         database.cartPresences.add(cartPresence)
     }
 
+    override fun removeFromCart(user: User, modelVersion: ModelVersion) {
+        database.cartPresences.removeIf {
+            it.modelVersionId eq modelVersion.id
+        }
+    }
+
     override fun getCart(user: User): List<ModelVersion> {
         return database.cartPresences
             .filter { it.userNickname eq user.nickname }
