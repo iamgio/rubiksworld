@@ -56,6 +56,14 @@ interface DatabaseController {
     fun insertModelVersion(model: Model, customizations: List<Customization>): ModelVersion
 
     /**
+     * Joins the complete information about a model from a partial structure
+     * composed by its name and maker.
+     * @param partialModel partial model information
+     * @return model filled with information
+     */
+    fun getFullModelInfo(partialModel: Model): Model
+
+    /**
      * Adds a model version to the [user]'s cart
      * @param user cart owner
      * @param modelVersion customized model version

@@ -95,6 +95,12 @@ open class DatabaseControllerImpl : DatabaseController {
         return modelVersion
     }
 
+    override fun getFullModelInfo(partialModel: Model): Model {
+        return database.models
+            .filter { it.name eq partialModel.name }
+            .first { it.maker eq partialModel.maker }
+    }
+
     override fun addToCart(user: User, modelVersion: ModelVersion) {
         val cartPresence = CartPresence {
             this.user = user

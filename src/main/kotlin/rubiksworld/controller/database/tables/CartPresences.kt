@@ -11,5 +11,5 @@ import rubiksworld.model.CartPresence
 object CartPresences : Table<CartPresence>("CartPresences") {
 
     val userNickname = varchar("user_nickname").primaryKey().bindTo { it.user.nickname }
-    val modelVersionId = int("model_version_id").primaryKey().bindTo { it.modelVersion.id }
+    val modelVersionId = int("model_version_id").primaryKey().references(ModelVersions) { it.modelVersion }
 }
