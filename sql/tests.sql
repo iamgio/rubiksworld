@@ -14,12 +14,23 @@ AND (NOT ? OR is_speed_cube)
 AND (NOT ? OR is_stickerless)
 AND (NOT ? OR is_magnetic);
 
+# User log-in/registration
+
+INSERT INTO Users
+    (nickname, name, surname)
+VALUES
+    (?, ?, ?)
+ON DUPLICATE KEY UPDATE
+                     name    = VALUES(name),
+                     surname = VALUES(surname);
+
 # Model version price calculation
 
 SELECT MV.id,
        M.name,
-       SUM(C.price) + M.price as base_price,
-       IF(ISNULL(M.discount_percentage), base_price, base_price - base_price * M.discount_percentage) as price
+       SUM(C.price) + M.price                                     AS base_price,
+       IF(ISNULL(M.discount_percentage), SUM(C.price) + M.price,
+          (SUM(C.price) + M.price) * (1 - M.discount_percentage)) AS price
 FROM Applications A,
      Customizations C,
      Models M,
