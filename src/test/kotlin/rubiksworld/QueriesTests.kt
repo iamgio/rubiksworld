@@ -84,11 +84,17 @@ class QueriesTests {
         val modelVersion = controller.insertModelVersion(model, customizations)
         assertEquals(model.name, modelVersion.model.name)
 
+        assertEquals(2, controller.getAppliedCustomizations(modelVersion).size)
+
         val user = controller.getUser("luca_rossi")
         assertNotNull(user)
         controller.addToCart(user, modelVersion)
 
         assertContains(controller.getCart(user).map { it.id }, modelVersion.id)
+
+        controller.removeFromCart(user, modelVersion)
+
+        assertFalse { modelVersion.id in controller.getCart(user).map { it.id } }
     }
 
     @Test
@@ -97,5 +103,26 @@ class QueriesTests {
         assertContains(users, "Alice Lombardi")
         assertContains(users, "Luca Rossi")
         assertContains(users, "Francesco Romano")
+    }
+
+    @Test
+    fun registerUser() {
+        val user1 = controller.insertUser("new_user", "Name", "Surname")
+        assertEquals("new_user", user1.nickname)
+        assertEquals("Name", user1.name)
+        assertEquals("Surname", user1.surname)
+
+        val lookup1 = controller.getUser("new_user")
+        assertNotNull(lookup1)
+        assertEquals(user1.nickname, lookup1.nickname)
+        assertEquals(user1.name, lookup1.name)
+        assertEquals(user1.surname, lookup1.surname)
+
+        val user2 = controller.insertUser("new_user", "X", "Y")
+        val lookup2 = controller.getUser("new_user")
+        assertNotNull(lookup2)
+        assertEquals("new_user", lookup2.nickname)
+        assertEquals("X", lookup2.name)
+        assertEquals("Y", lookup2.surname)
     }
 }
