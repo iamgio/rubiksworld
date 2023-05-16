@@ -1,9 +1,10 @@
 package rubiksworld.view.shop
 
-import javafx.scene.control.Label
+import javafx.scene.control.ScrollPane
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import rubiksworld.controller.Controller
+import rubiksworld.view.ModelsPane
 import rubiksworld.view.View
 
 /**
@@ -12,9 +13,14 @@ import rubiksworld.view.View
 class CartView : View<Pane> {
 
     override fun create(controller: Controller) = VBox().apply {
-        children += Label("${controller.user.name}'s cart")
+        val modelsPane = ModelsPane()
+
         controller.getCart(controller.user).forEach {
-            children += ModelVersionCard(it).create(controller)
+            modelsPane.children += ModelVersionCard(it).create(controller)
+        }
+
+        children += ScrollPane(modelsPane).apply {
+            isFitToWidth = true
         }
     }
 }

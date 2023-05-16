@@ -1,13 +1,12 @@
 package rubiksworld.view.shop
 
-import javafx.geometry.Orientation
 import javafx.scene.control.ScrollPane
-import javafx.scene.layout.FlowPane
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import rubiksworld.controller.Controller
 import rubiksworld.model.Model
 import rubiksworld.view.ModelCard
+import rubiksworld.view.ModelsPane
 import rubiksworld.view.View
 
 const val CURRENCY = '€'
@@ -27,7 +26,7 @@ class ShopView(
 ) : View<Pane> {
 
     override fun create(controller: Controller) = VBox().apply {
-        val modelsPane = FlowPane(Orientation.HORIZONTAL).apply { styleClass += "models-pane" }
+        val modelsPane = ModelsPane()
 
         val bar = ShopBar(
             onSearchFiltersChange = { filters ->
