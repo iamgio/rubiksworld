@@ -113,6 +113,12 @@ open class DatabaseControllerImpl : DatabaseController {
         return model.discountPercentage?.let { calcDiscountedPrice(subtotal, it) } ?: subtotal
     }
 
+    override fun getAppliedCustomizations(modelVersion: ModelVersion): List<Application> {
+        return database.applications
+            .filter { it.modelVersionId eq modelVersion.id }
+            .toList()
+    }
+
     override fun getFullModelInfo(partialModel: Model): Model {
         return database.models
             .filter { it.name eq partialModel.name }

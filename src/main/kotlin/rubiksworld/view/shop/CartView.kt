@@ -16,7 +16,9 @@ class CartView : View<Pane> {
         val modelsPane = ModelsPane()
 
         controller.getCart(controller.user).forEach {
-            modelsPane.children += ModelVersionCard(it).create(controller)
+            modelsPane.children += ModelVersionCard(it) {
+
+            }.create(controller)
         }
 
         children += ScrollPane(modelsPane).apply {

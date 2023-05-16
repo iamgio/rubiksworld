@@ -55,7 +55,15 @@ interface DatabaseController {
      */
     fun insertModelVersion(model: Model, customizations: List<Customization>): ModelVersion
 
+    /**
+     * @return the price of a customized [modelVersion], discounts included
+     */
     fun getModelVersionPrice(modelVersion: ModelVersion): Double
+
+    /**
+     * @return the customizations applied to a [modelVersion].
+     */
+    fun getAppliedCustomizations(modelVersion: ModelVersion): List<Application>
 
     /**
      * Joins the complete information about a model from a partial structure
