@@ -84,7 +84,7 @@ class ModelOverviewView(private val model: Model) : View<Pane> {
         }
 
         children += Button("Add to cart").apply {
-            // ...
+            controller.addToCart(controller.user, model, appliedCustomizations)
         }
     }
 
