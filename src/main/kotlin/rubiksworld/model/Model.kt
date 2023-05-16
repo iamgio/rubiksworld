@@ -27,12 +27,12 @@ interface Model : Entity<Model> {
     /**
      * Model price.
      */
-    val price: Double
+    var price: Double
 
     /**
      * If not `null`, discount percentage on this model's final price.
      */
-    val discountPercentage: Double?
+    var discountPercentage: Double?
 
     /**
      * Image URL of this model.

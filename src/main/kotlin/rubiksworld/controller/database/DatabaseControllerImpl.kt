@@ -1,11 +1,12 @@
 package rubiksworld.controller.database
 
 import org.ktorm.database.Database
-import org.ktorm.dsl.eq
-import org.ktorm.dsl.like
-import org.ktorm.dsl.or
+import org.ktorm.dsl.*
 import org.ktorm.entity.*
+import rubiksworld.common.calcDiscountedPrice
 import rubiksworld.controller.ModelsSearchFilters
+import rubiksworld.controller.database.tables.Applications
+import rubiksworld.controller.database.tables.Customizations
 import rubiksworld.model.*
 
 /**
@@ -93,6 +94,23 @@ open class DatabaseControllerImpl : DatabaseController {
         }
 
         return modelVersion
+    }
+
+    override fun getModelVersionPrice(modelVersion: ModelVersion): Double {
+        val customizationsPrice = database.from(Applications)
+            .leftJoin(Customizations,
+                on = (Applications.part eq Customizations.part)
+                        and (Applications.change eq Customizations.change)
+                        and (Applications.modelName eq Customizations.modelName)
+                        and (Applications.modelMaker eq Customizations.modelMaker))
+            .select(sum(Customizations.price))
+            .where(Applications.modelVersionId eq modelVersion.id)
+            .map { it.getDouble(1) }
+            .firstOrNull() ?: .0
+
+        val model = getFullModelInfo(modelVersion.model)
+        val subtotal = model.price + customizationsPrice
+        return model.discountPercentage?.let { calcDiscountedPrice(subtotal, it) } ?: subtotal
     }
 
     override fun getFullModelInfo(partialModel: Model): Model {

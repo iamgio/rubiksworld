@@ -55,6 +55,8 @@ interface DatabaseController {
      */
     fun insertModelVersion(model: Model, customizations: List<Customization>): ModelVersion
 
+    fun getModelVersionPrice(modelVersion: ModelVersion): Double
+
     /**
      * Joins the complete information about a model from a partial structure
      * composed by its name and maker.
