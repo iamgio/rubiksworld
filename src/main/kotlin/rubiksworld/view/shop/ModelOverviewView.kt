@@ -25,7 +25,7 @@ private const val IMAGE_WIDTH = 250.0
 class ModelOverviewView(private val model: Model) : View<Pane> {
 
     private val price: DoubleProperty = SimpleDoubleProperty(model.price)
-    private val discountedPrice: DoubleProperty = SimpleDoubleProperty()
+    private val discountedPrice: DoubleProperty = SimpleDoubleProperty(model.price)
     private val appliedCustomizations = mutableListOf<Customization>()
 
     override fun create(controller: Controller) = HBox().apply {
