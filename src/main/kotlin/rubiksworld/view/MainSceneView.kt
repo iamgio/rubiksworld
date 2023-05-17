@@ -9,6 +9,7 @@ import rubiksworld.view.login.LoginView
 import rubiksworld.view.shop.CartView
 import rubiksworld.view.shop.ModelOverviewView
 import rubiksworld.view.shop.ShopView
+import rubiksworld.view.shop.WishlistView
 
 /**
  * The main scene component.
@@ -58,7 +59,7 @@ class MainSceneView : View<Pane> {
                 onUpdate = { tabPane.requestLayout() },
                 onModelSelect = { model -> openTemporaryModelOverviewTab(model, controller, tabPane) },
                 onCartOpen = { openTemporaryCartTab(controller, tabPane) },
-                onWishlistOpen = {}
+                onWishlistOpen = { openTemporaryWishlistTab(controller, tabPane) }
             ).create(controller)),
             Tab("Solves")
         )
@@ -71,6 +72,14 @@ class MainSceneView : View<Pane> {
 
     private fun openTemporaryCartTab(controller: Controller, tabPane: TabPane) {
         val tab = Tab("Cart", CartView().create(controller))
+        openTemporaryTab(tabPane, tab)
+    }
+
+    private fun openTemporaryWishlistTab(controller: Controller, tabPane: TabPane) {
+        val tab = Tab("Wishlist", WishlistView(onModelSelect = {
+            tabPane.selectionModel.select(0)
+            openTemporaryModelOverviewTab(it, controller, tabPane)
+        }).create(controller))
         openTemporaryTab(tabPane, tab)
     }
 

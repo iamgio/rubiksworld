@@ -80,7 +80,14 @@ class ModelOverviewView(private val model: Model) : View<Pane> {
         children += priceBox
 
         children += CheckBox("Wishlist").apply {
-            // isSelected = check...
+            isSelected = controller.isInWishlist(controller.user, model)
+            selectedProperty().addListener { _, _, selected ->
+                if (selected) {
+                    controller.addToWishlist(controller.user, model)
+                } else {
+                    controller.removeFromWishlist(controller.user, model)
+                }
+            }
         }
 
         children += Button("Add to cart").apply {

@@ -17,6 +17,9 @@ private const val BARS_HEIGHT = 40.0 // TODO make dynamic
  * The shop section content.
  *
  * @param onUpdate action to run when the UI should be updated
+ * @param onModelSelect action to run when a model is selected
+ * @param onCartOpen action to run when the cart should be opened
+ * @param onWishlistOpen action to run when the wishlist should be opened
  */
 class ShopView(
     private val onUpdate: () -> Unit,
