@@ -43,4 +43,29 @@ WHERE MV.model_name = M.name
   AND C.model_maker = M.maker
   AND A.customization_part = C.part
   AND A.customization_change = C.change
-GROUP BY MV.id
+GROUP BY MV.id;
+
+# Create a model version and add it to cart
+
+SET @model_name = ?;
+SET @model_maker = ?;
+
+# Create version
+INSERT INTO ModelVersions
+    (model_name, model_maker)
+VALUES
+    (@model_name, @model_maker);
+
+SET @model_version_id = LAST_INSERT_ID();
+
+# For each customization
+INSERT INTO Applications
+    (model_name, model_maker, customization_part, customization_change, model_version_id)
+VALUES
+    (@model_name, @model_maker, ?, ?, @model_version_id);
+
+# Add to cart
+INSERT INTO CartPresences
+    (user_nickname, model_version_id)
+VALUES
+    (?, @model_version_id)
