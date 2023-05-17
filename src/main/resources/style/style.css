@@ -62,8 +62,12 @@
     -fx-padding: 10 0 0 0;
 }
 
+.model-card .spacer {
+    -fx-min-height: 8;
+}
+
 .model-card .customization-box {
-    -fx-padding: 8 0 8 0;
+    -fx-padding: 0 0 8 0;
 }
 
 .model-card .customization-box .label {

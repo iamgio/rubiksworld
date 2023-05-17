@@ -19,7 +19,10 @@ import rubiksworld.view.ModelCard
 class RemovableModelCard(model: Model, private val onRemove: (Node) -> Unit) : ModelCard(model) {
 
     override fun create(controller: Controller) = super.create(controller).apply {
-        val spacer = Pane().apply { VBox.setVgrow(this, Priority.ALWAYS) }
+        val spacer = Pane().apply {
+            styleClass += "spacer"
+            VBox.setVgrow(this, Priority.ALWAYS)
+        }
 
         val remove = Button("Remove").also {
             it.setOnAction { onRemove(this) }
