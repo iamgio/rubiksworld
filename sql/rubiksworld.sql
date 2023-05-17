@@ -185,14 +185,14 @@ ALTER TABLE `Discounts`
 # Populate
 
 INSERT INTO Categories
-VALUES ('3x3'), ('4x4');
+VALUES ('3x3'), ('4x4'), ('Exotic');
 
 INSERT INTO Models
     (name, maker, category_name, price, discount_percentage, image_url, is_speed_cube, is_stickerless, is_magnetic)
 VALUES
     ('WeiLong WR M V9', 'MoYu', '3x3', 17.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-WeiLong-WR-M-V9-3x3-Magnetic-Standard-Frosted-Stickerless-Bright_540x.jpg?v=1682478273', 1, 1, 1),
     ('RS3 M', 'MoYu', '3x3', 9.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoYu-RS3-M-2020-3x3-Magnetic-Black-2_540x.jpg?v=1681849962', 1, 0, 1),
-    ('GTS3 M', 'MoYu', '3x3', 24, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoYu-WeiLong-GTS2-M-3x3-Magnetic-Black_540x.jpg?v=1681847670', 1, 1, 1),
+    ('GTS3 M', 'MoYu', '3x3', 24, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoYu-WeiLong-GTS2-M-3x3-Magnetic-Black_540x.jpg?v=1681847670', 1, 0, 1),
     ('WeiLong GTS3 M', 'MoYu', '3x3', 19.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoYu-WeiLong-GTS3-M-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681848204', 1, 1, 0),
     ('356', 'GAN', '3x3', 26, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-356-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681849509', 1, 1, 1),
     ('11 Pro', 'GAN', '3x3', 41.89, 0.1, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-11-Pro-3x3-Magnetic_540x.jpg?v=1681850528', 1, 1, 1),
@@ -201,7 +201,10 @@ VALUES
     ('Sail W', 'QiYi', '3x3', 3.68, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-Sail-W-3x3-White-2_540x.jpg?v=1681848838', 0, 0, 0),
     ('Big Sail', 'QiYi', '3x3', 4.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-Big-Sail-60mm-3x3-Black_540x.jpg?v=1681847606', 1, 0, 0),
     ('Meilong', 'MoFang JiaoShi', '3x3', 6.99, 0.2, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoFang-JiaoShi-MeiLong-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681849893', 1, 0, 1),
-    ('Metallic', 'Cyclone Boys', '3x3', 16.49, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/Cyclone-Boys-Metallic-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681852512', 0, 0, 1);
+    ('Metallic', 'Cyclone Boys', '3x3', 16.49, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/Cyclone-Boys-Metallic-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681852512', 0, 0, 1),
+    ('Pyraminx', 'QiYi', 'Exotic', 7.45, 0.1, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-MS-Pyraminx-Magnetic-Stickerless-Bright_540x.jpg?v=1681849569', 0, 1, 1),
+    ('Galaxy V2 Megaminx', 'X-Man', 'Exotic', 18.50, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/X-Man-Galaxy-V2-Megaminx-Sculpted-Stickerless-Bright_540x.jpg?v=1681847935', 0, 1, 0),
+    ('MeiLong Skewb', 'MoFang JiaoShi', 'Exotic', 5.40, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoFang-JiaoShi-MeiLong-Skewb-Stickerless-Bright_540x.jpg?v=1681849974', 0, 1, 0);
 
 INSERT INTO CustomizableParts
     (model_name, model_maker, part)
@@ -213,7 +216,8 @@ VALUES
     ('356', 'GAN', 'Lubrication'),
     ('11 Pro', 'GAN', 'Internal Color'),
     ('Sail W', 'QiYi', 'Plastic Color'),
-    ('Meilong', 'MoFang JiaoShi', 'Plastic Color');
+    ('Meilong', 'MoFang JiaoShi', 'Plastic Color'),
+    ('Pyraminx', 'QiYi', 'Lubrication');
 
 INSERT INTO Customizations
     (model_name, model_maker, part, `change`, price, is_default)
@@ -235,7 +239,9 @@ VALUES
     ('Sail W', 'QiYi', 'Plastic Color', 'Black', 0, FALSE),
     ('Sail W', 'QiYi', 'Plastic Color', 'White', 0, TRUE),
     ('Meilong', 'MoFang JiaoShi', 'Plastic Color', 'Stickerless', 0, TRUE),
-    ('Meilong', 'MoFang JiaoShi', 'Plastic Color', 'Black', 0,  FALSE);
+    ('Meilong', 'MoFang JiaoShi', 'Plastic Color', 'Black', 0,  FALSE),
+    ('Pyraminx', 'QiYi', 'Lubrication', 'No', 0, TRUE),
+    ('Pyraminx', 'QiYi', 'Lubrication', 'Yes', 5, FALSE);
 
 INSERT INTO Users
     (nickname, name, surname)
