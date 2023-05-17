@@ -64,7 +64,7 @@ class QueriesTests {
     }
 
     @Test
-    fun addToCart() {
+    fun cart() {
         val model = controller.searchModels(ModelsSearchFilters("RS3 M")).first()
         assertEquals("MoYu", model.maker)
 
@@ -95,6 +95,25 @@ class QueriesTests {
         controller.removeFromCart(user, modelVersion)
 
         assertFalse { modelVersion.id in controller.getCart(user).map { it.id } }
+    }
+
+    @Test
+    fun wishlist() {
+        val model = controller.searchModels(ModelsSearchFilters("RS3 M")).first()
+        assertEquals("MoYu", model.maker)
+
+        val user = controller.getUser("luca_rossi")
+        assertNotNull(user)
+
+        controller.addToWishlist(user, model)
+        assertContains(controller.getWishlist(user).map { it.name }, model.name)
+
+        assertTrue(controller.isInWishlist(user, model))
+
+        controller.removeFromWishlist(user, model)
+        assertFalse { model.name in controller.getWishlist(user).map { it.name } }
+
+        assertFalse(controller.isInWishlist(user, model))
     }
 
     @Test
