@@ -135,7 +135,8 @@ open class DatabaseControllerImpl : DatabaseController {
 
     override fun removeFromCart(user: User, modelVersion: ModelVersion) {
         database.cartPresences.removeIf {
-            it.modelVersionId eq modelVersion.id
+            (it.userNickname eq user.nickname) and
+                    (it.modelVersionId eq modelVersion.id)
         }
     }
 
@@ -143,5 +144,33 @@ open class DatabaseControllerImpl : DatabaseController {
         return database.cartPresences
             .filter { it.userNickname eq user.nickname }
             .map { it.modelVersion }
+    }
+
+    override fun addToWishlist(user: User, model: Model) {
+        val wishlistPresence = WishlistPresence {
+            this.user = user
+            this.model = model
+        }
+        database.wishlistPresences.add(wishlistPresence)
+    }
+
+    override fun removeFromWishlist(user: User, model: Model) {
+        database.wishlistPresences.removeIf {
+            (it.userNickname eq user.nickname) and
+                    (it.modelName eq model.name) and
+                    (it.modelMaker eq model.maker)
+        }
+    }
+
+    override fun getWishlist(user: User): List<Model> {
+        return database.wishlistPresences
+            .filter { it.userNickname eq user.nickname }
+            .map { getFullModelInfo(it.model) }
+    }
+
+    override fun isInWishlist(user: User, model: Model): Boolean {
+        return database.wishlistPresences
+            .filter { it.userNickname eq user.nickname }
+            .any { (it.modelName eq model.name) and (it.modelMaker eq model.maker) }
     }
 }

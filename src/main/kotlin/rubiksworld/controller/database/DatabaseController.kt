@@ -102,4 +102,31 @@ interface DatabaseController {
      * @return the model versions from the [user]'s cart
      */
     fun getCart(user: User): List<ModelVersion>
+
+    /**
+     * Adds a model to the [user]'s wishlist.
+     * @param user wishlist owner
+     * @param model model to add
+     */
+    fun addToWishlist(user: User, model: Model)
+
+    /**
+     * Removes a model from the [user]'s wishlist.
+     * @param user wishlist owner
+     * @param model model to remove
+     */
+    fun removeFromWishlist(user: User, model: Model)
+
+    /**
+     * @param user wishlist owner
+     * @return the models from the [user]'s wishlist
+     */
+    fun getWishlist(user: User): List<Model>
+
+    /**
+     * @param user wishlist owner
+     * @param model model to check existance for
+     * @return whether [model] is in [user]'s wishlist
+     */
+    fun isInWishlist(user: User, model: Model): Boolean
 }
