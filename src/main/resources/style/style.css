@@ -11,20 +11,28 @@
     -fx-font-weight: bold;
 }
 
-.login-view {
-    -fx-max-width: 250;
+.login-view, .checkout-view {
     -fx-padding: 16 24 24 24;
     -fx-spacing: 24;
 }
 
-.login-view .fields-box {
+.login-view .fields-box, .checkout-view .fields-box {
+    -fx-max-width: 250;
     -fx-spacing: 6;
 }
 
-.login-view .label {
+.login-view .label, .checkout-view .fields-box .label {
     -fx-text-fill: -fx-dark-text;
     -fx-font-weight: bold;
     -fx-padding: 8 0 0 0;
+}
+
+.checkout-view {
+    -fx-spacing: 120;
+}
+
+.checkout-view .coupon-box {
+    -fx-padding: 0 0 16 0;
 }
 
 .shop-bar {
