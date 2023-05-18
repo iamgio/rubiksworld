@@ -1,4 +1,4 @@
-package rubiksworld.view
+package rubiksworld.view.common
 
 import javafx.scene.image.Image
 import rubiksworld.controller.Controller

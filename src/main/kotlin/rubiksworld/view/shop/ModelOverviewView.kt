@@ -12,8 +12,8 @@ import rubiksworld.common.formatPrice
 import rubiksworld.controller.Controller
 import rubiksworld.model.Customization
 import rubiksworld.model.Model
-import rubiksworld.view.ImageCache
 import rubiksworld.view.View
+import rubiksworld.view.common.ImageCache
 
 private const val IMAGE_WIDTH = 250.0
 

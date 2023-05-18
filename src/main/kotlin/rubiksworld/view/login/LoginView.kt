@@ -3,11 +3,12 @@ package rubiksworld.view.login
 import javafx.application.Platform
 import javafx.scene.control.Button
 import javafx.scene.control.Label
-import javafx.scene.control.TextField
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import rubiksworld.controller.Controller
 import rubiksworld.view.View
+import rubiksworld.view.common.LiteralTextField
+import rubiksworld.view.common.NicknameTextField
 
 /**
  *
@@ -19,23 +20,9 @@ class LoginView : View<Pane> {
     override fun create(controller: Controller) = VBox().apply {
         styleClass += "login-view"
 
-        val nickname = TextField()
-        nickname.textProperty().addListener { _, _, new ->
-            // Remove special characters
-            nickname.text = new.replace("[^\\w_]".toRegex(), "")
-        }
-
-        val name = TextField()
-        name.textProperty().addListener { _, _, new ->
-            // Remove non-literal characters
-            name.text = new.replace("[^a-zA-Z ]".toRegex(), "")
-        }
-
-        val surname = TextField()
-        surname.textProperty().addListener { _, _, new ->
-            // Remove non-literal characters
-            surname.text = new.replace("[^a-zA-Z ]".toRegex(), "")
-        }
+        val nickname = NicknameTextField()
+        val name = LiteralTextField()
+        val surname = LiteralTextField()
 
         val button = Button("Log in").apply {
             setOnAction {

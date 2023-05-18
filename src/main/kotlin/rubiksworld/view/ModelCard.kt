@@ -11,6 +11,7 @@ import rubiksworld.common.doublePercentageToInt
 import rubiksworld.common.formatPrice
 import rubiksworld.controller.Controller
 import rubiksworld.model.Model
+import rubiksworld.view.common.ImageCache
 
 private const val WIDTH = 150.0
 private const val LOADING_IMAGE_HEIGHT = 92.0
