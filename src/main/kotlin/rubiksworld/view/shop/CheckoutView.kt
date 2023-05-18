@@ -44,20 +44,40 @@ class CheckoutView : View<Pane> {
             styleClass += "fields-box"
         }
 
+        val appliedCouponsBox = VBox()
         val couponBox = VBox(
             Label("Coupon"), HBox(coupon, couponButton),
+            appliedCouponsBox
         ).apply {
             styleClass.addAll("fields-box", "coupon-box")
         }
 
         val totalBox = VBox(
-            couponBox,
             // TODO coupons + shipping price in total
             Label(formatPrice(controller.getCartSubtotal(controller.user))),
-            purchaseButton
+            purchaseButton,
+            couponBox
         ).apply {
             styleClass += "fields-box"
         }
         children += totalBox
+
+        // Handlers
+
+        couponButton.setOnAction {
+            val code = coupon.text
+            val couponMatch = controller.getCoupon(code)
+            appliedCouponsBox.children += Label(
+                if (couponMatch == null) {
+                    "$code: invalid coupon"
+                } else {
+                    "${couponMatch.code}: -${couponMatch.formatted()}"
+                }
+            ).apply {
+                styleClass += "applied-coupon-label"
+            }
+        }
+
+        couponButton.disableProperty().bind(coupon.textProperty().isEmpty)
     }
 }

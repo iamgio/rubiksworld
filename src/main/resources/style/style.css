@@ -21,7 +21,7 @@
     -fx-spacing: 6;
 }
 
-.login-view .label, .checkout-view .fields-box .label {
+.login-view .label, .checkout-view .fields-box > .label {
     -fx-text-fill: -fx-dark-text;
     -fx-font-weight: bold;
     -fx-padding: 8 0 0 0;
@@ -32,7 +32,13 @@
 }
 
 .checkout-view .coupon-box {
-    -fx-padding: 0 0 16 0;
+    -fx-padding: 16 0 0 0;
+}
+
+.checkout-view .coupon-box .applied-coupon-label {
+    -fx-padding: 4 0 0 0;
+    -fx-font-weight: normal;
+    -fx-text-fill: orange;
 }
 
 .shop-bar {

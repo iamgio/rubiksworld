@@ -181,4 +181,9 @@ open class DatabaseControllerImpl : DatabaseController {
             .filter { it.userNickname eq user.nickname }
             .any { (it.modelName eq model.name) and (it.modelMaker eq model.maker) }
     }
+
+    override fun getCoupon(code: String): Coupon? {
+        return database.coupons
+            .find { it.code eq code }
+    }
 }

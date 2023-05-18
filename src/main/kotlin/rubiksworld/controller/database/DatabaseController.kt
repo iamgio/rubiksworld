@@ -141,4 +141,10 @@ interface DatabaseController {
      * @return whether [model] is in [user]'s wishlist
      */
     fun isInWishlist(user: User, model: Model): Boolean
+
+    /**
+     * @param code coupon code
+     * @return corresponding coupon, if it exists
+     */
+    fun getCoupon(code: String): Coupon?
 }

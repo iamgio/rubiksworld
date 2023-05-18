@@ -213,7 +213,7 @@ VALUES
     ('Lubricant', 'Martian', 'Lubricant', 5.60, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/Martian-Lubricant_540x.jpg?v=1681847624', 0, 0, 0),
     ('Halo Smart Timer', 'GAN', 'Accessory', 39.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-Halo-Smart-Timer-Bluetooth-Blue_540x.jpg?v=1681856081', 0, 0, 0),
     ('G5 Pro Timer', 'SpeedStacks', 'Accessory', 30.80, 0.05, 'https://cdn.shopify.com/s/files/1/0978/8602/products/SpeedStacks-G5-Pro-Timer-Factory_540x.jpg?v=1681881393', 0, 0, 0),
-    ('Display Stand', 'GAN', 'Accessory', 30.80, 0.05, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-Cube-Display-Stand-4_c7a2bc1b-9232-4f87-bee4-1b99df74f817_540x.jpg?v=1681851661', 0, 0, 0);
+    ('Display Stand', 'GAN', 'Accessory', 5.80, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-Cube-Display-Stand-4_c7a2bc1b-9232-4f87-bee4-1b99df74f817_540x.jpg?v=1681851661', 0, 0, 0);
 
 INSERT INTO CustomizableParts
     (model_name, model_maker, part)
@@ -269,3 +269,11 @@ VALUES
     ('marisofi', 'Sofia', 'Marino'),
     ('darkmatt', 'Matteo', 'Greco'),
     ('alilombi', 'Alice', 'Lombardi');
+
+INSERT INTO Coupons
+    (code, value, type)
+VALUES
+    ('welcome', 10, 1),
+    ('5off', 5, 0),
+    ('2off', 2, 0),
+    ('5perc', 5, 1)
