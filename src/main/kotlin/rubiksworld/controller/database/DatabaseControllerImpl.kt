@@ -146,6 +146,14 @@ open class DatabaseControllerImpl : DatabaseController {
             .map { it.modelVersion }
     }
 
+    override fun getCartSubtotal(user: User): Double {
+        return getCart(user).sumOf { getModelVersionPrice(it) }
+    }
+
+    override fun canCheckout(user: User): Boolean {
+        return getCartSubtotal(user) >= user.minimumSubtotal
+    }
+
     override fun addToWishlist(user: User, model: Model) {
         val wishlistPresence = WishlistPresence {
             this.user = user

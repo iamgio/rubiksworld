@@ -6,10 +6,7 @@ import javafx.scene.layout.Pane
 import rubiksworld.controller.Controller
 import rubiksworld.model.Model
 import rubiksworld.view.login.LoginView
-import rubiksworld.view.shop.CartView
-import rubiksworld.view.shop.ModelOverviewView
-import rubiksworld.view.shop.ShopView
-import rubiksworld.view.shop.WishlistView
+import rubiksworld.view.shop.*
 
 /**
  * The main scene component.
@@ -71,7 +68,15 @@ class MainSceneView : View<Pane> {
     }
 
     private fun openTemporaryCartTab(controller: Controller, tabPane: TabPane) {
-        val tab = Tab("Cart", CartView().create(controller))
+        val tab = Tab("Cart", CartView(onCheckout = {
+            tabPane.selectionModel.select(0)
+            openTemporaryCheckoutTab(controller, tabPane)
+        }).create(controller))
+        openTemporaryTab(tabPane, tab)
+    }
+
+    private fun openTemporaryCheckoutTab(controller: Controller, tabPane: TabPane) {
+        val tab = Tab("Checkout", CheckoutView().create(controller))
         openTemporaryTab(tabPane, tab)
     }
 

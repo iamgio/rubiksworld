@@ -104,6 +104,18 @@ interface DatabaseController {
     fun getCart(user: User): List<ModelVersion>
 
     /**
+     * @param user cart owner
+     * @return [user]'s cart subtotal
+     */
+    fun getCartSubtotal(user: User): Double
+
+    /**
+     * @param user cart owner
+     * @return whether [user] can proceed to checkout
+     */
+    fun canCheckout(user: User): Boolean
+
+    /**
      * Adds a model to the [user]'s wishlist.
      * @param user wishlist owner
      * @param model model to add
