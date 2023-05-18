@@ -1,5 +1,7 @@
 package rubiksworld.view.shop
 
+import javafx.beans.property.DoubleProperty
+import javafx.beans.property.SimpleDoubleProperty
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
@@ -8,6 +10,7 @@ import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import rubiksworld.common.formatPrice
 import rubiksworld.controller.Controller
+import rubiksworld.model.Coupon
 import rubiksworld.view.View
 import rubiksworld.view.common.LiteralTextField
 import rubiksworld.view.common.NumericTextField
@@ -16,6 +19,9 @@ import rubiksworld.view.common.NumericTextField
  * Cart checkout view.
  */
 class CheckoutView : View<Pane> {
+
+    private val total: DoubleProperty = SimpleDoubleProperty()
+    private val appliedCoupons = mutableListOf<Coupon>()
 
     override fun create(controller: Controller) = HBox().apply {
         styleClass += "checkout-view"
@@ -52,9 +58,15 @@ class CheckoutView : View<Pane> {
             styleClass.addAll("fields-box", "coupon-box")
         }
 
+        updateTotal(controller)
+
+        val totalLabel = Label().apply {
+            textProperty().bind(total.map { formatPrice(it.toDouble()) })
+        }
+
         val totalBox = VBox(
-            // TODO coupons + shipping price in total
-            Label(formatPrice(controller.getCartSubtotal(controller.user))),
+            // TODO prevent duplicate coupons
+            totalLabel,
             purchaseButton,
             couponBox
         ).apply {
@@ -71,6 +83,8 @@ class CheckoutView : View<Pane> {
                 if (couponMatch == null) {
                     "$code: invalid coupon"
                 } else {
+                    appliedCoupons += couponMatch
+                    updateTotal(controller)
                     "${couponMatch.code}: -${couponMatch.formatted()}"
                 }
             ).apply {
@@ -79,5 +93,9 @@ class CheckoutView : View<Pane> {
         }
 
         couponButton.disableProperty().bind(coupon.textProperty().isEmpty)
+    }
+
+    private fun updateTotal(controller: Controller) {
+        this.total.set(controller.getCartTotal(controller.user, appliedCoupons))
     }
 }

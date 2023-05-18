@@ -111,6 +111,13 @@ interface DatabaseController {
 
     /**
      * @param user cart owner
+     * @param coupons used coupons
+     * @return [user]'s cart total, including shipping price and coupon discounts
+     */
+    fun getCartTotal(user: User, coupons: List<Coupon>): Double
+
+    /**
+     * @param user cart owner
      * @return whether [user] can proceed to checkout
      */
     fun canCheckout(user: User): Boolean

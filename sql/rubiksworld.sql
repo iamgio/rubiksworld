@@ -127,7 +127,7 @@ CREATE TABLE `Discounts`
 CREATE TABLE `Coupons`
 (
     `code`  VARCHAR(20) PRIMARY KEY,
-    `value` INTEGER NOT NULL,
+    `value` DECIMAL(4, 2) NOT NULL,
     `type`  INTEGER NOT NULL
 );
 
@@ -273,7 +273,7 @@ VALUES
 INSERT INTO Coupons
     (code, value, type)
 VALUES
-    ('welcome', 10, 1),
+    ('welcome', 0.10, 1),
     ('5off', 5, 0),
     ('2off', 2, 0),
-    ('5perc', 5, 1)
+    ('5perc', 0.5, 1)

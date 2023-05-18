@@ -150,6 +150,15 @@ open class DatabaseControllerImpl : DatabaseController {
         return getCart(user).sumOf { getModelVersionPrice(it) }
     }
 
+    override fun getCartTotal(user: User, coupons: List<Coupon>): Double {
+        var subtotal = getCartSubtotal(user)
+        coupons
+            .sortedBy { it.type.ordinal }
+            .forEach { subtotal = it.applied(subtotal) }
+
+        return subtotal + user.shippingPrice
+    }
+
     override fun canCheckout(user: User): Boolean {
         return getCartSubtotal(user) >= user.minimumSubtotal
     }

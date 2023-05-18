@@ -1,7 +1,9 @@
 package rubiksworld.model
 
 import org.ktorm.entity.Entity
-import rubiksworld.view.shop.CURRENCY
+import rubiksworld.common.calcDiscountedPrice
+import rubiksworld.common.doublePercentageToInt
+import rubiksworld.common.formatPrice
 
 /**
  * A coupon that provides a discount.
@@ -18,7 +20,7 @@ interface Coupon : Entity<Coupon> {
     /**
      * Coupon value.
      */
-    val value: Int
+    val value: Double
 
     /**
      * Coupon type.
@@ -29,8 +31,13 @@ interface Coupon : Entity<Coupon> {
      * @return the formatted content of this coupon as a string
      */
     fun formatted() = when(type) {
-        Type.ABSOLUTE -> "$value$CURRENCY"
-        Type.PERCENTAGE -> "$value%"
+        Type.ABSOLUTE -> formatPrice(value)
+        Type.PERCENTAGE -> "${doublePercentageToInt(value)}%"
+    }
+
+    fun applied(price: Double) = when(type) {
+        Type.ABSOLUTE -> kotlin.math.max(.0, price - value)
+        Type.PERCENTAGE -> calcDiscountedPrice(price, value)
     }
 
     enum class Type {
