@@ -185,7 +185,7 @@ ALTER TABLE `Discounts`
 # Populate
 
 INSERT INTO Categories
-VALUES ('3x3'), ('4x4'), ('Exotic');
+VALUES ('2x2'), ('3x3'), ('4x4'), ('5x5'), ('Exotic'), ('Lubricant'), ('Accessory');
 
 INSERT INTO Models
     (name, maker, category_name, price, discount_percentage, image_url, is_speed_cube, is_stickerless, is_magnetic)
@@ -202,9 +202,18 @@ VALUES
     ('Big Sail', 'QiYi', '3x3', 4.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-Big-Sail-60mm-3x3-Black_540x.jpg?v=1681847606', 1, 0, 0),
     ('Meilong', 'MoFang JiaoShi', '3x3', 6.99, 0.2, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoFang-JiaoShi-MeiLong-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681849893', 1, 0, 1),
     ('Metallic', 'Cyclone Boys', '3x3', 16.49, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/Cyclone-Boys-Metallic-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681852512', 0, 0, 1),
+    ('Little Magic', 'YuXin', '3x3', 4.64, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/YuXin-Little-Magic-3x3-Stickerless-Bright_540x.jpg?v=1681847815', 0, 1, 0),
+    ('YuPo V2', 'YJ', '2x2', 6.51, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/YJ-YuPo-V2-2x2-Magnetic-Stickerless-Bright_540x.jpg?v=1681848530', 0, 1, 0),
     ('Pyraminx', 'QiYi', 'Exotic', 7.45, 0.1, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-MS-Pyraminx-Magnetic-Stickerless-Bright_540x.jpg?v=1681849569', 0, 1, 1),
     ('Galaxy V2 Megaminx', 'X-Man', 'Exotic', 18.50, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/X-Man-Galaxy-V2-Megaminx-Sculpted-Stickerless-Bright_540x.jpg?v=1681847935', 0, 1, 0),
-    ('MeiLong Skewb', 'MoFang JiaoShi', 'Exotic', 5.40, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoFang-JiaoShi-MeiLong-Skewb-Stickerless-Bright_540x.jpg?v=1681849974', 0, 1, 0);
+    ('MeiLong Skewb', 'MoFang JiaoShi', 'Exotic', 5.40, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoFang-JiaoShi-MeiLong-Skewb-Stickerless-Bright_540x.jpg?v=1681849974', 0, 1, 0),
+    ('Gear Cube', 'QiYi', 'Exotic', 6.50, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-3x3-Gear-Cube-Tiled-Black_a8b77767-829b-4719-b6b5-06c808d8f812_540x.jpg?v=1681880198', 0, 0, 0),
+    ('MeiLong 4x4', 'MoFang JiaoShi', '4x4', 10.20, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoFang-JiaoShi-MeiLong-4x4-Magnetic-Black-2_540x.jpg?v=1681849918', 0, 0, 1),
+    ('MGC 5x5', 'YJ', '5x5', 20.50, 0.15, 'https://cdn.shopify.com/s/files/1/0978/8602/products/YJ-MGC-5x5-Magnetic-Black-2_540x.jpg?v=1681849430', 0, 0, 1),
+    ('Lubricant', 'Martian', 'Lubricant', 5.60, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/Martian-Lubricant_540x.jpg?v=1681847624', 0, 0, 0),
+    ('Halo Smart Timer', 'GAN', 'Accessory', 39.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-Halo-Smart-Timer-Bluetooth-Blue_540x.jpg?v=1681856081', 0, 0, 0),
+    ('G5 Pro Timer', 'SpeedStacks', 'Accessory', 30.80, 0.05, 'https://cdn.shopify.com/s/files/1/0978/8602/products/SpeedStacks-G5-Pro-Timer-Factory_540x.jpg?v=1681881393', 0, 0, 0),
+    ('Display Stand', 'GAN', 'Accessory', 30.80, 0.05, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-Cube-Display-Stand-4_c7a2bc1b-9232-4f87-bee4-1b99df74f817_540x.jpg?v=1681851661', 0, 0, 0);
 
 INSERT INTO CustomizableParts
     (model_name, model_maker, part)
@@ -217,7 +226,8 @@ VALUES
     ('11 Pro', 'GAN', 'Internal Color'),
     ('Sail W', 'QiYi', 'Plastic Color'),
     ('Meilong', 'MoFang JiaoShi', 'Plastic Color'),
-    ('Pyraminx', 'QiYi', 'Lubrication');
+    ('Pyraminx', 'QiYi', 'Lubrication'),
+    ('Lubricant', 'Martian', 'Size');
 
 INSERT INTO Customizations
     (model_name, model_maker, part, `change`, price, is_default)
@@ -241,7 +251,10 @@ VALUES
     ('Meilong', 'MoFang JiaoShi', 'Plastic Color', 'Stickerless', 0, TRUE),
     ('Meilong', 'MoFang JiaoShi', 'Plastic Color', 'Black', 0,  FALSE),
     ('Pyraminx', 'QiYi', 'Lubrication', 'No', 0, TRUE),
-    ('Pyraminx', 'QiYi', 'Lubrication', 'Yes', 5, FALSE);
+    ('Pyraminx', 'QiYi', 'Lubrication', 'Yes', 5, FALSE),
+    ('Lubricant', 'Martian', 'Size', '5ml', 0, TRUE),
+    ('Lubricant', 'Martian', 'Size', '10ml', 4, FALSE),
+    ('Lubricant', 'Martian', 'Size', '15ml', 7, FALSE);
 
 INSERT INTO Users
     (nickname, name, surname)
