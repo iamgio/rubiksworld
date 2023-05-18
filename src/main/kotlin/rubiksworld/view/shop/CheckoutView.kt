@@ -80,6 +80,10 @@ class CheckoutView : View<Pane> {
 
         // Handlers
 
+        if (city.text.isBlank()) {
+            Platform.runLater { city.requestFocus() }
+        }
+
         couponButton.setOnAction {
             val code = coupon.text
             val couponMatch = controller.getCoupon(code)
@@ -105,8 +109,11 @@ class CheckoutView : View<Pane> {
 
         coupon.setOnAction { couponButton.fire() }
 
-        if (city.text.isBlank()) {
-            Platform.runLater { city.requestFocus() }
+        purchaseButton.setOnAction {
+            if (!validateTextFields(name, surname, city, zip, email, address)) {
+                return@setOnAction
+            }
+            println("Checkout")
         }
     }
 
@@ -145,5 +152,16 @@ class CheckoutView : View<Pane> {
                 }
             )
         ).apply { styleClass += "prices-box" }
+    }
+
+    private fun validateTextFields(vararg mandatoryFields: TextField): Boolean {
+        var valid = true
+        mandatoryFields.forEach {
+            if (it.text.isBlank()) {
+                it.styleClass += "error-field"
+                valid = false
+            }
+        }
+        return valid
     }
 }

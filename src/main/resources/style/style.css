@@ -7,6 +7,10 @@
     -fx-font-family: "Manrope";
 }
 
+.error-field {
+    -fx-background-color: rgba(255, 0, 0, .1);
+}
+
 .tab {
     -fx-font-weight: bold;
 }
