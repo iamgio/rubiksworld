@@ -65,7 +65,6 @@ class CheckoutView : View<Pane> {
         }
 
         val totalBox = VBox(
-            // TODO prevent duplicate coupons
             totalLabel,
             purchaseButton,
             couponBox
@@ -79,6 +78,11 @@ class CheckoutView : View<Pane> {
         couponButton.setOnAction {
             val code = coupon.text
             val couponMatch = controller.getCoupon(code)
+            coupon.clear()
+            if (code in appliedCoupons.map { it.code }) {
+                return@setOnAction
+            }
+
             appliedCouponsBox.children += Label(
                 if (couponMatch == null) {
                     "$code: invalid coupon"
@@ -93,6 +97,8 @@ class CheckoutView : View<Pane> {
         }
 
         couponButton.disableProperty().bind(coupon.textProperty().isEmpty)
+
+        coupon.setOnAction { couponButton.fire() }
     }
 
     private fun updateTotal(controller: Controller) {
