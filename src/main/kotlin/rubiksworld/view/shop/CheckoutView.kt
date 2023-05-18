@@ -1,5 +1,6 @@
 package rubiksworld.view.shop
 
+import javafx.application.Platform
 import javafx.beans.property.DoubleProperty
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.geometry.Orientation
@@ -103,6 +104,10 @@ class CheckoutView : View<Pane> {
         couponButton.disableProperty().bind(coupon.textProperty().isEmpty)
 
         coupon.setOnAction { couponButton.fire() }
+
+        if (city.text.isBlank()) {
+            Platform.runLater { city.requestFocus() }
+        }
     }
 
     private fun updateTotal(controller: Controller) {
