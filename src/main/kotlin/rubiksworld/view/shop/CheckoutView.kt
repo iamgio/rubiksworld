@@ -2,8 +2,10 @@ package rubiksworld.view.shop
 
 import javafx.beans.property.DoubleProperty
 import javafx.beans.property.SimpleDoubleProperty
+import javafx.geometry.Orientation
 import javafx.scene.control.Button
 import javafx.scene.control.Label
+import javafx.scene.control.Separator
 import javafx.scene.control.TextField
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
@@ -20,6 +22,7 @@ import rubiksworld.view.common.NumericTextField
  */
 class CheckoutView : View<Pane> {
 
+    private val subtotal: DoubleProperty = SimpleDoubleProperty()
     private val total: DoubleProperty = SimpleDoubleProperty()
     private val appliedCoupons = mutableListOf<Coupon>()
 
@@ -58,6 +61,7 @@ class CheckoutView : View<Pane> {
             styleClass.addAll("fields-box", "coupon-box")
         }
 
+        subtotal.set(controller.getCartSubtotal(controller.user))
         updateTotal(controller)
 
         val totalLabel = Label().apply {
@@ -65,9 +69,9 @@ class CheckoutView : View<Pane> {
         }
 
         val totalBox = VBox(
-            totalLabel,
-            purchaseButton,
-            couponBox
+            couponBox,
+            createPricesBox(controller),
+            purchaseButton
         ).apply {
             styleClass += "fields-box"
         }
@@ -103,5 +107,38 @@ class CheckoutView : View<Pane> {
 
     private fun updateTotal(controller: Controller) {
         this.total.set(controller.getCartTotal(controller.user, appliedCoupons))
+    }
+
+    private fun createPricesBox(controller: Controller): Pane {
+        fun title(text: String) = Label(text).apply { styleClass += "title" }
+
+        return VBox(
+            HBox(
+                title("Subtotal"),
+                Label().apply {
+                    textProperty().bind(subtotal.map { formatPrice(it.toDouble()) })
+                }
+            ),
+            HBox(
+                title("Coupons"),
+                Label().apply {
+                    textProperty().bind(
+                        total.subtract(subtotal)
+                            .subtract(controller.user.shippingPrice)
+                            .map { formatPrice(it.toDouble()) })
+                }
+            ),
+            HBox(
+                title("Shipping"),
+                Label(formatPrice(controller.user.shippingPrice))
+            ),
+            Separator(Orientation.HORIZONTAL),
+            HBox(
+                title("Total"),
+                Label().apply {
+                    textProperty().bind(total.map { formatPrice(it.toDouble()) })
+                }
+            )
+        ).apply { styleClass += "prices-box" }
     }
 }

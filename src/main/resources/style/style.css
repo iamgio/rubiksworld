@@ -31,14 +31,23 @@
     -fx-spacing: 120;
 }
 
-.checkout-view .coupon-box {
-    -fx-padding: 16 0 0 0;
-}
-
 .checkout-view .coupon-box .applied-coupon-label {
     -fx-padding: 4 0 0 0;
     -fx-font-weight: normal;
     -fx-text-fill: orange;
+}
+
+.checkout-view .prices-box {
+    -fx-padding: 16 0 16 0;
+}
+
+.checkout-view .prices-box .title {
+    -fx-pref-width: 100;
+    -fx-font-weight: bold;
+}
+
+.checkout-view .prices-box .separator {
+    -fx-padding: 8 0 4 0;
 }
 
 .shop-bar {
