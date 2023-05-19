@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import rubiksworld.controller.ControllerInitializer
 import rubiksworld.controller.ModelsSearchFilters
+import rubiksworld.model.SolveTime
 import kotlin.test.*
 
 /**
@@ -143,5 +144,22 @@ class QueriesTests {
         assertEquals("new_user", lookup2.nickname)
         assertEquals("X", lookup2.name)
         assertEquals("Y", lookup2.surname)
+    }
+
+    @Test
+    fun topSolves() {
+        val user = controller.getUser("giulia_russo")
+
+        assertNotNull(user)
+
+        val solves = controller.getTopSolvesByModel(user)
+            .mapKeys { it.key?.name }
+            .mapValues { it.value.solveTime }
+
+        assertContains(solves, "Big Sail")
+        assertEquals(SolveTime(1, 22), solves["Big Sail"])
+
+        assertContains(solves, null)
+        assertEquals(SolveTime(0, 41), solves[null])
     }
 }

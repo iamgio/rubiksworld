@@ -276,4 +276,15 @@ VALUES
     ('welcome', 0.10, 1),
     ('5off', 5, 0),
     ('2off', 2, 0),
-    ('5perc', 0.5, 1)
+    ('5perc', 0.5, 1);
+
+INSERT INTO Solves
+    (user_nickname, solve_time, registration_date, model_name, model_maker)
+VALUES
+    ('luca_rossi', 20, '2023-05-18', 'RS3 M', 'MoYu'),
+    ('luca_rossi', 22, '2023-05-17', 'RS3 M', 'MoYu'),
+    ('luca_rossi', 18, '2023-05-16', '356', 'GAN'),
+    ('luca_rossi', 19, '2023-05-16', NULL, NULL),
+    ('giulia_russo', 82, '2023-02-08', 'Big Sail', 'QiYi'),
+    ('giulia_russo', 78, '2023-02-08', 'Big Sail', 'QiYi'),
+    ('giulia_russo', 41, '2023-02-08', NULL, NULL);

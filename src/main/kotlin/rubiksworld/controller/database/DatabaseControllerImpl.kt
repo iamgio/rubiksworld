@@ -7,7 +7,10 @@ import rubiksworld.common.calcDiscountedPrice
 import rubiksworld.controller.ModelsSearchFilters
 import rubiksworld.controller.database.tables.Applications
 import rubiksworld.controller.database.tables.Customizations
+import rubiksworld.controller.database.tables.Models
+import rubiksworld.controller.database.tables.Solves
 import rubiksworld.model.*
+import java.time.LocalDateTime
 
 /**
  *
@@ -194,5 +197,35 @@ open class DatabaseControllerImpl : DatabaseController {
     override fun getCoupon(code: String): Coupon? {
         return database.coupons
             .find { it.code eq code }
+    }
+
+    override fun getSolves(user: User): List<Solve> {
+        return database.solves
+            .filter { it.userNickname eq user.nickname }
+            .toList()
+    }
+
+    override fun getTopSolvesByModel(user: User): Map<Model?, Solve> {
+        return database.from(Solves)
+            .leftJoin(Models, on = (Solves.userNickname eq user.nickname)
+                    and (Solves.modelName eq Models.name)
+                    and (Solves.modelMaker eq Models.maker))
+            .select()
+            .orderBy(Solves.solveTime.asc())
+            .associate {
+                Models.createEntity(it).let { model ->
+                    if (model.name.isEmpty()) null else model
+                } to Solves.createEntity(it)
+            }
+    }
+
+    override fun insertSolve(user: User, model: Model?, solveTime: SolveTime) {
+        val solve = Solve {
+            this.user = user
+            this.model = model
+            this.registrationDate = LocalDateTime.now()
+            this.solveTime = solveTime
+        }
+        database.solves.add(solve)
     }
 }

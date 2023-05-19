@@ -154,4 +154,22 @@ interface DatabaseController {
      * @return corresponding coupon, if it exists
      */
     fun getCoupon(code: String): Coupon?
+
+    /**
+     * @return all the solves registered by [user].
+     */
+    fun getSolves(user: User): List<Solve>
+
+    /**
+     * @return the top solve registered by [user] for each model
+     */
+    fun getTopSolvesByModel(user: User): Map<Model?, Solve>
+
+    /**
+     * Registers a new solve.
+     * @param user solve owner
+     * @param model optional model used to make the solve
+     * @param solveTime time spent to make the solve
+     */
+    fun insertSolve(user: User, model: Model?, solveTime: SolveTime)
 }
