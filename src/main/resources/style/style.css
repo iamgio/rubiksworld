@@ -149,3 +149,15 @@
 .solves-view .shop-bar {
     -fx-spacing: 4;
 }
+
+.solves-view .table-container {
+    -fx-padding: 16;
+}
+
+.solves-view .table-row-cell {
+    -fx-cell-size: 50;
+}
+
+.solves-view .table-column {
+    -fx-alignment: center;
+}
