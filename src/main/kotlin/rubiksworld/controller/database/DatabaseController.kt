@@ -161,6 +161,11 @@ interface DatabaseController {
     fun getSolves(user: User): List<Solve>
 
     /**
+     * @return all the solves registered by any user.
+     */
+    fun getAllSolves(): List<Solve>
+
+    /**
      * @return the top solve registered by [user] for each model
      */
     fun getTopSolvesByModel(user: User): Map<Model?, Solve>

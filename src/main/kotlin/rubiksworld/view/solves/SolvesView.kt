@@ -19,8 +19,6 @@ class SolvesView : View<Pane> {
     override fun create(controller: Controller) = VBox().apply {
         styleClass += "solves-view"
 
-        children += SolvesBar().create(controller)
-
         val table = TableView<Solve>()
 
         table.columns.addAll(
@@ -35,7 +33,17 @@ class SolvesView : View<Pane> {
             }
         )
 
-        table.items.setAll(controller.getSolves(controller.user))
+        table.columns.forEach { column ->
+            column.prefWidthProperty().bind(table.layoutBoundsProperty().map {
+                it.width / table.columns.size - 1
+            })
+        }
+
+        //table.items.setAll(controller.getSolves(controller.user))
+
+        children += SolvesBar(onFiltersChange = {
+            table.items.setAll(it)
+        }).create(controller)
 
         children += VBox(table).apply { styleClass += "table-container" }
     }

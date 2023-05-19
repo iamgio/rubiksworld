@@ -202,6 +202,13 @@ open class DatabaseControllerImpl : DatabaseController {
     override fun getSolves(user: User): List<Solve> {
         return database.solves
             .filter { it.userNickname eq user.nickname }
+            .sortedBy { it.solveTime.asc() }
+            .toList()
+    }
+
+    override fun getAllSolves(): List<Solve> {
+        return database.solves
+            .sortedBy { it.solveTime.asc() }
             .toList()
     }
 
