@@ -145,3 +145,7 @@
 .model-card .discount, .model-overview .discount {
     -fx-text-fill: orange;
 }
+
+.solves-view .shop-bar {
+    -fx-spacing: 4;
+}

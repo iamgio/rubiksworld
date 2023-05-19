@@ -7,6 +7,7 @@ import rubiksworld.controller.Controller
 import rubiksworld.model.Model
 import rubiksworld.view.login.LoginView
 import rubiksworld.view.shop.*
+import rubiksworld.view.solves.SolvesView
 
 /**
  * The main scene component.
@@ -52,13 +53,13 @@ class MainSceneView : View<Pane> {
 
     private fun populateTabs(tabPane: TabPane, controller: Controller) {
         tabPane.tabs.addAll(
+            Tab("Solves", SolvesView().create(controller)), // TODO move to second position
             Tab("Shop", ShopView(
                 onUpdate = { tabPane.requestLayout() },
                 onModelSelect = { model -> openTemporaryModelOverviewTab(model, controller, tabPane) },
                 onCartOpen = { openTemporaryCartTab(controller, tabPane) },
                 onWishlistOpen = { openTemporaryWishlistTab(controller, tabPane) }
-            ).create(controller)),
-            Tab("Solves")
+            ).create(controller))
         )
     }
 
