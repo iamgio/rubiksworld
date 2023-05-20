@@ -19,18 +19,18 @@ class SolvesBar(private val onFiltersChange: (List<Solve>) -> Unit) : View<Pane>
         val group = ToggleGroup()
 
         val personal = createButton("Personal", group) {
-            controller.getSolves(controller.user)
+            controller.getPersonalSolves(controller.user)
         }
 
         val friends = createButton("Friends", group) {
-            emptyList() // TODO friendships
+            controller.getFriendsSolves(controller.user)
         }
 
         val global = createButton("Global", group) {
             controller.getAllSolves()
         }
 
-        personal.fire() // TODO friends is default
+        friends.fire() // Default
 
         children.addAll(personal, friends, global)
     }

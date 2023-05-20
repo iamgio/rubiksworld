@@ -287,7 +287,9 @@ VALUES
     ('luca_rossi', 19, '2023-05-16', NULL, NULL),
     ('giulia_russo', 82, '2023-02-08', 'Big Sail', 'QiYi'),
     ('giulia_russo', 78, '2023-02-08', 'Big Sail', 'QiYi'),
-    ('giulia_russo', 41, '2023-02-08', NULL, NULL);
+    ('giulia_russo', 41, '2023-02-08', NULL, NULL),
+    ('fraroma', 58, '2022-12-25', 'Meilong', 'MoFang JiaoShi'),
+    ('fraroma', 92, '2022-12-20', 'Metallic', 'Cyclone Boys');
 
 INSERT INTO Friendships
     (sender_nickname, receiver_nickname)

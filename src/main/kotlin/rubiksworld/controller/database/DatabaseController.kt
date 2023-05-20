@@ -162,12 +162,18 @@ interface DatabaseController {
     fun getFriends(user: User): List<User>
 
     /**
-     * @return all the solves registered by [user].
+     * @return all the solves registered by [user], in ascending order.
      */
-    fun getSolves(user: User): List<Solve>
+    fun getPersonalSolves(user: User): List<Solve>
 
     /**
-     * @return all the solves registered by any user.
+     * @return all the solves registered by [user]'s friends,
+     *         plus their personal solves, in ascending order
+     */
+    fun getFriendsSolves(user: User): List<Solve>
+
+    /**
+     * @return all the solves registered by any user, in ascending order.
      */
     fun getAllSolves(): List<Solve>
 

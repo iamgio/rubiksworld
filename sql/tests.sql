@@ -68,4 +68,14 @@ VALUES
 INSERT INTO CartPresences
     (user_nickname, model_version_id)
 VALUES
-    (?, @model_version_id)
+    (?, @model_version_id);
+
+# Get friends' solves + personal solves
+SET @user_nickname = ?;
+SELECT DISTINCT S.*
+FROM Solves S,
+     Friendships F
+WHERE (F.sender_nickname = @user_nickname
+    AND S.user_nickname = F.receiver_nickname)
+   OR S.user_nickname = @user_nickname
+ORDER BY S.solve_time

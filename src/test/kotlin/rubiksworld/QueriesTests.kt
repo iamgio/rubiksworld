@@ -160,9 +160,24 @@ class QueriesTests {
         val user = controller.getUser("giulia_russo")
         assertNotNull(user)
 
-        val solves = controller.getSolves(user)
+        val solves = controller.getPersonalSolves(user)
         assertEquals(3, solves.size)
         assertEquals(2, solves.count { it.model != null })
+    }
+
+    @Test
+    fun friendsSolves() {
+        val user = controller.getUser("giulia_russo")
+        assertNotNull(user)
+
+        val solves = controller.getFriendsSolves(user)
+
+        val friendsSolves = controller.getFriends(user).flatMap {
+            controller.getPersonalSolves(it)
+        }
+        val personalSolves = controller.getPersonalSolves(user)
+
+        assertEquals(friendsSolves.size + personalSolves.size, solves.size)
     }
 
     @Test

@@ -5,10 +5,7 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.*
 import rubiksworld.common.calcDiscountedPrice
 import rubiksworld.controller.ModelsSearchFilters
-import rubiksworld.controller.database.tables.Applications
-import rubiksworld.controller.database.tables.Customizations
-import rubiksworld.controller.database.tables.Models
-import rubiksworld.controller.database.tables.Solves
+import rubiksworld.controller.database.tables.*
 import rubiksworld.model.*
 import java.time.LocalDateTime
 
@@ -205,11 +202,21 @@ open class DatabaseControllerImpl : DatabaseController {
             .map { it.receiver }
     }
 
-    override fun getSolves(user: User): List<Solve> {
+    override fun getPersonalSolves(user: User): List<Solve> {
         return database.solves
             .filter { it.userNickname eq user.nickname }
             .sortedBy { it.solveTime.asc() }
             .toList()
+    }
+
+    override fun getFriendsSolves(user: User): List<Solve> {
+        return database.from(Solves)
+            .crossJoin(Friendships, on = ((Friendships.senderNickname eq user.nickname)
+                    and (Solves.userNickname eq Friendships.receiverNickname))
+                    or (Solves.userNickname eq user.nickname))
+            .selectDistinct(Solves.columns)
+            .orderBy(Solves.solveTime.asc())
+            .map { Solves.createEntity(it) }
     }
 
     override fun getAllSolves(): List<Solve> {
