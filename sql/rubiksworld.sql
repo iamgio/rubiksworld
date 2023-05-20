@@ -288,3 +288,9 @@ VALUES
     ('giulia_russo', 82, '2023-02-08', 'Big Sail', 'QiYi'),
     ('giulia_russo', 78, '2023-02-08', 'Big Sail', 'QiYi'),
     ('giulia_russo', 41, '2023-02-08', NULL, NULL);
+
+INSERT INTO Friendships
+    (sender_nickname, receiver_nickname)
+VALUES
+    ('luca_rossi', 'giulia_russo'),
+    ('giulia_russo', 'fraroma');

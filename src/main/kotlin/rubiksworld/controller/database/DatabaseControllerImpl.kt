@@ -199,6 +199,12 @@ open class DatabaseControllerImpl : DatabaseController {
             .find { it.code eq code }
     }
 
+    override fun getFriends(user: User): List<User> {
+        return database.friendships
+            .filter { it.senderNickname eq user.nickname }
+            .map { it.receiver }
+    }
+
     override fun getSolves(user: User): List<Solve> {
         return database.solves
             .filter { it.userNickname eq user.nickname }

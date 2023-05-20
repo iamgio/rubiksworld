@@ -147,9 +147,27 @@ class QueriesTests {
     }
 
     @Test
-    fun topSolves() {
+    fun friendships() {
         val user = controller.getUser("giulia_russo")
+        assertNotNull(user)
 
+        val friends = controller.getFriends(user).map { it.nickname }
+        assertContains(friends, "fraroma")
+    }
+
+    @Test
+    fun userSolves() {
+        val user = controller.getUser("giulia_russo")
+        assertNotNull(user)
+
+        val solves = controller.getSolves(user)
+        assertEquals(3, solves.size)
+        assertEquals(2, solves.count { it.model != null })
+    }
+
+    @Test
+    fun topUserSolves() {
+        val user = controller.getUser("giulia_russo")
         assertNotNull(user)
 
         val solves = controller.getTopSolvesByModel(user)

@@ -156,6 +156,12 @@ interface DatabaseController {
     fun getCoupon(code: String): Coupon?
 
     /**
+     * @param user friendship sender
+     * @return users that have received friendship from [user]
+     */
+    fun getFriends(user: User): List<User>
+
+    /**
      * @return all the solves registered by [user].
      */
     fun getSolves(user: User): List<Solve>
