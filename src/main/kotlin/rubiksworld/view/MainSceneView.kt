@@ -5,6 +5,7 @@ import javafx.scene.control.TabPane
 import javafx.scene.layout.Pane
 import rubiksworld.controller.Controller
 import rubiksworld.model.Model
+import rubiksworld.model.User
 import rubiksworld.view.login.LoginView
 import rubiksworld.view.profile.ProfileView
 import rubiksworld.view.shop.*
@@ -54,7 +55,9 @@ class MainSceneView : View<Pane> {
 
     private fun populateTabs(tabPane: TabPane, controller: Controller) {
         tabPane.tabs.addAll(
-            Tab("Profile", ProfileView(controller.user).create(controller)),
+            Tab("Profile", ProfileView(controller.user, onUserRedirect = {
+                openTemporaryProfileTab(it, controller, tabPane)
+            }).create(controller)),
             Tab("Shop", ShopView(
                 onUpdate = { tabPane.requestLayout() },
                 onModelSelect = { model -> openTemporaryModelOverviewTab(model, controller, tabPane) },
@@ -87,6 +90,14 @@ class MainSceneView : View<Pane> {
         val tab = Tab("Wishlist", WishlistView(onModelSelect = {
             tabPane.selectionModel.select(0)
             openTemporaryModelOverviewTab(it, controller, tabPane)
+        }).create(controller))
+        openTemporaryTab(tabPane, tab)
+    }
+
+    private fun openTemporaryProfileTab(user: User, controller: Controller, tabPane: TabPane) {
+        val tab = Tab(user.nickname, ProfileView(user, onUserRedirect = {
+            tabPane.selectionModel.select(0)
+            openTemporaryProfileTab(it, controller, tabPane)
         }).create(controller))
         openTemporaryTab(tabPane, tab)
     }

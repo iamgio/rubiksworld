@@ -15,8 +15,11 @@ import rubiksworld.view.solves.column
 
 /**
  * User's profile view.
+ *
+ * @param user profile owner
+ * @param onUserRedirect action to run when it is required to show another user's profile
  */
-class ProfileView(private val user: User) : View<Pane> {
+class ProfileView(private val user: User, private val onUserRedirect: (User) -> Unit) : View<Pane> {
 
     override fun create(controller: Controller) = VBox().apply {
         styleClass += "profile-view"
@@ -58,5 +61,8 @@ class ProfileView(private val user: User) : View<Pane> {
 
     private fun title(text: String) = Label(text).apply { styleClass += "title" }
 
-    private fun friendNode(user: User) = Label(user.nickname).apply { styleClass += "friend-node" }
+    private fun friendNode(friend: User) = Label(friend.nickname).apply {
+        styleClass += "friend-node"
+        setOnMouseClicked { onUserRedirect(friend) }
+    }
 }
