@@ -2,6 +2,7 @@ package rubiksworld.view.solves
 
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
+import rubiksworld.common.asString
 import rubiksworld.common.defaultFormat
 import rubiksworld.controller.Controller
 import rubiksworld.model.Solve
@@ -19,9 +20,7 @@ class SolvesView : View<Pane> {
             column("Position") { (items.indexOf(it) + 1).toString() },
             column("User") { it.user.nickname },
             column("Time") { it.solveTime.toString() },
-            column("Model") {
-                it.model?.let { model -> "${model.maker} ${model.name}" } ?: ""
-            },
+            column("Model") { it.model.asString(ifNull = "-") },
             column("Date") { it.registrationDate.defaultFormat() }
         )
 

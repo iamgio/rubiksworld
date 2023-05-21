@@ -5,6 +5,7 @@ import javafx.scene.layout.FlowPane
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
+import rubiksworld.common.asString
 import rubiksworld.common.defaultFormat
 import rubiksworld.controller.Controller
 import rubiksworld.model.Solve
@@ -39,14 +40,12 @@ class ProfileView(private val user: User, private val onUserRedirect: (User) -> 
         children += title("Best solves")
 
         val table = SimpleTableView<Solve>(
-            column("Model") {
-                it.model?.let { model -> "${model.maker} ${model.name}" } ?: ""
-            },
+            column("Model") { it.model.asString(ifNull = "-") },
             column("Time") { it.solveTime.toString() },
             column("Date") { it.registrationDate.defaultFormat() }
         )
 
-        table.items.setAll(controller.getTopSolvesByModel(user).values)
+        table.items.setAll(controller.getTopSolvesByModel(user))
 
         children += table
     }
