@@ -78,4 +78,11 @@ FROM Solves S,
 WHERE (F.sender_nickname = @user_nickname
     AND S.user_nickname = F.receiver_nickname)
    OR S.user_nickname = @user_nickname
-ORDER BY S.solve_time
+ORDER BY S.solve_time;
+
+
+# Get top solve for each model
+SELECT MIN(solve_time) as time, model_name, model_maker, registration_date
+FROM Solves
+WHERE user_nickname = ?
+GROUP BY model_name, model_maker;

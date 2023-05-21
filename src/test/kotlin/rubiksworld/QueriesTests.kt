@@ -186,13 +186,15 @@ class QueriesTests {
         assertNotNull(user)
 
         val solves = controller.getTopSolvesByModel(user)
-            .mapKeys { it.key?.name }
-            .mapValues { it.value.solveTime }
 
-        assertContains(solves, "Big Sail")
-        assertEquals(SolveTime(1, 22), solves["Big Sail"])
+        println(solves)
 
-        assertContains(solves, null)
-        assertEquals(SolveTime(0, 41), solves[null])
+        assertContains(solves.map { it.model?.name }, "Big Sail")
+        assertEquals(SolveTime(1, 18), solves.first { it.model?.name == "Big Sail" }.solveTime)
+        assertEquals(1, solves.count { it.model?.name == "Big Sail" })
+
+        assertContains(solves.map { it.model }, null)
+        assertEquals(SolveTime(0, 41), solves.first { it.model == null }.solveTime)
+        assertEquals(1, solves.count { it.model == null })
     }
 }

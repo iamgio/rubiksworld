@@ -178,9 +178,9 @@ interface DatabaseController {
     fun getAllSolves(): List<Solve>
 
     /**
-     * @return the top solve registered by [user] for each model
+     * @return the top solve registered by [user] for each model (`null` (unregistered) model is included)
      */
-    fun getTopSolvesByModel(user: User): Map<Model?, Solve>
+    fun getTopSolvesByModel(user: User): List<Solve>
 
     /**
      * Registers a new solve.

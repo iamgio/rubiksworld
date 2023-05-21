@@ -5,7 +5,10 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.*
 import rubiksworld.common.calcDiscountedPrice
 import rubiksworld.controller.ModelsSearchFilters
-import rubiksworld.controller.database.tables.*
+import rubiksworld.controller.database.tables.Applications
+import rubiksworld.controller.database.tables.Customizations
+import rubiksworld.controller.database.tables.Friendships
+import rubiksworld.controller.database.tables.Solves
 import rubiksworld.model.*
 import java.time.LocalDateTime
 
@@ -225,18 +228,12 @@ open class DatabaseControllerImpl : DatabaseController {
             .toList()
     }
 
-    override fun getTopSolvesByModel(user: User): Map<Model?, Solve> {
+    override fun getTopSolvesByModel(user: User): List<Solve> {
         return database.from(Solves)
-            .leftJoin(Models, on = (Solves.userNickname eq user.nickname)
-                    and (Solves.modelName eq Models.name)
-                    and (Solves.modelMaker eq Models.maker))
-            .select()
-            .orderBy(Solves.solveTime.asc())
-            .associate {
-                Models.createEntity(it).let { model ->
-                    if (model.name.isEmpty()) null else model
-                } to Solves.createEntity(it)
-            }
+            .select(min(Solves.solveTime).aliased(Solves.solveTime.label), Solves.modelName, Solves.modelMaker, Solves.registrationDate)
+            .where(Solves.userNickname eq user.nickname)
+            .groupBy(Solves.modelName, Solves.modelMaker)
+            .map { Solves.createEntity(it) }
     }
 
     override fun insertSolve(user: User, model: Model?, solveTime: SolveTime) {
