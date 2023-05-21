@@ -16,7 +16,7 @@
     -fx-font-weight: bold;
 }
 
-.login-view, .checkout-view {
+.login-view, .checkout-view, .profile-view {
     -fx-padding: 16 24 24 24;
     -fx-spacing: 24;
 }
@@ -117,7 +117,7 @@
     -fx-spacing: 2;
 }
 
-.model-overview .label {
+.model-overview .label, .profile-view .label  {
     -fx-text-fill: -fx-dark-text;
 }
 
@@ -155,10 +155,28 @@
     -fx-padding: 16;
 }
 
-.solves-view .table-row-cell {
+.table-row-cell {
     -fx-cell-size: 50;
 }
 
-.solves-view .table-column {
+.table-column {
     -fx-alignment: center;
+}
+
+.profile-view .name-box {
+    -fx-spacing: 12;
+}
+
+.profile-view .title {
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 4 0;
+}
+
+.profile-view .friend-node {
+    -fx-padding: 2 6 0 0;
+    -fx-cursor: hand;
+}
+
+.profile-view .friend-node:hover {
+    -fx-text-fill: purple;
 }
