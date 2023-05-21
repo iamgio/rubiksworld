@@ -1,8 +1,5 @@
 package rubiksworld.view.solves
 
-import javafx.beans.property.SimpleStringProperty
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableView
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import rubiksworld.controller.Controller
@@ -19,10 +16,8 @@ class SolvesView : View<Pane> {
     override fun create(controller: Controller) = VBox().apply {
         styleClass += "solves-view"
 
-        val table = TableView<Solve>()
-
-        table.columns.addAll(
-            column("Position") { (table.items.indexOf(it) + 1).toString() },
+        val table = SimpleTableView<Solve>(
+            column("Position") { (items.indexOf(it) + 1).toString() },
             column("User") { it.user.nickname },
             column("Time") { formatTime(it.solveTime) },
             column("Model") {
@@ -33,23 +28,11 @@ class SolvesView : View<Pane> {
             }
         )
 
-        table.columns.forEach { column ->
-            column.prefWidthProperty().bind(table.layoutBoundsProperty().map {
-                it.width / table.columns.size - 1
-            })
-        }
-
-        //table.items.setAll(controller.getSolves(controller.user))
-
         children += SolvesBar(onFiltersChange = {
             table.items.setAll(it)
         }).create(controller)
 
         children += VBox(table).apply { styleClass += "table-container" }
-    }
-
-    private fun column(name: String, binding: (Solve) -> String) = TableColumn<Solve, String>(name).apply {
-        setCellValueFactory { SimpleStringProperty(binding(it.value)) }
     }
 
     private fun formatTime(time: SolveTime) = buildString {
