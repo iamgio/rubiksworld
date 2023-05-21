@@ -5,6 +5,7 @@
 
 .label, .text {
     -fx-font-family: "Manrope";
+    -fx-font-smoothing-type: gray;
 }
 
 .error-field {
