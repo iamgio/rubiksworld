@@ -27,7 +27,7 @@ class ProfileView(private val user: User, private val onUserRedirect: (User) -> 
 
         children += HBox(
             title(user.nickname),
-            Label(user.name + " " + controller.user.surname)
+            Label(user.name + " " + user.surname)
         ).apply {
             styleClass += "name-box"
         }
