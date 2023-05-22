@@ -16,7 +16,7 @@
     -fx-font-weight: bold;
 }
 
-.login-view, .checkout-view, .profile-view {
+.login-view, .checkout-view, .profile-view, .new-solve-view {
     -fx-padding: 16 24 24 24;
     -fx-spacing: 24;
 }
@@ -155,6 +155,20 @@
     -fx-padding: 16;
 }
 
+.new-solve-view .time-box {
+    -fx-alignment: center-left;
+    -fx-spacing: 6;
+}
+
+.new-solve-view .time-box .text-field {
+    -fx-pref-width: 50;
+    -fx-alignment: center;
+}
+
+.new-solve-view .time-box > .label {
+    -fx-font-size: 20;
+}
+
 .table-row-cell {
     -fx-cell-size: 50;
 }
@@ -167,7 +181,7 @@
     -fx-spacing: 12;
 }
 
-.profile-view .title {
+.profile-view .title, .new-solve-view .title {
     -fx-font-weight: bold;
     -fx-padding: 0 0 4 0;
 }

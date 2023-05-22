@@ -10,8 +10,10 @@ import rubiksworld.view.View
 
 /**
  * The Solves section content.
+ *
+ * @param onRegister action to run when a new solve should be registered
  */
-class SolvesView : View<Pane> {
+class SolvesView(private val onRegister: () -> Unit) : View<Pane> {
 
     override fun create(controller: Controller) = VBox().apply {
         styleClass += "solves-view"
@@ -26,7 +28,7 @@ class SolvesView : View<Pane> {
 
         children += SolvesBar(onFiltersChange = {
             table.items.setAll(it)
-        }).create(controller)
+        }, onRegister).create(controller)
 
         children += VBox(table).apply { styleClass += "table-container" }
     }

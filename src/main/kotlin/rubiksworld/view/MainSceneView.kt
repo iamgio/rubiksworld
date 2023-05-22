@@ -9,6 +9,7 @@ import rubiksworld.model.User
 import rubiksworld.view.login.LoginView
 import rubiksworld.view.profile.ProfileView
 import rubiksworld.view.shop.*
+import rubiksworld.view.solves.NewSolveView
 import rubiksworld.view.solves.SolvesView
 
 /**
@@ -55,8 +56,8 @@ class MainSceneView : View<Pane> {
 
     private fun populateTabs(tabPane: TabPane, controller: Controller) {
         tabPane.tabs.addAll(
-            Tab("Profile", ProfileView(controller.user, onUserRedirect = {
-                openTemporaryProfileTab(it, controller, tabPane)
+            Tab("Solves", SolvesView(onRegister = {
+                openTemporaryNewSolveTab(controller, tabPane)
             }).create(controller)),
             Tab("Shop", ShopView(
                 onUpdate = { tabPane.requestLayout() },
@@ -64,7 +65,9 @@ class MainSceneView : View<Pane> {
                 onCartOpen = { openTemporaryCartTab(controller, tabPane) },
                 onWishlistOpen = { openTemporaryWishlistTab(controller, tabPane) }
             ).create(controller)),
-            Tab("Solves", SolvesView().create(controller))
+            Tab("Profile", ProfileView(controller.user, onUserRedirect = {
+                openTemporaryProfileTab(it, controller, tabPane)
+            }).create(controller))
         )
     }
 
@@ -99,6 +102,11 @@ class MainSceneView : View<Pane> {
             tabPane.selectionModel.select(0)
             openTemporaryProfileTab(it, controller, tabPane)
         }).create(controller))
+        openTemporaryTab(tabPane, tab)
+    }
+
+    private fun openTemporaryNewSolveTab(controller: Controller, tabPane: TabPane) {
+        val tab = Tab("New solve", NewSolveView().create(controller))
         openTemporaryTab(tabPane, tab)
     }
 
