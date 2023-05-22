@@ -181,6 +181,13 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 128, 0, .5), 8, 0, 0, 0);
 }
 
+.table-view .scroll-bar:horizontal .increment-button,
+.table-view .scroll-bar:horizontal .decrement-button,
+.table-view .scroll-bar:horizontal .increment-arrow,
+.table-view .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 0;
+}
+
 .table-row-cell {
     -fx-cell-size: 50;
 }
