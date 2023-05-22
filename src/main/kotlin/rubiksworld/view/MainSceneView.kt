@@ -55,16 +55,16 @@ class MainSceneView : View<Pane> {
     }
 
     private fun populateTabs(tabPane: TabPane, controller: Controller) {
-        tabPane.tabs.addAll(
-            Tab("Solves", SolvesView(onRegister = {
-                openTemporaryNewSolveTab(controller, tabPane)
-            }).create(controller)),
+        tabPane.tabs.setAll(
             Tab("Shop", ShopView(
                 onUpdate = { tabPane.requestLayout() },
                 onModelSelect = { model -> openTemporaryModelOverviewTab(model, controller, tabPane) },
                 onCartOpen = { openTemporaryCartTab(controller, tabPane) },
                 onWishlistOpen = { openTemporaryWishlistTab(controller, tabPane) }
             ).create(controller)),
+            Tab("Solves", SolvesView(onRegister = {
+                openTemporaryNewSolveTab(controller, tabPane)
+            }).create(controller)),
             Tab("Profile", ProfileView(controller.user, onUserRedirect = {
                 openTemporaryProfileTab(it, controller, tabPane)
             }).create(controller))
@@ -106,7 +106,11 @@ class MainSceneView : View<Pane> {
     }
 
     private fun openTemporaryNewSolveTab(controller: Controller, tabPane: TabPane) {
-        val tab = Tab("New solve", NewSolveView().create(controller))
+        val tab = Tab("New solve", NewSolveView(onRegistered = {
+            populateTabs(tabPane, controller)
+            val profileTab = tabPane.tabs.first { it.text == "Profile" }
+            tabPane.selectionModel.select(profileTab)
+        }).create(controller))
         openTemporaryTab(tabPane, tab)
     }
 

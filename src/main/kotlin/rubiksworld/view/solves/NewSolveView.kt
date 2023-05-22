@@ -2,12 +2,15 @@ package rubiksworld.view.solves
 
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
+import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
+import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import rubiksworld.controller.Controller
 import rubiksworld.model.Model
+import rubiksworld.model.SolveTime
 import rubiksworld.view.ModelCard
 import rubiksworld.view.ModelsPane
 import rubiksworld.view.ModelsSearchBar
@@ -18,7 +21,7 @@ import rubiksworld.view.common.TitleLabel
 /**
  * The view that lets the user register a new solve.
  */
-class NewSolveView : View<Pane> {
+class NewSolveView(private val onRegistered: () -> Unit) : View<Pane> {
 
     private val minutes = SimpleStringProperty()
     private val seconds = SimpleStringProperty()
@@ -27,24 +30,44 @@ class NewSolveView : View<Pane> {
     override fun create(controller: Controller) = VBox().apply {
         styleClass += "new-solve-view"
 
-        children += createTimeBox()
+        children += createTimeBox(controller)
         children += createModelBox(controller)
     }
 
-    private fun createTimeBox() = VBox().apply {
-        val minutes = NumericTextField().apply {
+    private fun createTimeBox(controller: Controller) = VBox().apply {
+        val minutesField = NumericTextField().apply {
             promptText = "mm"
             minutes.bind(textProperty())
         }
 
-        val seconds = NumericTextField().apply {
+        val secondsField = NumericTextField().apply {
             promptText = "ss"
             seconds.bind(textProperty())
         }
 
+        val spacer = Pane().apply { HBox.setHgrow(this, Priority.ALWAYS) }
+
+        val register = Button("Register solve")
+        register.setOnAction {
+            val minutes = this@NewSolveView.minutes.get().toIntOrNull()
+            if (minutes == null) {
+                minutesField.styleClass += "error-field"
+            }
+
+            val seconds = this@NewSolveView.seconds.get().toIntOrNull()
+            if (seconds == null) {
+                secondsField.styleClass += "error-field"
+            }
+
+            if (minutes != null && seconds != null) {
+                controller.insertSolve(controller.user, model.get(), SolveTime(minutes, seconds))
+                onRegistered()
+            }
+        }
+
         children.addAll(
             TitleLabel("Time"),
-            HBox(minutes, Label(":"), seconds).apply { styleClass += "time-box" }
+            HBox(minutesField, Label(":"), secondsField, spacer, register).apply { styleClass += "time-box" }
         )
     }
 
