@@ -50,16 +50,17 @@ class NewSolveView(private val onRegistered: () -> Unit) : View<Pane> {
         val register = Button("Register solve")
         register.setOnAction {
             val minutes = this@NewSolveView.minutes.get().toIntOrNull()
+
             if (minutes == null) {
                 minutesField.styleClass += "error-field"
             }
 
             val seconds = this@NewSolveView.seconds.get().toIntOrNull()
-            if (seconds == null) {
+            if (seconds == null || seconds > 60) {
                 secondsField.styleClass += "error-field"
             }
 
-            if (minutes != null && seconds != null) {
+            if (minutes != null && seconds != null && seconds <= 60) {
                 controller.insertSolve(controller.user, model.get(), SolveTime(minutes, seconds))
                 onRegistered()
             }
