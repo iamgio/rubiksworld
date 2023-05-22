@@ -10,10 +10,17 @@ import rubiksworld.controller.database.tables.Customizations
 import rubiksworld.controller.database.tables.Friendships
 import rubiksworld.controller.database.tables.Solves
 import rubiksworld.model.*
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 
 /**
- *
+ * Days after the order was placed in order to ship.
+ */
+private const val SHIPPING_TIME_DAYS = 2
+
+/**
+ * [DatabaseController] implementation.
  */
 open class DatabaseControllerImpl : DatabaseController {
 
@@ -164,6 +171,34 @@ open class DatabaseControllerImpl : DatabaseController {
 
     override fun canCheckout(user: User): Boolean {
         return getCartSubtotal(user) >= user.minimumSubtotal
+    }
+
+    override fun insertOrderFromCart(user: User, coupons: List<Coupon>) {
+        val orderDate = LocalDate.now()
+        val id = database.orders
+            .filter { it.orderDate eq orderDate }
+            .maxBy { it.id }?.plus(1) ?: 0
+
+        val order = Order {
+            this.id = id
+            this.orderDate = orderDate
+            this.orderTime = LocalTime.now()
+            this.shippingDate = LocalDate.now().plusDays(SHIPPING_TIME_DAYS.toLong())
+            this.total = getCartTotal(user, coupons)
+            this.user = user
+        }
+
+        database.orders.add(order)
+
+        getCart(user).forEach { modelVersion ->
+            val orderPresence = OrderPresence {
+                this.order = order
+                this.modelVersion = modelVersion
+            }
+            database.orderPresences.add(orderPresence)
+        }
+
+        database.cartPresences.removeIf { it.userNickname eq user.nickname }
     }
 
     override fun addToWishlist(user: User, model: Model) {

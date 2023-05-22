@@ -107,11 +107,11 @@ CREATE TABLE `Friendships`
 
 CREATE TABLE `Orders`
 (
-    `id`            INTEGER AUTO_INCREMENT,
+    `id`            INTEGER,
     `order_date`    DATE,
     `order_time`    TIME    NOT NULL,
     `shipping_date` DATE    NOT NULL,
-    `total`         INTEGER NOT NULL,
+    `total`         DECIMAL(4, 2) NOT NULL,
     `user_nickname` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`, `order_date`)
 );

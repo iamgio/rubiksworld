@@ -122,6 +122,8 @@ interface DatabaseController {
      */
     fun canCheckout(user: User): Boolean
 
+    fun insertOrderFromCart(user: User, coupons: List<Coupon>)
+
     /**
      * Adds a model to the [user]'s wishlist.
      * @param user wishlist owner

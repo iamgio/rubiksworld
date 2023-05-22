@@ -66,10 +66,6 @@ class CheckoutView : View<Pane> {
         subtotal.set(controller.getCartSubtotal(controller.user))
         updateTotal(controller)
 
-        val totalLabel = Label().apply {
-            textProperty().bind(total.map { formatPrice(it.toDouble()) })
-        }
-
         val totalBox = VBox(
             couponBox,
             createPricesBox(controller),
@@ -114,6 +110,7 @@ class CheckoutView : View<Pane> {
             if (!validateTextFields(name, surname, city, zip, email, address)) {
                 return@setOnAction
             }
+            controller.insertOrderFromCart(controller.user, appliedCoupons)
             println("Checkout")
         }
     }
