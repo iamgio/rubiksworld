@@ -50,6 +50,13 @@ interface DatabaseController {
     fun insertUser(nickname: String, name: String, surname: String): User
 
     /**
+     * Updates a user's information.
+     * @param user user to update
+     */
+    fun updateUserInfo(user: User, name: String, surname: String, city: String, zip: String,
+                       email: String, address: String, phoneNumber: String?)
+
+    /**
      * Creates a row for a new customized version of a [Model].
      * @return a new model version
      */
@@ -122,6 +129,11 @@ interface DatabaseController {
      */
     fun canCheckout(user: User): Boolean
 
+    /**
+     * Places an order.
+     * @param user cart owner
+     * @param coupons applied coupons
+     */
     fun insertOrderFromCart(user: User, coupons: List<Coupon>)
 
     /**

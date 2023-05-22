@@ -89,6 +89,23 @@ open class DatabaseControllerImpl : DatabaseController {
         return newUser
     }
 
+    override fun updateUserInfo(
+        user: User,
+        name: String, surname: String,
+        city: String, zip: String,
+        email: String, address: String,
+        phoneNumber: String?
+    ) {
+        user.name = name
+        user.surname = surname
+        user.city = city
+        user.zip = zip
+        user.email = email
+        user.address = address
+        user.phoneNumber = phoneNumber
+        user.flushChanges()
+    }
+
     override fun insertModelVersion(model: Model, customizations: List<Customization>): ModelVersion {
         val modelVersion = ModelVersion {
             this.model = model

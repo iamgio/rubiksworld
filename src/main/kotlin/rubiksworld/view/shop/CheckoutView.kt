@@ -110,8 +110,16 @@ class CheckoutView : View<Pane> {
             if (!validateTextFields(name, surname, city, zip, email, address)) {
                 return@setOnAction
             }
+
+            controller.updateUserInfo(controller.user,
+                name.text, surname.text,
+                city.text, zip.text,
+                email.text, address.text,
+                phone.text.takeIf { it.isNotBlank() }
+            )
             controller.insertOrderFromCart(controller.user, appliedCoupons)
-            println("Checkout")
+
+            // TODO go to Orders page
         }
     }
 
