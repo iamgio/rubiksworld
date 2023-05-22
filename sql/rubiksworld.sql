@@ -92,7 +92,7 @@ CREATE TABLE `Solves`
 (
     `user_nickname`     VARCHAR(255),
     `solve_time`        INTEGER,
-    `registration_date` DATE,
+    `registration_date` DATETIME,
     `model_name`        VARCHAR(100),
     `model_maker`       VARCHAR(100),
     PRIMARY KEY (`user_nickname`, `solve_time`, `registration_date`)

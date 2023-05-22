@@ -70,6 +70,23 @@ INSERT INTO CartPresences
 VALUES
     (?, @model_version_id);
 
+# Add to wishlist
+INSERT INTO WishlistPresences
+    (user_nickname, model_name, model_maker)
+VALUES
+    (?, ?, ?);
+
+# Coupon validity
+SELECT *
+FROM Coupons
+WHERE code = ?;
+
+# Get personal solves
+SELECT *
+FROM Solves
+WHERE user_nickname = ?
+ORDER BY solve_time;
+
 # Get friends' solves + personal solves
 SET @user_nickname = ?;
 SELECT DISTINCT S.*
@@ -80,9 +97,20 @@ WHERE (F.sender_nickname = @user_nickname
    OR S.user_nickname = @user_nickname
 ORDER BY S.solve_time;
 
+# Get global solves
+SELECT *
+FROM Solves
+ORDER BY solve_time;
+
 
 # Get top solve for each model
 SELECT MIN(solve_time) as time, model_name, model_maker, registration_date
 FROM Solves
 WHERE user_nickname = ?
 GROUP BY model_name, model_maker;
+
+# Register solve
+INSERT INTO Solves
+    (user_nickname, solve_time, registration_date, model_name, model_maker)
+VALUES
+    (?, ?, NOW(), ?, ?)
