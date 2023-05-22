@@ -116,6 +116,14 @@ CREATE TABLE `Orders`
     PRIMARY KEY (`id`, `order_date`)
 );
 
+CREATE TABLE `OrderPresences`
+(
+    `order_id`         INTEGER,
+    `order_date`       DATE,
+    `model_version_id` INTEGER,
+    PRIMARY KEY (`order_id`, `order_date`, `model_version_id`)
+);
+
 CREATE TABLE `Discounts`
 (
     `order_id`    INTEGER,
@@ -175,6 +183,12 @@ ALTER TABLE `Friendships`
 
 ALTER TABLE `Orders`
     ADD FOREIGN KEY (`user_nickname`) REFERENCES `Users` (`nickname`);
+
+ALTER TABLE `OrderPresences`
+    ADD FOREIGN KEY (`order_id`, `order_date`) REFERENCES `Orders` (`id`, `order_date`);
+
+ALTER TABLE `OrderPresences`
+    ADD FOREIGN KEY (`model_version_id`) REFERENCES `ModelVersions` (`id`);
 
 ALTER TABLE `Discounts`
     ADD FOREIGN KEY (`order_id`, `order_date`) REFERENCES `Orders` (`id`, `order_date`);
