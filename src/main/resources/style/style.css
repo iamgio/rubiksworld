@@ -62,9 +62,6 @@
 .models-pane {
     -fx-hgap: 24;
     -fx-vgap: 24;
-}
-
-.shop-view .models-pane {
     -fx-padding: 24 0 24 24;
 }
 
@@ -174,6 +171,10 @@
 
 .new-solve-view .shop-bar {
     -fx-padding: 4 0 12 0;
+}
+
+.new-solve-view .models-pane {
+    -fx-padding: 0;
 }
 
 .new-solve-view .selected-model-card {
