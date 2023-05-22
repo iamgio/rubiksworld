@@ -21,7 +21,7 @@ private const val LOADING_IMAGE_HEIGHT = 92.0
  *
  * @param model model to represent
  */
-open class ModelCard(private val model: Model) : View<Pane> {
+open class ModelCard(private val model: Model, private val showPrice: Boolean = true) : View<Pane> {
 
     override fun create(controller: Controller) = VBox().apply {
         styleClass += "model-card"
@@ -49,6 +49,10 @@ open class ModelCard(private val model: Model) : View<Pane> {
         // Info
         children += Label(model.maker).apply { styleClass += "maker" }
         children += Label(model.name).apply { styleClass += "name" }
+
+        if (!showPrice) {
+            return@apply
+        }
 
         // Base price
         val priceHbox = HBox(

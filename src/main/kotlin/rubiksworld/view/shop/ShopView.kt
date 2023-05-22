@@ -29,6 +29,8 @@ class ShopView(
 ) : View<Pane> {
 
     override fun create(controller: Controller) = VBox().apply {
+        styleClass += "shop-view"
+
         val modelsPane = ModelsPane()
 
         val bar = ShopBar(
