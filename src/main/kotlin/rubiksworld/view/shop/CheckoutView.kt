@@ -17,6 +17,7 @@ import rubiksworld.model.Coupon
 import rubiksworld.view.View
 import rubiksworld.view.common.LiteralTextField
 import rubiksworld.view.common.NumericTextField
+import rubiksworld.view.common.TitleLabel
 
 /**
  * Cart checkout view.
@@ -122,17 +123,15 @@ class CheckoutView : View<Pane> {
     }
 
     private fun createPricesBox(controller: Controller): Pane {
-        fun title(text: String) = Label(text).apply { styleClass += "title" }
-
         return VBox(
             HBox(
-                title("Subtotal"),
+                TitleLabel("Subtotal"),
                 Label().apply {
                     textProperty().bind(subtotal.map { formatPrice(it.toDouble()) })
                 }
             ),
             HBox(
-                title("Coupons"),
+                TitleLabel("Coupons"),
                 Label().apply {
                     textProperty().bind(
                         total.subtract(subtotal)
@@ -141,12 +140,12 @@ class CheckoutView : View<Pane> {
                 }
             ),
             HBox(
-                title("Shipping"),
+                TitleLabel("Shipping"),
                 Label(formatPrice(controller.user.shippingPrice))
             ),
             Separator(Orientation.HORIZONTAL),
             HBox(
-                title("Total"),
+                TitleLabel("Total"),
                 Label().apply {
                     textProperty().bind(total.map { formatPrice(it.toDouble()) })
                 }

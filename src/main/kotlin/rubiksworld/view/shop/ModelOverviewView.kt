@@ -14,6 +14,7 @@ import rubiksworld.model.Customization
 import rubiksworld.model.Model
 import rubiksworld.view.View
 import rubiksworld.view.common.ImageCache
+import rubiksworld.view.common.TitleLabel
 
 private const val IMAGE_WIDTH = 250.0
 
@@ -38,26 +39,24 @@ class ModelOverviewView(private val model: Model) : View<Pane> {
     }
 
     private fun createRightColumn(controller: Controller) = VBox().apply {
-        fun title(text: String) = Label(text).apply { styleClass += "section-title" }
+        children += TitleLabel("${model.maker} ${model.name}")
 
-        children += title("${model.maker} ${model.name}")
-
-        children += title("Category")
+        children += TitleLabel("Category")
         children += Label(model.category.name)
 
-        children += title("Tags")
+        children += TitleLabel("Tags")
         children += Label(getTags().joinToString(", "))
 
         val parts = controller.getCustomizableParts(model)
 
         parts.forEach { part ->
-            children += title(part.part)
+            children += TitleLabel(part.part)
 
             val customizations = controller.getAvailableCustomizations(part)
             children += createCustomizationsBox(customizations, controller)
         }
 
-        children += title("Total")
+        children += TitleLabel("Total")
 
         val priceBox = HBox().apply { styleClass += "price-box" }
 

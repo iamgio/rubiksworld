@@ -11,6 +11,7 @@ import rubiksworld.controller.Controller
 import rubiksworld.model.Solve
 import rubiksworld.model.User
 import rubiksworld.view.View
+import rubiksworld.view.common.TitleLabel
 import rubiksworld.view.solves.SimpleTableView
 import rubiksworld.view.solves.column
 
@@ -26,7 +27,7 @@ class ProfileView(private val user: User, private val onUserRedirect: (User) -> 
         styleClass += "profile-view"
 
         children += HBox(
-            title(user.nickname),
+            TitleLabel(user.nickname),
             Label(user.name + " " + user.surname)
         ).apply {
             styleClass += "name-box"
@@ -37,7 +38,7 @@ class ProfileView(private val user: User, private val onUserRedirect: (User) -> 
     }
 
     private fun createSolvesBox(controller: Controller) = VBox().apply {
-        children += title("Best solves")
+        children += TitleLabel("Best solves")
 
         val table = SimpleTableView<Solve>(
             column("Model") { it.model.asString(ifNull = "-") },
@@ -51,14 +52,12 @@ class ProfileView(private val user: User, private val onUserRedirect: (User) -> 
     }
 
     private fun createFriendsBox(controller: Controller) = VBox().apply {
-        children += title("Friends")
+        children += TitleLabel("Friends")
 
         children += FlowPane().apply {
             children.addAll(controller.getFriends(user).map { friendNode(it) })
         }
     }
-
-    private fun title(text: String) = Label(text).apply { styleClass += "title" }
 
     private fun friendNode(friend: User) = Label(friend.nickname).apply {
         styleClass += "friend-node"
