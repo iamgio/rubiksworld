@@ -106,10 +106,10 @@ class MainSceneView : View<Pane> {
     }
 
     private fun openTemporaryNewSolveTab(controller: Controller, tabPane: TabPane) {
+        val initialTabIndex = tabPane.selectionModel.selectedIndex
         val tab = Tab("New solve", NewSolveView(onRegistered = {
             populateTabs(tabPane, controller)
-            val profileTab = tabPane.tabs.first { it.text == "Profile" }
-            tabPane.selectionModel.select(profileTab)
+            tabPane.selectionModel.select(initialTabIndex)
         }).create(controller))
         openTemporaryTab(tabPane, tab)
     }
