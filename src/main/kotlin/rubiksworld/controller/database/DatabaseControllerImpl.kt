@@ -230,7 +230,7 @@ open class DatabaseControllerImpl : DatabaseController {
 
     override fun getTopSolvesByModel(user: User): List<Solve> {
         return database.from(Solves)
-            .select(min(Solves.solveTime).aliased(Solves.solveTime.label), Solves.modelName, Solves.modelMaker, Solves.registrationDate)
+            .select(min(Solves.solveTime).aliased(Solves.solveTime.label), Solves.modelName, Solves.modelMaker)
             .where(Solves.userNickname eq user.nickname)
             .groupBy(Solves.modelName, Solves.modelMaker)
             .map { Solves.createEntity(it) }

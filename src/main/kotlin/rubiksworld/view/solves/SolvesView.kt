@@ -23,7 +23,7 @@ class SolvesView(private val onRegister: () -> Unit) : View<Pane> {
             column("User") { it.user.nickname },
             column("Time") { it.solveTime.toString() },
             column("Model") { it.model.asString(ifNull = "-") },
-            column("Date") { it.registrationDate.defaultFormat() }
+            column("Date") { it.registrationDate?.defaultFormat() ?: "-" }
         )
 
         children += SolvesBar(onFiltersChange = {

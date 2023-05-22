@@ -23,7 +23,7 @@ interface Solve : Entity<Solve> {
     /**
      * Registration date of the solve.
      */
-    var registrationDate: LocalDateTime
+    var registrationDate: LocalDateTime?
 
     /**
      * Time spent.

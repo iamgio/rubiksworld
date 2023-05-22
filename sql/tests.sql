@@ -104,7 +104,7 @@ ORDER BY solve_time;
 
 
 # Get top solve for each model
-SELECT MIN(solve_time) as time, model_name, model_maker, registration_date
+SELECT MIN(solve_time) as time, model_name, model_maker
 FROM Solves
 WHERE user_nickname = ?
 GROUP BY model_name, model_maker;
