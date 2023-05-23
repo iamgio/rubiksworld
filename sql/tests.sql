@@ -113,4 +113,22 @@ GROUP BY model_name, model_maker;
 INSERT INTO Solves
     (user_nickname, solve_time, registration_date, model_name, model_maker)
 VALUES
-    (?, ?, NOW(), ?, ?)
+    (?, ?, NOW(), ?, ?);
+
+# Get orders
+SELECT *
+FROM Orders
+WHERE user_nickname = ?
+ORDER BY order_date DESC;
+
+# Get model versions from order
+SELECT MV.*
+FROM OrderPresences O JOIN ModelVersions MV ON O.model_version_id = MV.id
+WHERE O.order_id = ?
+  AND O.order_date = ?;
+
+# Find user
+SELECT *
+FROM Users
+WHERE CONCAT(nickname, name, ' ', surname) LIKE CONCAT('%', ?, '%')
+  AND nickname <> ?
