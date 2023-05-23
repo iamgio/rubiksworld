@@ -111,7 +111,7 @@ CREATE TABLE `Orders`
     `order_date`    DATE,
     `order_time`    TIME    NOT NULL,
     `shipping_date` DATE    NOT NULL,
-    `total`         DECIMAL(4, 2) NOT NULL,
+    `total`         DECIMAL(6, 2) NOT NULL,
     `user_nickname` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`, `order_date`)
 );
