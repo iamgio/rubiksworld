@@ -218,6 +218,12 @@ open class DatabaseControllerImpl : DatabaseController {
         database.cartPresences.removeIf { it.userNickname eq user.nickname }
     }
 
+    override fun getOrders(user: User): List<Order> {
+        return database.orders
+            .filter { it.userNickname eq user.nickname }
+            .toList()
+    }
+
     override fun addToWishlist(user: User, model: Model) {
         val wishlistPresence = WishlistPresence {
             this.user = user

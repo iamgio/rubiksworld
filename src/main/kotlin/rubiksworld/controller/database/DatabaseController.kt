@@ -137,6 +137,11 @@ interface DatabaseController {
     fun insertOrderFromCart(user: User, coupons: List<Coupon>)
 
     /**
+     * @return orders placed by [user]
+     */
+    fun getOrders(user: User): List<Order>
+
+    /**
      * Adds a model to the [user]'s wishlist.
      * @param user wishlist owner
      * @param model model to add

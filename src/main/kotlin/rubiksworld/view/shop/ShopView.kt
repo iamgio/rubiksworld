@@ -18,12 +18,14 @@ private const val BARS_HEIGHT = 40.0 // TODO make dynamic
  *
  * @param onUpdate action to run when the UI should be updated
  * @param onModelSelect action to run when a model is selected
+ * @param onOrdersOpen action to run when the orders page should be opened
  * @param onCartOpen action to run when the cart should be opened
  * @param onWishlistOpen action to run when the wishlist should be opened
  */
 class ShopView(
     private val onUpdate: () -> Unit,
     private val onModelSelect: (Model) -> Unit,
+    private val onOrdersOpen: () -> Unit,
     private val onCartOpen: () -> Unit,
     private val onWishlistOpen: () -> Unit,
 ) : View<Pane> {
@@ -48,7 +50,7 @@ class ShopView(
                     }
                 }
             },
-            onCartOpen, onWishlistOpen
+            onOrdersOpen, onCartOpen, onWishlistOpen
         ).create(controller)
 
         val scrollPane = ScrollPane(modelsPane).apply {

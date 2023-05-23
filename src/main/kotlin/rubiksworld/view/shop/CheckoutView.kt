@@ -21,8 +21,10 @@ import rubiksworld.view.common.TitleLabel
 
 /**
  * Cart checkout view.
+ *
+ * @param onCheckoutComplete action to run after purchasing
  */
-class CheckoutView : View<Pane> {
+class CheckoutView(private val onCheckoutComplete: () -> Unit) : View<Pane> {
 
     private val subtotal: DoubleProperty = SimpleDoubleProperty()
     private val total: DoubleProperty = SimpleDoubleProperty()
@@ -119,7 +121,7 @@ class CheckoutView : View<Pane> {
             )
             controller.insertOrderFromCart(controller.user, appliedCoupons)
 
-            // TODO go to Orders page
+            onCheckoutComplete()
         }
     }
 

@@ -57,6 +57,7 @@
 
 .shop-bar {
     -fx-padding: 5;
+    -fx-spacing: 4;
 }
 
 .models-pane {
@@ -145,10 +146,6 @@
 
 .model-card .discount, .model-overview .discount {
     -fx-text-fill: orange;
-}
-
-.solves-view .shop-bar {
-    -fx-spacing: 4;
 }
 
 .solves-view .table-container {

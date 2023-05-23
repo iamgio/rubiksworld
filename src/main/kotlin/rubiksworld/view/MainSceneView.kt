@@ -59,6 +59,7 @@ class MainSceneView : View<Pane> {
             Tab("Shop", ShopView(
                 onUpdate = { tabPane.requestLayout() },
                 onModelSelect = { model -> openTemporaryModelOverviewTab(model, controller, tabPane) },
+                onOrdersOpen = { openTemporaryOrdersTab(controller, tabPane) },
                 onCartOpen = { openTemporaryCartTab(controller, tabPane) },
                 onWishlistOpen = { openTemporaryWishlistTab(controller, tabPane) }
             ).create(controller)),
@@ -85,7 +86,15 @@ class MainSceneView : View<Pane> {
     }
 
     private fun openTemporaryCheckoutTab(controller: Controller, tabPane: TabPane) {
-        val tab = Tab("Checkout", CheckoutView().create(controller))
+        val tab = Tab("Checkout", CheckoutView(onCheckoutComplete = {
+            tabPane.selectionModel.select(0)
+            openTemporaryOrdersTab(controller, tabPane)
+        }).create(controller))
+        openTemporaryTab(tabPane, tab)
+    }
+
+    private fun openTemporaryOrdersTab(controller: Controller, tabPane: TabPane) {
+        val tab = Tab("Orders", OrdersView().create(controller))
         openTemporaryTab(tabPane, tab)
     }
 
