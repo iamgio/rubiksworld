@@ -27,7 +27,7 @@ class OrdersView : View<Pane> {
             children.addAll(controller.getOrders(controller.user).map { createItem(it, controller) })
         }
 
-        children += ScrollPane(content).apply { fitToViewport() }
+        children += ScrollPane(content).apply { fitToViewport(includeBar = false) }
     }
 
     private fun createItem(order: Order, controller: Controller) = VBox(

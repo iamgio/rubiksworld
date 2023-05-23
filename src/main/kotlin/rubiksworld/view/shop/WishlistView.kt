@@ -27,6 +27,6 @@ class WishlistView(private val onModelSelect: (Model) -> Unit) : View<Pane> {
             }
         }
 
-        children += ScrollPane(modelsPane).apply { fitToViewport() }
+        children += ScrollPane(modelsPane).apply { fitToViewport(includeBar = false) }
     }
 }
