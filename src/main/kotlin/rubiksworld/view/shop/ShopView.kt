@@ -9,8 +9,6 @@ import rubiksworld.view.ModelCard
 import rubiksworld.view.ModelsPane
 import rubiksworld.view.View
 
-const val CURRENCY = '€'
-
 private const val BARS_HEIGHT = 40.0 // TODO make dynamic
 
 /**

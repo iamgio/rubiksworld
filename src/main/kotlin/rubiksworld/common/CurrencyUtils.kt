@@ -1,6 +1,6 @@
 package rubiksworld.common
 
-import rubiksworld.view.shop.CURRENCY
+const val CURRENCY = '€'
 
 /**
  * @return [price] with 2 decimal places + currency symbol
