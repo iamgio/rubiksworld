@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import rubiksworld.controller.Controller
 import rubiksworld.model.ModelVersion
+import rubiksworld.view.ModelCard
 import rubiksworld.view.View
 
 /**
@@ -14,14 +15,17 @@ import rubiksworld.view.View
  * @param modelVersion customized model version
  * @param onRemove action to run when this is model version is removed from a list
  */
-class ModelVersionCard(private val modelVersion: ModelVersion, private val onRemove: (Node) -> Unit) : View<Pane> {
+class ModelVersionCard(private val modelVersion: ModelVersion, private val onRemove: ((Node) -> Unit)?) : View<Pane> {
 
     override fun create(controller: Controller): Pane {
         val model = controller.getFullModelInfo(modelVersion.model).copy()
         model.price = controller.getModelVersionPrice(modelVersion)
         model.discountPercentage = null
 
-        return RemovableModelCard(model, onRemove).create(controller).apply {
+        // If the remove handle is null, the card is not removable
+        val card = onRemove?.let { RemovableModelCard(model, it) } ?: ModelCard(model)
+
+        return card.create(controller).apply {
             val customizationsBox = VBox().apply { styleClass += "customization-box" }
 
             customizationsBox.children.addAll(

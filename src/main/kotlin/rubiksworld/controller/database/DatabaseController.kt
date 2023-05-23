@@ -142,6 +142,11 @@ interface DatabaseController {
     fun getOrders(user: User): List<Order>
 
     /**
+     * @return model versions present in an [order]
+     */
+    fun getModelVersionsFromOrder(order: Order): List<ModelVersion>
+
+    /**
      * Adds a model to the [user]'s wishlist.
      * @param user wishlist owner
      * @param model model to add

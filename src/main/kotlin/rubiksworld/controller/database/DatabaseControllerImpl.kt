@@ -221,7 +221,14 @@ open class DatabaseControllerImpl : DatabaseController {
     override fun getOrders(user: User): List<Order> {
         return database.orders
             .filter { it.userNickname eq user.nickname }
+            .sortedByDescending { it.orderDate }
             .toList()
+    }
+
+    override fun getModelVersionsFromOrder(order: Order): List<ModelVersion> {
+        return database.orderPresences
+            .filter { (it.orderId eq order.id) and (it.orderDate eq order.orderDate) }
+            .map { it.modelVersion }
     }
 
     override fun addToWishlist(user: User, model: Model) {

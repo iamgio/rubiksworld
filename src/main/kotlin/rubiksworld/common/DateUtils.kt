@@ -1,9 +1,15 @@
 package rubiksworld.common
 
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 /**
- * @return this datetime formatted using the `dd/MM/yyyy` pattern
+ * @return this date formatted using the `dd/MM/yyyy` pattern
  */
-fun LocalDateTime.defaultFormat(): String = format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+fun LocalDate.defaultFormat(): String = format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
+/**
+ * @see defaultFormat
+ */
+fun LocalDateTime.defaultFormat() = toLocalDate().defaultFormat()

@@ -12,6 +12,10 @@
     -fx-background-color: rgba(255, 0, 0, .1);
 }
 
+.title {
+    -fx-font-weight: bold;
+}
+
 .tab {
     -fx-font-weight: bold;
 }
@@ -48,7 +52,6 @@
 
 .checkout-view .prices-box .title {
     -fx-pref-width: 100;
-    -fx-font-weight: bold;
 }
 
 .checkout-view .prices-box .separator {
@@ -123,7 +126,6 @@
 }
 
 .model-overview .title {
-    -fx-font-weight: bold;
     -fx-padding: 16 0 0 0;
 }
 
@@ -146,6 +148,14 @@
 
 .model-card .discount, .model-overview .discount {
     -fx-text-fill: orange;
+}
+
+.orders-view .models-pane {
+    -fx-padding: 18 0 18 0;
+}
+
+.orders-view .order-item {
+    -fx-padding: 18 18 0 18;
 }
 
 .solves-view .table-container {
@@ -198,7 +208,6 @@
 }
 
 .profile-view .title, .new-solve-view .title {
-    -fx-font-weight: bold;
     -fx-padding: 0 0 4 0;
 }
 
