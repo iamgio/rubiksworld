@@ -42,6 +42,13 @@ interface DatabaseController {
     fun getUser(nickname: String): User?
 
     /**
+     * @param query part of nickname, name or surname
+     * @param except user to exclude from the results
+     * @return users that match the query
+     */
+    fun findUser(query: String, except: User?): List<User>
+
+    /**
      * Inserts a new user if it does not exist, or updates it if it exists.
      * @param nickname user's nickname
      * @param name user's name

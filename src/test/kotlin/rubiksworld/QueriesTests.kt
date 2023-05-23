@@ -126,6 +126,19 @@ class QueriesTests {
     }
 
     @Test
+    fun findUser() {
+        val users1 = controller.findUser("francesco romano", null).map { it.nickname }
+        assertContains(users1, "fraroma")
+
+        val users2 = controller.findUser("mar", null).map { it.nickname }
+        assertContains(users2, "marisofi")
+        assertContains(users2, "marchino05")
+
+        val users3 = controller.findUser("something else...", null)
+        assertEquals(0, users3.size)
+    }
+
+    @Test
     fun registerUser() {
         val user1 = controller.insertUser("new_user", "Name", "Surname")
         assertEquals("new_user", user1.nickname)

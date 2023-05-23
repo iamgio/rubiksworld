@@ -3,6 +3,8 @@ package rubiksworld.controller.database
 import org.ktorm.database.Database
 import org.ktorm.dsl.*
 import org.ktorm.entity.*
+import org.ktorm.expression.ArgumentExpression
+import org.ktorm.schema.VarcharSqlType
 import rubiksworld.common.calcDiscountedPrice
 import rubiksworld.controller.ModelsSearchFilters
 import rubiksworld.controller.database.tables.Applications
@@ -69,6 +71,17 @@ open class DatabaseControllerImpl : DatabaseController {
     override fun getUser(nickname: String): User? {
         return database.users
             .find { it.nickname eq nickname }
+    }
+
+    override fun findUser(query: String, except: User?): List<User> {
+        return database.users
+            .filter {
+                concat(
+                    it.nickname.asExpression(), it.name.asExpression(), ArgumentExpression(" ", VarcharSqlType), it.surname.asExpression()
+                ) like "%$query%"
+            }
+            .filter { it.nickname neq (except?.nickname ?: "") }
+            .toList()
     }
 
     override fun insertUser(nickname: String, name: String, surname: String): User {
