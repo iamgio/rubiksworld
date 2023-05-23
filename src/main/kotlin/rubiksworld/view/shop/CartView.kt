@@ -10,6 +10,7 @@ import rubiksworld.common.formatPrice
 import rubiksworld.controller.Controller
 import rubiksworld.view.ModelsPane
 import rubiksworld.view.View
+import rubiksworld.view.common.fitToViewport
 
 /**
  * User's cart view.
@@ -30,9 +31,7 @@ class CartView(private val onCheckout: () -> Unit) : View<Pane> {
             }.create(controller)
         }
 
-        children += ScrollPane(modelsPane).apply {
-            isFitToWidth = true
-        }
+        children += ScrollPane(modelsPane).apply { fitToViewport() }
     }
 
     private fun createBar(controller: Controller) = HBox().apply {

@@ -8,8 +8,7 @@ import rubiksworld.model.Model
 import rubiksworld.view.ModelCard
 import rubiksworld.view.ModelsPane
 import rubiksworld.view.View
-
-private const val BARS_HEIGHT = 40.0 // TODO make dynamic
+import rubiksworld.view.common.fitToViewport
 
 /**
  * The shop section content.
@@ -51,10 +50,7 @@ class ShopView(
             onOrdersOpen, onCartOpen, onWishlistOpen
         ).create(controller)
 
-        val scrollPane = ScrollPane(modelsPane).apply {
-            isFitToWidth = true
-            prefHeightProperty().bind(sceneProperty().map { it?.height?.minus(BARS_HEIGHT) ?: 0 })
-        }
+        val scrollPane = ScrollPane(modelsPane).apply { fitToViewport() }
 
         children.addAll(bar, scrollPane)
     }

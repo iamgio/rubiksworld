@@ -13,6 +13,7 @@ import rubiksworld.model.Order
 import rubiksworld.view.ModelsPane
 import rubiksworld.view.View
 import rubiksworld.view.common.TitleLabel
+import rubiksworld.view.common.fitToViewport
 
 /**
  * A page containing a user's orders.
@@ -26,10 +27,7 @@ class OrdersView : View<Pane> {
             children.addAll(controller.getOrders(controller.user).map { createItem(it, controller) })
         }
 
-        children += ScrollPane(content).apply {
-            isFitToWidth = true
-            prefHeight = 400.0 // TODO fit height
-        }
+        children += ScrollPane(content).apply { fitToViewport() }
     }
 
     private fun createItem(order: Order, controller: Controller) = VBox(

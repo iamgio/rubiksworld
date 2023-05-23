@@ -7,6 +7,7 @@ import rubiksworld.controller.Controller
 import rubiksworld.model.Model
 import rubiksworld.view.ModelsPane
 import rubiksworld.view.View
+import rubiksworld.view.common.fitToViewport
 
 /**
  * User's wishlist view.
@@ -26,8 +27,6 @@ class WishlistView(private val onModelSelect: (Model) -> Unit) : View<Pane> {
             }
         }
 
-        children += ScrollPane(modelsPane).apply {
-            isFitToWidth = true
-        }
+        children += ScrollPane(modelsPane).apply { fitToViewport() }
     }
 }
