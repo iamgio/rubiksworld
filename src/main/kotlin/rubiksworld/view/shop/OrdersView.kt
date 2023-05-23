@@ -33,7 +33,7 @@ class OrdersView : View<Pane> {
     private fun createItem(order: Order, controller: Controller) = VBox(
         TitleLabel("Order #${order.id}\t" + formatPrice(order.total)),
         Label("Ordered " + order.orderDate.defaultFormat()),
-        Label("Shipping " + order.orderDate.defaultFormat()),
+        Label("Shipping " + order.shippingDate.defaultFormat()),
         ModelsPane().apply {
             controller.getModelVersionsFromOrder(order).forEach {
                 children += ModelVersionCard(it, null).create(controller)
