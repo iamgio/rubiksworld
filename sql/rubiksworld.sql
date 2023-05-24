@@ -129,7 +129,7 @@ CREATE TABLE `Discounts`
     `order_id`    INTEGER,
     `order_date`  DATE,
     `coupon_code` VARCHAR(20) NOT NULL,
-    PRIMARY KEY (`order_id`, `order_date`)
+    PRIMARY KEY (`order_id`, `order_date`, `coupon_code`)
 );
 
 CREATE TABLE `Coupons`

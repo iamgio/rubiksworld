@@ -205,6 +205,8 @@ open class DatabaseControllerImpl : DatabaseController {
 
     override fun insertOrderFromCart(user: User, coupons: List<Coupon>) {
         val orderDate = LocalDate.now()
+
+        // Getting next order ID for the current date
         val id = database.orders
             .filter { it.orderDate eq orderDate }
             .maxBy { it.id }?.plus(1) ?: 0
@@ -220,6 +222,16 @@ open class DatabaseControllerImpl : DatabaseController {
 
         database.orders.add(order)
 
+        // Pushing coupon applications
+        coupons.forEach { coupon ->
+            val discount = Discount {
+                this.order = order
+                this.coupon = coupon
+            }
+            database.discounts.add(discount)
+        }
+
+        // Pushing model versions
         getCart(user).forEach { modelVersion ->
             val orderPresence = OrderPresence {
                 this.order = order
@@ -228,6 +240,7 @@ open class DatabaseControllerImpl : DatabaseController {
             database.orderPresences.add(orderPresence)
         }
 
+        // Emptying user's cart
         database.cartPresences.removeIf { it.userNickname eq user.nickname }
     }
 
