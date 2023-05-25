@@ -18,6 +18,9 @@ import rubiksworld.view.solves.SolvesView
  */
 class MainSceneView : View<Pane> {
 
+    private lateinit var controller: Controller
+    private lateinit var tabPane: TabPane
+
     override fun create(controller: Controller) = Pane().apply {
         sceneProperty().addListener { _, _, new ->
             prefWidthProperty().bind(new.widthProperty())
@@ -29,24 +32,27 @@ class MainSceneView : View<Pane> {
             it.prefWidthProperty().bind(prefWidthProperty())
         }
 
+        this@MainSceneView.controller = controller
+        this@MainSceneView.tabPane = tabPane
+
         // addLoginPage(tabPane, controller)
         // TODO development: remove before production
         // ---
         controller.user = controller.getUser("luca_rossi")!!
-        populateTabs(tabPane, controller)
+        populateTabs()
         // ---
 
         children += tabPane
     }
 
-    private fun addLoginPage(tabPane: TabPane, controller: Controller) {
+    private fun addLoginPage() {
         val login = LoginView().also {
             it.onLogin = { nickname, name, surname ->
                 controller.async {
                     controller.user = controller.insertUser(nickname, name, surname)
                     controller.sync {
                         tabPane.tabs.clear()
-                        populateTabs(tabPane, controller)
+                        populateTabs()
                     }
                 }
             }
@@ -55,87 +61,86 @@ class MainSceneView : View<Pane> {
         tabPane.tabs += Tab("Log in", login)
     }
 
-    private fun populateTabs(tabPane: TabPane, controller: Controller) {
+    private fun populateTabs() {
         tabPane.tabs.setAll(
             Tab("Shop", ShopView(
                 onUpdate = { tabPane.requestLayout() },
-                onModelSelect = { model -> openTemporaryModelOverviewTab(model, controller, tabPane) },
-                onOrdersOpen = { openTemporaryOrdersTab(controller, tabPane) },
-                onCartOpen = { openTemporaryCartTab(controller, tabPane) },
-                onWishlistOpen = { openTemporaryWishlistTab(controller, tabPane) }
+                onModelSelect = { model -> openTemporaryModelOverviewTab(model) },
+                onOrdersOpen = { openTemporaryOrdersTab() },
+                onCartOpen = { openTemporaryCartTab() },
+                onWishlistOpen = { openTemporaryWishlistTab() }
             ).create(controller)),
 
             Tab("Solves", SolvesView(onRegister = {
-                openTemporaryNewSolveTab(controller, tabPane)
+                openTemporaryNewSolveTab()
             }).create(controller)),
 
             Tab("Profile", ProfileView(controller.user, onUserRedirect = {
-                openTemporaryProfileTab(it, controller, tabPane)
+                openTemporaryProfileTab(it)
             }).create(controller)),
 
             Tab("Find user", FindUserView(onProfileOpen = {
-                openTemporaryProfileTab(it, controller, tabPane)
+                openTemporaryProfileTab(it)
             }).create(controller))
         )
     }
 
-    private fun openTemporaryModelOverviewTab(model: Model, controller: Controller, tabPane: TabPane) {
+    private fun openTemporaryModelOverviewTab(model: Model) {
         val tab = Tab(model.name, ModelOverviewView(model).create(controller))
-        openTemporaryTab(tabPane, tab)
+        openTemporaryTab(tab)
     }
 
-    private fun openTemporaryCartTab(controller: Controller, tabPane: TabPane) {
+    private fun openTemporaryCartTab() {
         val tab = Tab("Cart", CartView(onCheckout = {
             tabPane.selectionModel.select(0)
-            openTemporaryCheckoutTab(controller, tabPane)
+            openTemporaryCheckoutTab()
         }).create(controller))
-        openTemporaryTab(tabPane, tab)
+        openTemporaryTab(tab)
     }
 
-    private fun openTemporaryCheckoutTab(controller: Controller, tabPane: TabPane) {
+    private fun openTemporaryCheckoutTab() {
         val tab = Tab("Checkout", CheckoutView(onCheckoutComplete = {
             tabPane.selectionModel.select(0)
-            openTemporaryOrdersTab(controller, tabPane)
+            openTemporaryOrdersTab()
         }).create(controller))
-        openTemporaryTab(tabPane, tab)
+        openTemporaryTab(tab)
     }
 
-    private fun openTemporaryOrdersTab(controller: Controller, tabPane: TabPane) {
+    private fun openTemporaryOrdersTab() {
         val tab = Tab("Orders", OrdersView().create(controller))
-        openTemporaryTab(tabPane, tab)
+        openTemporaryTab(tab)
     }
 
-    private fun openTemporaryWishlistTab(controller: Controller, tabPane: TabPane) {
+    private fun openTemporaryWishlistTab() {
         val tab = Tab("Wishlist", WishlistView(onModelSelect = {
             tabPane.selectionModel.select(0)
-            openTemporaryModelOverviewTab(it, controller, tabPane)
+            openTemporaryModelOverviewTab(it)
         }).create(controller))
-        openTemporaryTab(tabPane, tab)
+        openTemporaryTab(tab)
     }
 
-    private fun openTemporaryProfileTab(user: User, controller: Controller, tabPane: TabPane) {
+    private fun openTemporaryProfileTab(user: User) {
         val tab = Tab(user.nickname, ProfileView(user, onUserRedirect = {
             tabPane.selectionModel.select(0)
-            openTemporaryProfileTab(it, controller, tabPane)
+            openTemporaryProfileTab(it)
         }).create(controller))
-        openTemporaryTab(tabPane, tab)
+        openTemporaryTab(tab)
     }
 
-    private fun openTemporaryNewSolveTab(controller: Controller, tabPane: TabPane) {
+    private fun openTemporaryNewSolveTab() {
         val initialTabIndex = tabPane.selectionModel.selectedIndex
         val tab = Tab("New solve", NewSolveView(onRegistered = {
-            populateTabs(tabPane, controller)
+            populateTabs()
             tabPane.selectionModel.select(initialTabIndex)
         }).create(controller))
-        openTemporaryTab(tabPane, tab)
+        openTemporaryTab(tab)
     }
 
     /**
      * Opens a tab that gets closed when it is unselected.
-     * @param tabPane tab pane to add the tab to
      * @param tab tab to open
      */
-    private fun openTemporaryTab(tabPane: TabPane, tab: Tab) {
+    private fun openTemporaryTab(tab: Tab) {
         tabPane.tabs += tab
         tabPane.selectionModel.select(tab)
         tab.setOnSelectionChanged {
