@@ -193,6 +193,21 @@ interface DatabaseController {
     fun getFriends(user: User): List<User>
 
     /**
+     * @return whether [sender] has sent friendship to [receiver]
+     */
+    fun isFriend(sender: User, receiver: User): Boolean
+
+    /**
+     * Adds a friendship from [sender] to [receiver].
+     */
+    fun addFriend(sender: User, receiver: User)
+
+    /**
+     * Removes a friendship from [sender] to [receiver].
+     */
+    fun removeFriend(sender: User, receiver: User)
+
+    /**
      * @return all the solves registered by [user], in ascending order.
      */
     fun getPersonalSolves(user: User): List<Solve>

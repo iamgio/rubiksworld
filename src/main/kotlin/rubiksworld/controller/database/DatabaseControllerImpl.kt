@@ -296,6 +296,26 @@ open class DatabaseControllerImpl : DatabaseController {
             .map { it.receiver }
     }
 
+    override fun isFriend(sender: User, receiver: User): Boolean {
+        return database.friendships
+            .filter { it.senderNickname eq sender.nickname }
+            .any { it.receiverNickname eq receiver.nickname }
+    }
+
+    override fun addFriend(sender: User, receiver: User) {
+        val friendship = Friendship {
+            this.sender = sender
+            this.receiver = receiver
+        }
+        database.friendships.add(friendship)
+    }
+
+    override fun removeFriend(sender: User, receiver: User) {
+        database.friendships.removeIf {
+            (it.senderNickname eq sender.nickname) and (it.receiverNickname eq receiver.nickname)
+        }
+    }
+
     override fun getPersonalSolves(user: User): List<Solve> {
         return database.solves
             .filter { it.userNickname eq user.nickname }

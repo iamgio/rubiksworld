@@ -164,8 +164,17 @@ class QueriesTests {
         val user = controller.getUser("giulia_russo")
         assertNotNull(user)
 
-        val friends = controller.getFriends(user).map { it.nickname }
-        assertContains(friends, "fraroma")
+        val friends = { controller.getFriends(user).map { it.nickname } }
+
+        assertContains(friends(), "fraroma")
+
+        assertFalse { "luca_rossi" in friends() }
+
+        controller.addFriend(user, controller.getUser("luca_rossi")!!)
+        assertContains(friends(), "luca_rossi")
+
+        controller.removeFriend(user, controller.getUser("luca_rossi")!!)
+        assertFalse { "luca_rossi" in friends() }
     }
 
     @Test

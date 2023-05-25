@@ -1,10 +1,8 @@
 package rubiksworld.view.profile
 
+import javafx.scene.control.Button
 import javafx.scene.control.Label
-import javafx.scene.layout.FlowPane
-import javafx.scene.layout.HBox
-import javafx.scene.layout.Pane
-import javafx.scene.layout.VBox
+import javafx.scene.layout.*
 import rubiksworld.common.asString
 import rubiksworld.controller.Controller
 import rubiksworld.model.Solve
@@ -22,12 +20,16 @@ import rubiksworld.view.solves.column
  */
 class ProfileView(private val user: User, private val onUserRedirect: (User) -> Unit) : View<Pane> {
 
+    private fun Controller.isFriend() = isFriend(this.user, this@ProfileView.user)
+
     override fun create(controller: Controller) = VBox().apply {
         styleClass += "profile-view"
 
         children += HBox(
             TitleLabel(user.nickname),
-            Label(user.name + " " + user.surname)
+            Label(user.name + " " + user.surname),
+            Pane().apply { HBox.setHgrow(this, Priority.ALWAYS) },
+            createButton(controller)
         ).apply {
             styleClass += "name-box"
         }
@@ -47,6 +49,24 @@ class ProfileView(private val user: User, private val onUserRedirect: (User) -> 
         table.items.setAll(controller.getTopSolvesByModel(user))
 
         children += table
+    }
+
+    private fun createButton(controller: Controller): Button {
+        fun getButtonText(isFriend: Boolean) = ("Remove".takeIf { isFriend } ?: "Add") + " friend"
+
+        val friendButton = Button(getButtonText(controller.isFriend()))
+        friendButton.setOnAction {
+            val isFriend = !controller.isFriend()
+            friendButton.text = getButtonText(isFriend)
+
+            if (isFriend) {
+                controller.addFriend(controller.user, user)
+            } else {
+                controller.removeFriend(controller.user, user)
+            }
+        }
+
+        return friendButton
     }
 
     private fun createFriendsBox(controller: Controller) = VBox().apply {
