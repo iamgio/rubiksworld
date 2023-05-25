@@ -20,8 +20,10 @@ import rubiksworld.view.solves.column
  */
 class ProfileView(private val user: User, private val onUserRedirect: (User) -> Unit) : View<Pane> {
 
+    // Whether the scene should be updated after this view is closed.
+    var requiresRefresh = false
+
     override fun create(controller: Controller) = VBox().apply {
-        // todo refresh after adding friends
         styleClass += "profile-view"
 
         children += HBox(
@@ -60,6 +62,8 @@ class ProfileView(private val user: User, private val onUserRedirect: (User) -> 
         friendButton.setOnAction {
             val wasAdded = controller.toggleFriendship(user)
             friendButton.text = getButtonText(wasAdded)
+
+            requiresRefresh = true
         }
 
         return friendButton

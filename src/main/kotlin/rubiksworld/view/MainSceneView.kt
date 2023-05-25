@@ -120,11 +120,21 @@ class MainSceneView : View<Pane> {
     }
 
     private fun openTemporaryProfileTab(user: User) {
-        val tab = Tab(user.nickname, ProfileView(user, onUserRedirect = {
+        val view = ProfileView(user, onUserRedirect = {
             tabPane.selectionModel.select(0)
             openTemporaryProfileTab(it)
-        }).create(controller))
+        })
+
+        val tab = Tab(user.nickname, view.create(controller))
+
         openTemporaryTab(tab)
+
+        // Refresh changes on close if changes were made
+        tabPane.selectionModel.selectedItemProperty().addListener { _, old, _ ->
+            if (old == tab && view.requiresRefresh) {
+                populateTabs()
+            }
+        }
     }
 
     private fun openTemporaryNewSolveTab() {
