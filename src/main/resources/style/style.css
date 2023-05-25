@@ -219,3 +219,21 @@
 .profile-view .friend-node:hover {
     -fx-text-fill: purple;
 }
+
+.find-user-view .text-field {
+    -fx-pref-width: 300;
+}
+
+.find-user-view .results-box {
+    -fx-padding: 12 0 12 0;
+}
+
+.find-user-view .results-box > * {
+    -fx-padding: 12 24 12 24;
+    -fx-spacing: 8;
+    -fx-cursor: hand;
+}
+
+.find-user-view .results-box > *:hover .label {
+    -fx-text-fill: purple;
+}

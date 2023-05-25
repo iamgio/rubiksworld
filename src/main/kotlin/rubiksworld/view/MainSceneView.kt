@@ -7,6 +7,7 @@ import rubiksworld.controller.Controller
 import rubiksworld.model.Model
 import rubiksworld.model.User
 import rubiksworld.view.login.LoginView
+import rubiksworld.view.profile.FindUserView
 import rubiksworld.view.profile.ProfileView
 import rubiksworld.view.shop.*
 import rubiksworld.view.solves.NewSolveView
@@ -63,10 +64,16 @@ class MainSceneView : View<Pane> {
                 onCartOpen = { openTemporaryCartTab(controller, tabPane) },
                 onWishlistOpen = { openTemporaryWishlistTab(controller, tabPane) }
             ).create(controller)),
+
             Tab("Solves", SolvesView(onRegister = {
                 openTemporaryNewSolveTab(controller, tabPane)
             }).create(controller)),
+
             Tab("Profile", ProfileView(controller.user, onUserRedirect = {
+                openTemporaryProfileTab(it, controller, tabPane)
+            }).create(controller)),
+
+            Tab("Find user", FindUserView(onProfileOpen = {
                 openTemporaryProfileTab(it, controller, tabPane)
             }).create(controller))
         )
