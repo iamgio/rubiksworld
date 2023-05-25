@@ -28,9 +28,12 @@ class ProfileView(private val user: User, private val onUserRedirect: (User) -> 
             TitleLabel(user.nickname),
             Label(user.name + " " + user.surname),
             Pane().apply { HBox.setHgrow(this, Priority.ALWAYS) },
-            createButton(controller)
         ).apply {
             styleClass += "name-box"
+
+            if (user != controller.user) {
+                children += createFriendButton(controller)
+            }
         }
 
         children += createSolvesBox(controller)
@@ -50,7 +53,7 @@ class ProfileView(private val user: User, private val onUserRedirect: (User) -> 
         children += table
     }
 
-    private fun createButton(controller: Controller): Button {
+    private fun createFriendButton(controller: Controller): Button {
         fun getButtonText(isFriend: Boolean) = ("Remove".takeIf { isFriend } ?: "Add") + " friend"
 
         val friendButton = Button(getButtonText(controller.isFriend(controller.user, user)))
