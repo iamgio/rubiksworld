@@ -27,4 +27,14 @@ class ControllerImpl : DatabaseControllerImpl(), Controller {
         val price = model.price + customizations.sumOf { it.price }
         return model.discountPercentage?.let { calcDiscountedPrice(price, it) }?.takeIf { applyDiscount } ?: price
     }
+
+    override fun toggleFriendship(receiver: User): Boolean {
+        return if (isFriend(user, receiver)) {
+            removeFriend(user, receiver)
+            false
+        } else {
+            addFriend(user, receiver)
+            true
+        }
+    }
 }

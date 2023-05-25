@@ -20,9 +20,8 @@ import rubiksworld.view.solves.column
  */
 class ProfileView(private val user: User, private val onUserRedirect: (User) -> Unit) : View<Pane> {
 
-    private fun Controller.isFriend() = isFriend(this.user, this@ProfileView.user)
-
     override fun create(controller: Controller) = VBox().apply {
+        // todo refresh after adding friends
         styleClass += "profile-view"
 
         children += HBox(
@@ -54,16 +53,10 @@ class ProfileView(private val user: User, private val onUserRedirect: (User) -> 
     private fun createButton(controller: Controller): Button {
         fun getButtonText(isFriend: Boolean) = ("Remove".takeIf { isFriend } ?: "Add") + " friend"
 
-        val friendButton = Button(getButtonText(controller.isFriend()))
+        val friendButton = Button(getButtonText(controller.isFriend(controller.user, user)))
         friendButton.setOnAction {
-            val isFriend = !controller.isFriend()
-            friendButton.text = getButtonText(isFriend)
-
-            if (isFriend) {
-                controller.addFriend(controller.user, user)
-            } else {
-                controller.removeFriend(controller.user, user)
-            }
+            val wasAdded = controller.toggleFriendship(user)
+            friendButton.text = getButtonText(wasAdded)
         }
 
         return friendButton

@@ -10,6 +10,9 @@ import rubiksworld.model.User
  */
 interface Controller : DatabaseController {
 
+    /**
+     * Current active user.
+     */
     var user: User
 
     /**
@@ -28,4 +31,11 @@ interface Controller : DatabaseController {
      * @return the final price of a [model] with applied [customizations]
      */
     fun calcPrice(model: Model, customizations: List<Customization>, applyDiscount: Boolean = true): Double
+
+    /**
+     * Adds or removes friendship between [user] and [receiver].
+     * @param receiver target user
+     * @return whether the friendship was added or not
+     */
+    fun toggleFriendship(receiver: User): Boolean
 }
