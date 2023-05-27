@@ -35,12 +35,7 @@ class MainSceneView : View<Pane> {
         this@MainSceneView.controller = controller
         this@MainSceneView.tabPane = tabPane
 
-        // addLoginPage(tabPane, controller)
-        // TODO development: remove before production
-        // ---
-        controller.user = controller.getUser("luca_rossi")!!
-        populateTabs()
-        // ---
+        addLoginPage()
 
         children += tabPane
     }
