@@ -131,4 +131,35 @@ WHERE O.order_id = ?
 SELECT *
 FROM Users
 WHERE CONCAT(nickname, name, ' ', surname) LIKE CONCAT('%', ?, '%')
-  AND nickname <> ?
+  AND nickname <> ?;
+
+# Place order
+
+# Get next ID
+SET @order_id = (SELECT IFNULL(MAX(id) + 1, 0)
+           FROM Orders
+           WHERE order_date = CURDATE());
+
+SET @user_nickname = ?;
+
+# Place order
+INSERT INTO Orders
+    (id, order_date, order_time, shipping_date, total, user_nickname)
+VALUES
+    (@order_id, CURDATE(), NOW(), DATE_ADD(NOW(), INTERVAL 2 DAY), ?, @user_nickname);
+
+# Add model versions from cart to the order
+INSERT INTO OrderPresences (order_id, order_date, model_version_id)
+SELECT @order_id, CURDATE(), model_version_id
+FROM CartPresences
+WHERE user_nickname = @user_nickname;
+
+# Empty cart
+DELETE FROM CartPresences
+WHERE user_nickname = @user_nickname;
+
+# Apply one coupon (for each coupon)
+INSERT INTO Discounts
+(order_id, order_date, coupon_code)
+VALUES
+    (@order_id, CURDATE(), ?);
