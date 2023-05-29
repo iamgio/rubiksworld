@@ -290,7 +290,7 @@ VALUES
     ('welcome', 0.10, 1),
     ('5off', 5, 0),
     ('2off', 2, 0),
-    ('5perc', 0.5, 1);
+    ('5perc', 0.05, 1);
 
 INSERT INTO Solves
     (user_nickname, solve_time, registration_date, model_name, model_maker)
@@ -303,10 +303,23 @@ VALUES
     ('giulia_russo', 78, '2023-02-09', 'Big Sail', 'QiYi'),
     ('giulia_russo', 41, '2023-02-08', NULL, NULL),
     ('fraroma', 58, '2022-12-25', 'Meilong', 'MoFang JiaoShi'),
-    ('fraroma', 92, '2022-12-20', 'Metallic', 'Cyclone Boys');
+    ('fraroma', 92, '2022-12-20', 'Metallic', 'Cyclone Boys'),
+    ('marchino05', 19, '2022-07-02', 'WeiLong WR M V9', 'MoYu'),
+    ('marchino05', 28, '2022-06-22', 'WeiLong WR M V9', 'MoYu'),
+    ('marisofi', 108, '2022-06-22', 'MeiLong Skewb', 'MoFang JiaoShi'),
+    ('alilombi', 32, '2022-09-24', '11 Pro', 'GAN'),
+    ('alilombi', 30, '2022-09-26', '11 Pro', 'GAN'),
+    ('ferrari50', 21, '2022-11-12', 'ZhiLong Mini', 'YJ');
 
 INSERT INTO Friendships
     (sender_nickname, receiver_nickname)
 VALUES
     ('luca_rossi', 'giulia_russo'),
+    ('galletta_', 'luca_rossi'),
+    ('galletta_', 'ferrari50'),
+    ('ferrari50', 'galletta_'),
+    ('ferrari50', 'marisofi'),
+    ('chiarina02', 'marisofi'),
+    ('marisofi', 'chiarina02'),
+    ('marisofi', 'darkmatt'),
     ('giulia_russo', 'fraroma');
