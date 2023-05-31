@@ -5,12 +5,11 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.*
 import org.ktorm.expression.ArgumentExpression
 import org.ktorm.schema.VarcharSqlType
+import org.ktorm.support.mysql.MySqlDialect
+import org.ktorm.support.mysql.insertOrUpdate
 import rubiksworld.common.calcDiscountedPrice
 import rubiksworld.controller.ModelsSearchFilters
-import rubiksworld.controller.database.tables.Applications
-import rubiksworld.controller.database.tables.Customizations
-import rubiksworld.controller.database.tables.Friendships
-import rubiksworld.controller.database.tables.Solves
+import rubiksworld.controller.database.tables.*
 import rubiksworld.model.*
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -29,7 +28,11 @@ open class DatabaseControllerImpl : DatabaseController {
     private lateinit var database: Database
 
     override fun initDatabase() {
-        database = Database.connect("jdbc:mysql://localhost:3306/rubiksworld", user = "root", password = "giodatabase")
+        database = Database.connect(
+            "jdbc:mysql://localhost:3306/rubiksworld",
+            user = "root", password = "giodatabase",
+            dialect = MySqlDialect()
+        )
     }
 
     override fun searchModels(filters: ModelsSearchFilters): List<Model> {
@@ -85,21 +88,18 @@ open class DatabaseControllerImpl : DatabaseController {
     }
 
     override fun insertUser(nickname: String, name: String, surname: String): User {
-        val match = getUser(nickname)
-        if (match != null) {
-            match.name = name
-            match.surname = surname
-            match.flushChanges()
-            return match
+        database.insertOrUpdate(Users) {
+            set(it.nickname, nickname)
+            set(it.name, name)
+            set(it.surname, surname)
+
+            onDuplicateKey {
+                set(it.name, name)
+                set(it.surname, surname)
+            }
         }
 
-        val newUser = User {
-            this.nickname = nickname
-            this.name = name
-            this.surname = surname
-        }
-        database.users.add(newUser)
-        return newUser
+        return getUser(nickname)!!
     }
 
     override fun updateUserInfo(
