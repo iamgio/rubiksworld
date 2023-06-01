@@ -133,6 +133,14 @@ FROM Users
 WHERE CONCAT(nickname, name, ' ', surname) LIKE CONCAT('%', ?, '%')
   AND nickname <> ?;
 
+# Add friend
+SET @sender = ?;
+SET @receiver = ?;
+INSERT INTO Friendships
+    (sender_nickname, receiver_nickname)
+SELECT @sender, @receiver
+WHERE @sender <> @receiver;
+
 # Place order
 
 # Get next ID

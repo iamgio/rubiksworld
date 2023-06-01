@@ -303,6 +303,10 @@ open class DatabaseControllerImpl : DatabaseController {
     }
 
     override fun addFriend(sender: User, receiver: User) {
+        if (sender == receiver) {
+            return
+        }
+
         val friendship = Friendship {
             this.sender = sender
             this.receiver = receiver
