@@ -204,30 +204,30 @@ VALUES ('2x2'), ('3x3'), ('4x4'), ('5x5'), ('Exotic'), ('Lubricant'), ('Accessor
 INSERT INTO Models
     (name, maker, category_name, price, discount_percentage, image_url, is_speed_cube, is_stickerless, is_magnetic)
 VALUES
-    ('WeiLong WR M V9', 'MoYu', '3x3', 17.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-WeiLong-WR-M-V9-3x3-Magnetic-Standard-Frosted-Stickerless-Bright_540x.jpg?v=1682478273', 1, 1, 1),
+    ('WeiLong WR M V9', 'MoYu', '3x3', 17.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-WeiLong-WR-M-V9-3x3-Magnetic-3-Versions-Standard-Frosted-Stickerless-Bright_540x.jpg?v=1686540331', 1, 1, 1),
     ('RS3 M', 'MoYu', '3x3', 9.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoYu-RS3-M-2020-3x3-Magnetic-Black-2_540x.jpg?v=1681849962', 1, 0, 1),
-    ('GTS3 M', 'MoYu', '3x3', 24, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoYu-WeiLong-GTS2-M-3x3-Magnetic-Black_540x.jpg?v=1681847670', 1, 0, 1),
-    ('WeiLong GTS3 M', 'MoYu', '3x3', 19.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoYu-WeiLong-GTS3-M-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681848204', 1, 1, 0),
+    ('GTS3 M', 'MoYu', '3x3', 24, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-WeiLong-GTS3-M-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1685687494', 1, 0, 1),
     ('356', 'GAN', '3x3', 26, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-356-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681849509', 1, 1, 1),
     ('11 Pro', 'GAN', '3x3', 41.89, 0.1, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-11-Pro-3x3-Magnetic_540x.jpg?v=1681850528', 1, 1, 1),
     ('ZhiLong Mini', 'YJ', '3x3', 7.41, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/YJ-ZhiLong-Mini-50mm-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681850645', 1, 1, 1),
-    ('Valk 3', 'QiYi', '3x3', 23.99, 0.15, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-Valk-3-3x3-Magnetic-Stickerless-Bright-4_540x.jpg?v=1681848780', 1, 1, 1),
-    ('Sail W', 'QiYi', '3x3', 3.68, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-Sail-W-3x3-White-2_540x.jpg?v=1681848838', 0, 0, 0),
-    ('Big Sail', 'QiYi', '3x3', 4.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-Big-Sail-60mm-3x3-Black_540x.jpg?v=1681847606', 1, 0, 0),
-    ('Meilong', 'MoFang JiaoShi', '3x3', 6.99, 0.2, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoFang-JiaoShi-MeiLong-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681849893', 1, 0, 1),
+    ('Valk 3', 'QiYi', '3x3', 23.99, 0.15, 'https://cdn.shopify.com/s/files/1/0978/8602/files/QiYi-Valk-3-3x3-Magnetic-Stickerless-Bright-2_540x.jpg?v=1685908103', 1, 1, 1),
+    ('Sail W', 'QiYi', '3x3', 3.68, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/QiYi-Sail-W-3x3-Black_540x.jpg?v=1686976593', 0, 0, 0),
+    ('Big Sail', 'QiYi', '3x3', 4.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/QiYi-Big-Sail-60mm-3x3-Black_540x.jpg?v=1686983469', 1, 0, 0),
+    ('Meilong', 'MoFang JiaoShi', '3x3', 6.99, 0.2, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoFang-JiaoShi-MeiLong-3x3-Stickerless-Bright_540x.jpg?v=1687329132', 1, 0, 1),
     ('Metallic', 'Cyclone Boys', '3x3', 16.49, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/Cyclone-Boys-Metallic-3x3-Magnetic-Stickerless-Bright_540x.jpg?v=1681852512', 0, 0, 1),
     ('Little Magic', 'YuXin', '3x3', 4.64, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/YuXin-Little-Magic-3x3-Stickerless-Bright_540x.jpg?v=1681847815', 0, 1, 0),
     ('YuPo V2', 'YJ', '2x2', 6.51, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/YJ-YuPo-V2-2x2-Magnetic-Stickerless-Bright_540x.jpg?v=1681848530', 0, 1, 0),
+    ('MeiLong 2x2', 'MoFang JiaoShi', '2x2', 3.99, 0.1, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoFang-JiaoShi-MeiLong-2x2-Black-2_540x.jpg?v=1685687522', 1, 0, 1),
     ('Pyraminx', 'QiYi', 'Exotic', 7.45, 0.1, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-MS-Pyraminx-Magnetic-Stickerless-Bright_540x.jpg?v=1681849569', 0, 1, 1),
     ('Galaxy V2 Megaminx', 'X-Man', 'Exotic', 18.50, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/X-Man-Galaxy-V2-Megaminx-Sculpted-Stickerless-Bright_540x.jpg?v=1681847935', 0, 1, 0),
-    ('MeiLong Skewb', 'MoFang JiaoShi', 'Exotic', 5.40, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoFang-JiaoShi-MeiLong-Skewb-Stickerless-Bright_540x.jpg?v=1681849974', 0, 1, 0),
+    ('MeiLong Skewb', 'MoFang JiaoShi', 'Exotic', 5.40, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoFang-JiaoShi-MeiLong-Skewb-Stickerless-Bright_540x.jpg?v=1686983548', 0, 1, 0),
     ('Gear Cube', 'QiYi', 'Exotic', 6.50, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/QiYi-3x3-Gear-Cube-Tiled-Black_a8b77767-829b-4719-b6b5-06c808d8f812_540x.jpg?v=1681880198', 0, 0, 0),
-    ('MeiLong 4x4', 'MoFang JiaoShi', '4x4', 10.20, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/MoFang-JiaoShi-MeiLong-4x4-Magnetic-Black-2_540x.jpg?v=1681849918', 0, 0, 1),
+    ('MeiLong 4x4', 'MoFang JiaoShi', '4x4', 10.20, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/MoYu-MeiLong-4x4-Magnetic-None-Black-2_540x.jpg?v=1686107225', 0, 0, 1),
     ('MGC 5x5', 'YJ', '5x5', 20.50, 0.15, 'https://cdn.shopify.com/s/files/1/0978/8602/products/YJ-MGC-5x5-Magnetic-Black-2_540x.jpg?v=1681849430', 0, 0, 1),
     ('Lubricant', 'Martian', 'Lubricant', 5.60, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/Martian-Lubricant_540x.jpg?v=1681847624', 0, 0, 0),
-    ('Halo Smart Timer', 'GAN', 'Accessory', 39.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-Halo-Smart-Timer-Bluetooth-Blue_540x.jpg?v=1681856081', 0, 0, 0),
+    ('Halo Smart Timer', 'GAN', 'Accessory', 39.99, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/GAN-Halo-Smart-Timer-Bluetooth-2-Versions-Smart-Blue-2_540x.jpg?v=1686540265', 0, 0, 0),
     ('G5 Pro Timer', 'SpeedStacks', 'Accessory', 30.80, 0.05, 'https://cdn.shopify.com/s/files/1/0978/8602/products/SpeedStacks-G5-Pro-Timer-Factory_540x.jpg?v=1681881393', 0, 0, 0),
-    ('Display Stand', 'GAN', 'Accessory', 5.80, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/products/GAN-Cube-Display-Stand-4_c7a2bc1b-9232-4f87-bee4-1b99df74f817_540x.jpg?v=1681851661', 0, 0, 0);
+    ('Display Stand', 'GAN', 'Accessory', 5.80, NULL, 'https://cdn.shopify.com/s/files/1/0978/8602/files/GAN-Cube-Display-Stand-2-Versions-4_540x.jpg?v=1686539066', 0, 0, 0);
 
 INSERT INTO CustomizableParts
     (model_name, model_maker, part)
